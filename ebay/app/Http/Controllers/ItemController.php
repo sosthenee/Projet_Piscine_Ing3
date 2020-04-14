@@ -7,6 +7,7 @@ use App\Item ;
 use App\Media ;
 
 
+
 class ItemController extends Controller
 {
     public function get_all_images()
@@ -45,6 +46,7 @@ class ItemController extends Controller
         $item->media()->saveMany([$media]);
 
         $media->save();
+
         return redirect('/items');
  
     }

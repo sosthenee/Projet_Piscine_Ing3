@@ -19,6 +19,7 @@
  
 @endforeach
  
+
 <h1>Only Pictures</h1>
  
 @foreach ($items as $item)
@@ -30,5 +31,6 @@
 @endforeach
 @endforeach
  
+
 </body>
 </html>
