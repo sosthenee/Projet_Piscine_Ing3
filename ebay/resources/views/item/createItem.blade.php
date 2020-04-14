@@ -52,7 +52,10 @@ input[type=submit]:hover {
        <div>
           <label >Item Name</label>
           <input type="text" name="Title" placeholder="Item Name">
- 
+
+          <label >Image Name</label>
+          <input type="text" name="reference">
+
       </div>
       
       <div>

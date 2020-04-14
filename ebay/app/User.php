@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'fisrtname', 'lastname', 'email', 'password','role'
     ];
 
     /**
@@ -37,8 +37,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+   
+
+    /**
+    * @param string|array $role
+    */
+
+    public function authorizeRoles($roles)
     {
-        return $this->belongsToMany('App\Role');
+        if ($roles) {
+            if (in_array($this->role, $roles)) {
+            } else {
+                return abort(401, 'This action is unauthorized.');
+            }
+        }      
     }
+
+    public function payment_info()
+    {
+        return $this->hasMany('App\Payment_Info');
+    }
+
+    public function delivery_adress()
+    {
+        return $this->hasMany('App\Delivery_Address');
+    }
+
+    public function offer()
+    {
+        return $this->hasMany('App\Offer');
+    }
+
 }
