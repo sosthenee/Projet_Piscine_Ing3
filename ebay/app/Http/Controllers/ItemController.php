@@ -26,12 +26,31 @@ class ItemController extends Controller
     public function storeItem(){
  
         $item = new Item();
- 
         $item->Title = request('Title');
+        $item->Description = request('Description');
+        $item->Category =request('Category');
 
+        $mySellType ="";
+        if(request('myCheckBid')){
+            $mySellType = "enchere";
+            $item->Price = request('price_min');
+           // $item->Start_date= request('Start_date');
+           // $item->End_date= request('End_date');
+        }else{
+            if(request('myCheckBestOffer')){
+                $mySellType = "bestoffer ";
+            }
+            if(request('myCheckImmediatPurchase')){
+                $mySellType .= "immediat";
+                $item->Price = request('price');
+            } 
+        }
+        $item->Sell_Type = $mySellType;
+
+       
         $item->save();
  
-        return redirect('/items');
+        return redirect('/items/create');
  
     }
  
