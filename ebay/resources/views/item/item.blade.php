@@ -31,3 +31,9 @@
             <br> Nous vous invitons à revenir plus tard. </p>
     @endif
 @endsection
+<!--<h1>Only Pictures</h1>
+@foreach ($items as $item)
+@foreach ( $item->media as $medias)
+<li> {{ $medias->reference}} </li>
+@endforeach
+@endforeach-->

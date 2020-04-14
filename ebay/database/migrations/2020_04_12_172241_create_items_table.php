@@ -15,12 +15,20 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements("id"); //par defaut une clé primaire
+
+            $table->bigInteger("user_id");
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');
+            
             $table->string('Title');
             $table->string('Description')->nullable();
-            $table->integer('Price')->unsigned()->index();
-            $table->string('Category');
-            $table->string('sell type');
-            $table->timestamps();
+            $table->integer('Initial_Price')->unsigned()->nullable();
+            $table->string('Category')->nullable();
+            $table->string('sell_type')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->boolean('sold')->nullable();
+
+
         });
     }
 
