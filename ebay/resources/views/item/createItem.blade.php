@@ -43,12 +43,15 @@
 <div class="container" style="display: flex; flex-direction: row;"> 
  
  <div style="width: 100%;">
-
-
-    <form method="POST" action="/items/action" style="width: 100%;" >
+  <!--form id="file-upload-form" class="uploader" action="/save" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+        
+    </form-->
+    <!--form  id="file-upload-form" action="{{url('save')}}" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data"-->
+    
+    <form method="POST" action="/items/action" style="width: 100%;" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
 
       {{ csrf_field() }} <!-- I don't know what is it-->
-      <h1>Ajout d'un nouelle Item</h1>
+      <h1>Ajout d'un nouvelle Item</h1>
       <hr>
       <div class="row">
         <div style ="width: 70%;">
@@ -56,12 +59,12 @@
 
             <tr>
               <td><label >Nom de l'item : </label></td>
-              <td><input type="text" name="Title" placeholder="Item Name"></td>
+              <td><input type="text" name="Title" placeholder="ex: montre"></td>
             </tr>
 
             <tr>
               <td><label >Description : </label></td>
-              <td><TEXTAREA name="Description" placeholder="Item Name" rows=4 style="width: 100%;"></textarea></td>
+              <td><TEXTAREA name="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"></textarea></td>
             </tr>
             <tr>
               <td><label >Catégorie : </label></td>
@@ -72,9 +75,20 @@
                   <option value="Bon pour le Musée">Bon pour le Musée</option>
                   <option value="Accessoire VIP">Accessoire VIP</option>
                 </select>
-                
               </td>
             </tr>
+
+            <tr>
+              <td><label >Insertion de média : </label></td>
+              <td>
+              @csrf
+                <input id="file-upload" type="file" name="fileUpload[]" accept="image/*" onchange="readURL(this);" multiple>
+                <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
+                <span id="erreurs"></span>
+              </td>
+ 
+            </tr>
+            
             <tr>
               <td><label >Type de vente : </label></td>
               <td>
@@ -84,23 +98,19 @@
                
               </td>
             </tr>
-
           </table>
 
 
         </div>
         <div class="right" style="width: 30%; display:flex;">
             <div  style="background: grey; height: 15vh; width: 15vh; margin: auto;">
-
-              
-                <input type="file" name="fileUpload" >
-                <img src="" alt="">
-                
-              
-
+                <img id="file-image0" src="#" alt="Preview" class="hidden">
+                <img id="file-image1" src="#" alt="Preview" class="hidden">
+                <img id="file-image2" src="#" alt="Preview" class="hidden">
+                <img id="file-image3" src="#" alt="Preview" class="hidden">
             </div>
         </div>
-        </div>
+      </div>
 
         <div id="BidContent" style="display: none;">
           <hr>

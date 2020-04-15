@@ -23,6 +23,45 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <script src="/js/myJS_CreateItem.js" ></script>
+
+    <script>
+        function readURL(input, id) {
+            
+            /*if (input.files&& input.files[0]) {
+                var reader;
+                 reader = new FileReader();
+        
+                reader.onload = function (e) {
+                    $('#file-image0').attr('src', e.target.result);
+                };
+        
+                reader.readAsDataURL(input.files[0]);
+                $('#file-image0').removeClass('hidden');
+            }*/
+            
+            var temp=0;
+            
+            //$('#erreurs').html(input.files.length);
+            while(temp<input.files.length){
+                var file=input.files[temp];
+                
+                if ( file) {
+                    $('#erreurs').html('#file-image'+temp);
+                    //$('#file-image'+temp).attr('src', "e.target.result");
+                  //  readers.push(new FileReader());
+                  var reader=new FileReader();
+                  var temp2=temp
+                    reader.onload = function (e) {
+                        $('#file-image'+temp2).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    $('#file-image'+temp2).removeClass('hidden');
+                }
+                temp++;
+        
+            }
+        }
+    </script> 
     
 </head>
 <body>
