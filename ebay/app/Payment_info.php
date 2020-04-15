@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment_info extends Model
 {
     public $timestamps = false;
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'cardType', 'cardNumber', 'cardName', 'expirationDate', 'securityCode'

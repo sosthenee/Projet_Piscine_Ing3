@@ -25,8 +25,7 @@
   @endif
 @endforeach 
     
-$user = User::find(5);
-$user->delete();
+
     
 @foreach ($users as $user)   
   @if($user->role==='seller')
