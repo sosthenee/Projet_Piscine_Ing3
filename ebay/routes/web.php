@@ -31,3 +31,9 @@ Route::get('/items/create','ItemController@create');
 Route::post('/items/action','ItemController@storeItem');
 
 //Route::get('/item', 'ItemController@get_all_images') ;
+
+Route::get('/admin','AdminController@get_all_vendeurs');
+
+Route::get('/admin/supp','AdminController@suppVendeur');
+
+Route::post('/admin/action','AdminController@Suppression');
