@@ -37,14 +37,14 @@
 
 -->
 
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
 <div class="container" style="display: flex; flex-direction: row;"> 
  
  <div style="width: 100%;">
 
-    <form id="upload" action="/items/action" method="POST"  style="width: 100%;" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
+    <form id="upload" action="/vendre/ajouter/action" method="POST"  style="width: 100%;" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
 
       {{ csrf_field() }} <!-- I don't know what is it-->
       <h1>Ajout d'un nouvelle Item</h1>

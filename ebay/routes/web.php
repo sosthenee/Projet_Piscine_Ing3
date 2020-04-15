@@ -24,11 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'HomeController@admin_only');
 
 
-Route::get('/items','ItemController@index');
- 
-Route::get('/items/create','ItemController@create');
- 
-Route::post('/items/action','ItemController@storeItem');
+Route::get('/achat','ItemController@index');
+Route::get('/achat/{item_id}','ItemController@display');
+
+Route::get('/vendre','ItemController@create');
+Route::post('/vendre/ajouter/action','ItemController@storeItem');
+
+
 
 Route::get('/payment/{user_id}','PaymentController@readPaymentInfofromUser');
 

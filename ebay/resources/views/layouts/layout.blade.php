@@ -11,7 +11,17 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+         <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <script src="/js/myJS_CreateItem.js" ></script>
+        <script src="/js/myJS_itemCarroussel.js" ></script>
         <!-- Styles -->
         <style>
             html, body {
@@ -76,11 +86,10 @@
     </head>
     <body>
         <div class="flex-center position-ref ">
-                        <div class="content">
-
+            <div class="content">
                 <div class="links">
-                    <a href="{{ url('/items/create') }}">Vendre un item</a>
-                    <a href="{{ url('/items') }}">Acheter un item</a>
+                    <a href="{{ url('/vendre') }}">Vendre un item</a>
+                    <a href="{{ url('/achat') }}">Acheter un item</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
@@ -91,7 +100,6 @@
             @if (Route::has('login'))
 
                 <div class=" links">
-         
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -102,14 +110,15 @@
                         @endif
                     @endauth
                 </div>
-          
+
             @endif
             
             
 
         </div>
-        
-              @yield('content')      
+            
+        @include('inc.errorsuccess')
+        @yield('content')      
         
     </body>
 </html>
