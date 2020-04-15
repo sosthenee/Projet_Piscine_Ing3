@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function admin_only(Request $request)
     {
-        $request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles(['admin','buyer']);
         return view('admin');
     }
 

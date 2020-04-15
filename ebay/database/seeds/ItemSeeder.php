@@ -20,6 +20,7 @@ class ItemSeeder extends Seeder
         $Item->Start_date = '2020-04-08';
         $Item->End_date = '2020-04-08';
         $Item->sold = 1;
+        $Item->admin_state = 'aprouved';
         $Item->user()->associate($user);
     
         $Item->save();
