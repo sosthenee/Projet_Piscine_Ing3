@@ -23,16 +23,33 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin', 'HomeController@admin_only');
 
-
+// ======= ITEMS =======
 Route::get('/items','ItemController@index');
  
 Route::get('/items/create','ItemController@create');
  
 Route::post('/items/action','ItemController@storeItem');
 
-Route::get('/payment/{user_id}','PaymentController@readPaymentInfofromUser');
+// ======= PAYMENTS =======
+Route::get('/user/{user_id}/payments','PaymentController@AllfromUser');
+Route::get('/payment/update_payment/{payment_id}', 'PaymentController@updateView');
+Route::post('/payment/create','PaymentController@Create');
+Route::delete('/payment/{payment_id}','PaymentController@delete');
+Route::put('/payment/update/{payment_id}','PaymentController@update');
 
-Route::get('/payment/{user_id}/{id}','PaymentController@readPaymentInfofromId');
+
+// ======= USER =========
+
+
+
+// ======= ADRESS =======
+Route::get('/user/{user_id}/adress','DeliveryController@AllfromUser');
+Route::get('/adress/update_adress/{adress_id}', 'DeliveryController@updateView');
+Route::post('/adress/create','DeliveryController@Create');
+Route::delete('/adress/{adress_id}','DeliveryController@delete');
+Route::put('/adress/update/{adress_id}','DeliveryController@update');
+
+
 
 //Route::get('/item', 'ItemController@get_all_images') ;
 
