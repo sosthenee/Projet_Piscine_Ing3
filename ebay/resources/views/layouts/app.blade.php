@@ -16,7 +16,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,23 +24,7 @@
     <script src="/js/myJS_CreateItem.js" ></script>
 
     <script>
-        /*var form=document.getElementById('upload');
-            var request= new XMLHttpRequest();
-
-            form.addEventListener('submit', function(e){
-                e.preventDefault();
-                var formDate=new FormData(form);
-                request.open('post', 'items/action');
-                request.addEventListener("load", transferComplete);
-                request.send(formdata);
-            });
-            function transferComplete(data){
-                console.log(data.currentTarget.response);
-            }
-            */
       /*  function readURL(input, id) {
-            
-
             if (input.files&& input.files[0]) {
                 var reader;
                  reader = new FileReader();
@@ -48,32 +32,9 @@
                 reader.onload = function (e) {
                     $('#file-image0').attr('src', e.target.result);
                 };
-        
                 reader.readAsDataURL(input.files[0]);
                 $('#file-image0').removeClass('hidden');
-            }*/
-            /*
-            var temp=0;
-            
-            //$('#erreurs').html(input.files.length);
-            while(temp<input.files.length){
-                var file=input.files[temp];
-                
-                if ( file) {
-                    $('#erreurs').html('#file-image'+temp);
-                    //$('#file-image'+temp).attr('src', "e.target.result");
-                  //  readers.push(new FileReader());
-                  var reader=new FileReader();
-                  var temp2=temp
-                    reader.onload = function (e) {
-                        $('#file-image'+temp2).attr('src', e.target.result);
-                    };
-                    reader.readAsDataURL(file);
-                    $('#file-image'+temp2).removeClass('hidden');
-                }
-                temp++;
-        
-            }
+            }                       
         }*/
     </script> 
     
