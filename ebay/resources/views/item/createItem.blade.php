@@ -43,12 +43,8 @@
 <div class="container" style="display: flex; flex-direction: row;"> 
  
  <div style="width: 100%;">
-  <!--form id="file-upload-form" class="uploader" action="/save" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-        
-    </form-->
-    <!--form  id="file-upload-form" action="{{url('save')}}" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data"-->
-    
-    <form method="POST" action="/items/action" style="width: 100%;" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
+
+    <form id="upload" action="/items/action" method="POST"  style="width: 100%;" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
 
       {{ csrf_field() }} <!-- I don't know what is it-->
       <h1>Ajout d'un nouvelle Item</h1>
@@ -82,7 +78,7 @@
               <td><label >Insertion de média : </label></td>
               <td>
               @csrf
-                <input id="file-upload" type="file" name="fileUpload[]" accept="image/*" onchange="readURL(this);" multiple>
+                <input id="file-upload" type="file" name="file[]" accept="image/*"  multiple > <!--onchange="readURL(this);"-->
                 <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
                 <span id="erreurs"></span>
               </td>
@@ -104,10 +100,10 @@
         </div>
         <div class="right" style="width: 30%; display:flex;">
             <div  style="background: grey; height: 15vh; width: 15vh; margin: auto;">
-                <img id="file-image0" src="#" alt="Preview" class="hidden">
-                <img id="file-image1" src="#" alt="Preview" class="hidden">
-                <img id="file-image2" src="#" alt="Preview" class="hidden">
-                <img id="file-image3" src="#" alt="Preview" class="hidden">
+                <img id="file-image0" src="#" alt="Preview" style="display: none;">
+                <img id="file-image1" src="#" alt="Preview" style="display: none;"class="hidden">
+                <img id="file-image2" src="#" alt="Preview" style="display: none;"class="hidden">
+                <img id="file-image3" src="#" alt="Preview" style="display: none;"class="hidden">
             </div>
         </div>
       </div>
@@ -116,9 +112,9 @@
           <hr>
           <h4> Enchère</h4>
           <table>
-          <tr><td><label >Date de début : </label></td><td> <input type=\"date\" name=\"start_date\" >     </td></tr>
-          <tr><td><label >Date de fin : </label></td><td><input type="date" name="end_date" ></td></tr>
-          <tr><td><label >Prix initial : </label></td><td><input type="number" name="price_min" placeholder="00,00" >€</td></tr>
+            <tr><td><label >Date de début : </label></td><td> <input type="date" name="start_date" ></td></tr>
+            <tr><td><label >Date de fin : </label></td><td><input type="date" name="end_date" ></td></tr>
+            <tr><td><label >Prix initial : </label></td><td><input type="number" name="price_min" placeholder="00,00" >€</td></tr>
           </table>
         </div>
         <div id="BestOfferContent" style="display: none;">

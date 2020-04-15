@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Item ;
 use App\Media ;
 
+use Storage;
 
 
 class ItemController extends Controller
@@ -28,6 +29,13 @@ class ItemController extends Controller
  
     public function storeItem(Request $request){
  
+        $this->validate($request, [
+            'Title' => 'required',
+            'Description' => 'required',
+            'Category' => 'required',
+            'Title' => 'required',
+        ]);
+
         $item = new Item();
         $item->user_id=3;
         $item->Title = request('Title');
@@ -50,41 +58,28 @@ class ItemController extends Controller
             } 
         }
         $item->sell_Type = $mySellType;
-        //$item->save();
+        $item->save();
 
-        echo "test".$_FILES['fileUpload']['name'][0];
-        //echo "test".$_FILES['fileUpload']['name'][1];
-        //echo "test".$_FILES['fileUpload']['name'][2];
-       // $_FILES['fileUpload']['name'][0]->isValid(['fileUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
-        if ($files = $_FILES['fileUpload']['name'][0]) {
-            $destinationPath = 'media/item/'; // upload path
-            $profileImage = date('YmdHis') . ".bmp";// . $files->getClientOriginalExtension();
-            //$files->move($destinationPath, $profileImage);
-            @copy($files,"$destinationPath" . "$profileImage");
-            $insert['reference'] = "$destinationPath" . "$profileImage";
-            $insert['item_id']=100;
-            
-            $check = Media::insertGetId($insert);
-         }
-         else
-             echo "erreur";
-        /* request('fileUpload')->isValid(['fileUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
-       if ($files = $request->file('fileUpload')) {
-           $destinationPath = 'media/item/'; // upload path
-           $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-           $files->move($destinationPath, $profileImage);
-           $insert['reference'] = "$destinationPath" . "$profileImage";
-           $insert['item_id']=100;
-           
-           $check = Media::insertGetId($insert);
+
+        $files=$request->file('file');
+        if(!empty($files)){
+            $i=0;
+            foreach($files as $file){
+                $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
+                Storage::put($path,file_get_contents($file));
+                
+                $insert['reference'] = $path;
+                $insert['type']="picture";
+                $insert['item_id']=$item->id;
+                
+                $check = Media::insertGetId($insert);
+                $i++;
+            }
         }
         else
-            echo "erreur";
-        
- */
-        
+            echo "no files";  
  
-        //return redirect('/items');
+        return redirect('/items')->with('success','Votre item a été ajouté !');
         
         //$media = new Media();
         //$media->reference = request('reference');

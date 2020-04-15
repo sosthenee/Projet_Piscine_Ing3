@@ -25,9 +25,24 @@
     <script src="/js/myJS_CreateItem.js" ></script>
 
     <script>
-        function readURL(input, id) {
+        /*var form=document.getElementById('upload');
+            var request= new XMLHttpRequest();
+
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                var formDate=new FormData(form);
+                request.open('post', 'items/action');
+                request.addEventListener("load", transferComplete);
+                request.send(formdata);
+            });
+            function transferComplete(data){
+                console.log(data.currentTarget.response);
+            }
+            */
+      /*  function readURL(input, id) {
             
-            /*if (input.files&& input.files[0]) {
+
+            if (input.files&& input.files[0]) {
                 var reader;
                  reader = new FileReader();
         
@@ -38,7 +53,7 @@
                 reader.readAsDataURL(input.files[0]);
                 $('#file-image0').removeClass('hidden');
             }*/
-            
+            /*
             var temp=0;
             
             //$('#erreurs').html(input.files.length);
@@ -60,7 +75,7 @@
                 temp++;
         
             }
-        }
+        }*/
     </script> 
     
 </head>
@@ -118,7 +133,10 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container" > 
+                @include('inc.errorsuccess')
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
