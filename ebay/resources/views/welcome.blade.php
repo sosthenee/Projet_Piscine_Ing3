@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Ebay SRW</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -40,6 +40,17 @@
                 top: 18px;
             }
 
+            .top-left{
+                position: absolute;
+                left: 70px;
+                top: 18px;
+            }
+
+            .logo{
+                height : 100px;
+            }
+
+
             .content {
                 text-align: center;
             }
@@ -67,7 +78,7 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
             <div class="top-left links">
-                <img src={{ asset('img/logo_ebay.png') }} >
+                <img class ="logo" src={{ asset('img/logo_ebay.png') }} >
             </div>
                 <div class="top-right links">
          
@@ -86,7 +97,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel 
+                    EBAY SRW
                 </div>
 
                 <div class="links">
