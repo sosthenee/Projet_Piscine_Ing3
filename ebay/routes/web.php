@@ -23,12 +23,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin', 'HomeController@admin_only');
 
+
 // ======= ITEMS =======
 Route::get('/items','ItemController@index');
  
 Route::get('/items/create','ItemController@create');
  
 Route::post('/items/action','ItemController@storeItem');
+
+
+Route::get('/achat','ItemController@index');
+Route::get('/achat/{item_id}','ItemController@display');
+
+Route::get('/vendre','ItemController@create');
+Route::post('/vendre/ajouter/action','ItemController@storeItem');
+
+
+
 
 // ======= PAYMENTS =======
 Route::get('/user/{user_id}/payments','PaymentController@AllfromUser');
