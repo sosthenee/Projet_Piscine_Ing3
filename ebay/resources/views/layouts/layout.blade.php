@@ -1,10 +1,13 @@
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Ebay SRW</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -40,17 +43,6 @@
                 top: 18px;
             }
 
-            .top-left{
-                position: absolute;
-                left: 70px;
-                top: 18px;
-            }
-
-            .logo{
-                height : 100px;
-            }
-
-
             .content {
                 text-align: center;
             }
@@ -72,15 +64,33 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            
+            a{
+                    transition: border-bottom 0.2s;
+            }
+            
+            a:hover{
+                    border-bottom: 2px solid #e67e22;
+            }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-            <div class="top-left links">
-             <!--   <img src={{ asset('img/logo_ebay.png') }} >-->
+        <div class="flex-center position-ref ">
+                        <div class="content">
+
+                <div class="links">
+                    <a href="{{ url('/items/create') }}">Vendre un item</a>
+                    <a href="{{ url('/items') }}">Acheter un item</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://blog.laravel.com">Blog</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
             </div>
-                <div class="top-right links">
+            
+            
+            @if (Route::has('login'))
+
+                <div class=" links">
          
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -94,23 +104,12 @@
                 </div>
           
             @endif
+            
+            
 
-            <div class="content">
-                <div class="title m-b-md">
-                    EBAY SRW
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
         </div>
+        
+              @yield('content')      
+        
     </body>
 </html>
