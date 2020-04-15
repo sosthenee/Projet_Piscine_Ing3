@@ -30,4 +30,8 @@ Route::get('/items/create','ItemController@create');
  
 Route::post('/items/action','ItemController@storeItem');
 
+Route::get('/payment/{user_id}','PaymentController@readPaymentInfofromUser');
+
+Route::get('/payment/{user_id}/{id}','PaymentController@readPaymentInfofromId');
+
 //Route::get('/item', 'ItemController@get_all_images') ;
