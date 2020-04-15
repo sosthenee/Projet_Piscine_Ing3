@@ -22,8 +22,16 @@ class ItemController extends Controller
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->get();
-            
-        //$items = Item::all();
+
+        return view('item.items',compact('items'));
+    }
+    public function display($item_id){
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('items.id',$item_id)
+                    ->get();
         return view('item.item',compact('items'));
     }
  
@@ -84,7 +92,7 @@ class ItemController extends Controller
         else
             echo "no files";  
  
-        return redirect('/items')->with('success','Votre item a été ajouté !');
+        return redirect('/vendre')->with('success','Votre item a été ajouté !');
         
         //$media = new Media();
         //$media->reference = request('reference');
