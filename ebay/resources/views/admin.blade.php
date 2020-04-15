@@ -1,1 +1,0 @@
-<h1>je suis un admin</h1>

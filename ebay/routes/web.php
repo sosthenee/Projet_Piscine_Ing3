@@ -35,3 +35,9 @@ Route::get('/payment/{user_id}','PaymentController@readPaymentInfofromUser');
 Route::get('/payment/{user_id}/{id}','PaymentController@readPaymentInfofromId');
 
 //Route::get('/item', 'ItemController@get_all_images') ;
+
+Route::get('/admin','AdminController@get_all_vendeurs');
+
+Route::get('/admin/supp','AdminController@suppVendeur');
+
+Route::post('/admin/action','AdminController@Suppression');

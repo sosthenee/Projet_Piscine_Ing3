@@ -12,17 +12,24 @@ class ItemController extends Controller
 {
     public function get_all_images()
     {
-       
+	$items = Item::all();
+    $title = "";
+    $txt2 = "<br>";
+	foreach ($items as $item) {
+    	$title = $title.$item->Title.$txt2;
+	};
+ 	
+ 	return $title.$txt2 ;
     }
    
     public function index(){
  
         $items = Item::all();
+ 
         return view('item.item',compact('items'));
     }
  
     public function create(){
-
         return view('item.createItem');
     } 
  
@@ -30,35 +37,17 @@ class ItemController extends Controller
  
         $item = new Item();
         $item->Title = request('Title');
-        $item->Description = request('Description');
-        $item->Category =request('Category');
-
-        $mySellType ="";
-        if(request('myCheckBid')){
-            $mySellType = "enchere";
-            $item->Price = request('price_min');
-           // $item->Start_date= request('Start_date');
-           // $item->End_date= request('End_date');
-        }else{
-            if(request('myCheckBestOffer')){
-                $mySellType = "bestoffer ";
-            }
-            if(request('myCheckImmediatPurchase')){
-                $mySellType .= "immediat";
-                $item->Price = request('price');
-            } 
-        }
-        $item->Sell_Type = $mySellType;
-
-       
         $item->save();
- 
-        return redirect('/items/create');
-        
-        //$media = new Media();
-        //$media->reference = request('reference');
-        //$item->media()->saveMany([$media]);
-        //$media->save();
+
+
+        $media = new Media();
+        $media->reference = request('reference');
+       
+        $item->media()->saveMany([$media]);
+
+        $media->save();
+
+        return redirect('/items');
  
     }
  

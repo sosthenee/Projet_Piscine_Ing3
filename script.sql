@@ -1,2 +1,0 @@
-INSERT INTO `items` (`id`, `Title`, `Description`, `Price`, `Category`, `sell type`, `created_at`, `updated_at`) VALUES (NULL, 'montre1', 'ceci est une belle montre', '100', 'Luxe', 'Enchere', '2020-04-14 00:00:00', '2020-04-14 00:00:00');
-INSERT INTO `items` (`id`, `Title`, `Description`, `Price`, `Category`, `sell type`, `created_at`, `updated_at`) VALUES (NULL, 'La Persistance de la mémoire', 'Tableau de Dali avec horloges', '10000', 'Bon pour le Musée', 'Enchère', '2020-04-14 00:00:00', '2020-04-14 00:00:00');
