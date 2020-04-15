@@ -22,7 +22,7 @@
                     <div class="carrousel" >
                         <!--width="500" height="300"-->
                         @foreach($items as $image)
-                            <img  style="width: 40vw; height: 25vw; display: none;" src="../storage/{{$image->reference}}" alt="{{$image->Title}}" > 
+                            <img  style="width: 40vw; height: 25vw; display: none;" src="/storage/{{$image->reference}}" alt="{{$image->Title}}" > 
                         @endforeach
                     </div>
                     
