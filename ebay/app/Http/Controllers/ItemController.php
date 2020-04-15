@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item ;
 use App\Media ;
-
+use Illuminate\Support\Facades\DB;
 use Storage;
 
 
@@ -18,7 +18,12 @@ class ItemController extends Controller
    
     public function index(){
  
-        $items = Item::all();
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->get();
+            
+        //$items = Item::all();
         return view('item.item',compact('items'));
     }
  
@@ -66,7 +71,7 @@ class ItemController extends Controller
             $i=0;
             foreach($files as $file){
                 $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
-                Storage::put($path,file_get_contents($file));
+                Storage::put("public/".$path,file_get_contents($file));
                 
                 $insert['reference'] = $path;
                 $insert['type']="picture";
