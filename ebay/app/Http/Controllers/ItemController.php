@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item ;
+use App\Media ;
+
+
 
 class ItemController extends Controller
 {
@@ -33,11 +36,17 @@ class ItemController extends Controller
     public function storeItem(){
  
         $item = new Item();
- 
         $item->Title = request('Title');
-
         $item->save();
- 
+
+
+        $media = new Media();
+        $media->reference = request('reference');
+       
+        $item->media()->saveMany([$media]);
+
+        $media->save();
+
         return redirect('/items');
  
     }

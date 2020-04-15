@@ -21,6 +21,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::get('/admin', 'HomeController@admin_only');
+
+
 Route::get('/items','ItemController@index');
  
 Route::get('/items/create','ItemController@create');

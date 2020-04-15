@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+    public function admin_only(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);
+        return view('admin');
+    }
+
 }
