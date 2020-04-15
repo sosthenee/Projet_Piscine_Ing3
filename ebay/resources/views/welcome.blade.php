@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Ebay SRW</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -39,6 +39,17 @@
                 right: 10px;
                 top: 18px;
             }
+
+            .top-left{
+                position: absolute;
+                left: 70px;
+                top: 18px;
+            }
+
+            .logo{
+                height : 100px;
+            }
+
 
             .content {
                 text-align: center;
@@ -86,7 +97,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel 
+                    EBAY SRW
                 </div>
 
                 <div class="links">

@@ -31,9 +31,9 @@ class ItemController extends Controller
  
     public function create(){
         return view('item.createItem');
-    }
+    } 
  
-    public function storeItem(){
+   public function storeItem(){
  
         $item = new Item();
         $item->Title = request('Title');
