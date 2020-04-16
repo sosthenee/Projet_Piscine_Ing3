@@ -7,14 +7,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Ebay SRW</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
          <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
         <!-- Styles -->
@@ -26,7 +27,7 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                
                 font-family: 'Nunito', sans-serif;
                 
                 font-weight: 200;
@@ -71,18 +72,24 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
+            .links a:hover{
+                    border-bottom: 2px solid #e67e22;
+                    transition: border-bottom 0.2s;
+            }
             .m-b-md {
                 margin-bottom: 30px;
             }
             
             a{
-                    transition: border-bottom 0.2s;
+                color: black;
+                transition: border-bottom 0.2s;
+            }
+            a:hover{
+                color: black;
+                text-decoration: none;
             }
             
-            a:hover{
-                    border-bottom: 2px solid #e67e22;
-            }
+            
         </style>
     </head>
     <body>
@@ -113,13 +120,13 @@
                 </div>
 
             @endif
-            
-            
-
         </div>
-            
-        @include('inc.errorsuccess')
-        @yield('content')      
+        <main>
+            <div class="container" style="margin-top: 40px;">
+                @include('inc.errorsuccess')
+                @yield('content')      
+            </div>
+        </main>
         
     </body>
 </html>

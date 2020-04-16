@@ -112,9 +112,9 @@
           <hr>
           <h4> Enchère</h4>
           <table>
-            <tr><td><label >Date de début : </label></td><td> <input type="date" name="start_date" ></td></tr>
-            <tr><td><label >Date de fin : </label></td><td><input type="date" name="end_date" ></td></tr>
-            <tr><td><label >Prix initial : </label></td><td><input type="number" name="price_min" placeholder="00,00" >€</td></tr>
+            <tr><td><label >Date de début : </label></td><td> <input id="start_date" type="date" name="start_date"  ></td></tr>
+            <tr><td><label >Date de fin : </label></td><td><input id="end_date"type="date" name="end_date" ></td></tr>
+            <tr><td><label >Prix initial : </label></td><td><input id="price_min"type="number" name="price_min" min=0 placeholder="00,00" >€</td></tr>
           </table>
         </div>
         <div id="BestOfferContent" style="display: none;">
@@ -127,12 +127,12 @@
           <hr>
           <h4> Achat Immédiat</h4>
           <table>
-          <tr><td><label >Prix : </label></td><td><input type="number" name="price" placeholder="00,00" >€</td></tr>
+          <tr><td><label >Prix : </label></td><td><input type="number" name="price" min=0 placeholder="00,00" >€</td></tr>
           </table>
         </div>
 
       <hr>
-      <input class="btn btn-primary btn-lg" type="submit" value="Ajouter un Item">
+      <input class="btn btn-primary btn-lg " type="submit" value="Ajouter un Item">
     </form>   
   </div>
  </div>   
