@@ -10,7 +10,7 @@ class DeliveryController extends Controller
 {
     public function AllfromUser(Request $request){
         
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user = Auth::user();
         $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
         return view('adress.adress',compact('delivery_addresses'));
@@ -18,14 +18,14 @@ class DeliveryController extends Controller
 
     public function updateView(Request $request, $id){
        
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $delivery_addresses = Delivery_address::where('id',$id)->first();
         return view('adress.change_adress',compact('delivery_addresses'));
     }
 
     public function Create(Request $request){
 
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user = Auth::user();
 
         $address = new Delivery_address();
@@ -47,7 +47,7 @@ class DeliveryController extends Controller
 
     public function delete(Request $request, $adress_id){
 
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user_id = Auth::id();
         $address = Delivery_address::where([
             ['id',$adress_id],
@@ -61,7 +61,7 @@ class DeliveryController extends Controller
 
     public function update(Request $request ,  $adress_id){
 
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user_id = Auth::id();
         $addresses = Delivery_address::where('id',$adress_id)->first();
         $addresses->firstName = request('firstName');
