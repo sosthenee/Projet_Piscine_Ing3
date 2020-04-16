@@ -33,18 +33,18 @@
             <p>Disponible : </p>
             @if(strpos($item->sell_type, "enchere")!== false)
                 <h4>Vente aux enchères</h4>
-                <p>Prix actuel : {{$item->Initial_Price}}€
+                <p>Prix actuel : <strong>{{$item->Initial_Price}}€</strong>
                 <br> Date Début : {{$item->start_date}}
                 <br> Fin Début : {{$item->end_date}}
                 </p>
                 <p>Enchère automatique :</p>
-                Saissisez le montant maximum que vous etes pret à dépenser: <input type="text" name="price" id="" placeholder="00€00">
+                Saissisez le montant maximum que vous etes pret à dépenser: <input type="number" min="{{$item->Initial_Price}}" name="price" id="" placeholder="00€00">
                 <button class="btn btn-primary">Encherire</button>
             @endif
             @if(strpos($item->sell_type, "bestoffer")!== false)
                 <h4>Vente au meilleur prix</h4>
                 <p> Proposez le prix que vous souhaitez au vendeur !</p>
-                <input type="text" name="price" id="" placeholder="00€00">
+                <input type="number" name="price" id="" placeholder="00€00">
                 <button class="btn btn-primary">Faire une proposition</button>
             @endif
             @if(strpos($item->sell_type, "immediat")!== false)

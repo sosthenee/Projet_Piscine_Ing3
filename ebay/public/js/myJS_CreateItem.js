@@ -20,6 +20,7 @@ $(document).ready(function(){
     $('#start_date').change(function(){
         $('#end_date').prop('min', this.value);
     });
+    
     $('#myCheckBid').change(function(){
         if($('#myCheckBid').is(':checked')){
             $("#myCheckBestOffer").prop( "checked", false );
