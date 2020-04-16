@@ -74,7 +74,7 @@ class RegisterController extends Controller
             $roletmp = 'buyer' ;
         }
         if (isset($data['roleseller']) && !isset($data['rolebuyer'])){
-            $roletmp = 'seller';
+            $roletmp = 'askseller';
         }
         if (isset($data['roleseller']) && isset($data['rolebuyer'])){
             $roletmp = 'askseller';

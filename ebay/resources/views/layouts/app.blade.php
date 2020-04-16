@@ -23,7 +23,7 @@
 
     <script src="/js/myJS_CreateItem.js" ></script>
     <script src="/js/myJS_itemCarroussel.js" ></script>
-
+    
     <script>
       /*  function readURL(input, id) {
             if (input.files&& input.files[0]) {

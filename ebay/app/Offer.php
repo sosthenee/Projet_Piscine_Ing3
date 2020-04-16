@@ -10,7 +10,7 @@ class Offer extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'price', 'state'
+        'price', 'state', 'type'
     ];
 
     public function user()
