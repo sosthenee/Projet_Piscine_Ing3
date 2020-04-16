@@ -11,13 +11,17 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-         <!-- CSRF Token -->
+        
+             <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+        <script  src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script  src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -89,43 +93,79 @@
                 color: black;
                 text-decoration: none;
             }
-            
+            .sticky{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                
+            }
             
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref ">
-            <div class="content">
-                <div class="links">
-                    <a href="{{ url('/vendre') }}">Vendre un item</a>
-                    <a href="{{ url('/achat') }}">Acheter un item</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-            
-            
-            @if (Route::has('login'))
+        <nav class="sticky">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <a class="navbar-brand" href="#">Mon site</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Accueil <span class="sr-only">Accueil</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Feraille ou trésor</a>
+                            <a class="dropdown-item" href="#">Bon pour le musée</a>
+                            <a class="dropdown-item" href="#">Accessoires VIP</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">TOUT</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Options d'achats
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Achat immédiat</a>
+                            <a class="dropdown-item" href="#">Enchère</a>
+                            <a class="dropdown-item" href="#">Meilleure offre</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">TOUT</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Vendre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Votre compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Panier</a>
+                    </li>
+                </ul>
+                @if (Route::has('login'))
 
-                <div class=" links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login </a>
+                    <div class=" links">
+                        @auth
+                            <a href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login </a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
 
-            @endif
-        </div>
+                @endif
+            </nav>
+        </nav>
         <main>
-            <div class="container" style="margin-top: 40px;">
+            <div class="container" style="margin-top: 60px; padding-top: 20px;">
                 @include('inc.errorsuccess')
-                @yield('content')      
+                @yield('content')     
             </div>
         </main>
         

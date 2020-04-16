@@ -11,6 +11,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+       
 
         <!-- Styles -->
         <style>
@@ -73,9 +74,17 @@
             a:hover{
                     border-bottom: 2px solid #e67e22;
             }
+                        .sticky{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                
+            }
         </style>
     </head>
     <body>
+    <nav class="sticky">
         <div class="flex-center position-ref ">
                         <div class="content">
 
@@ -105,11 +114,13 @@
           
             @endif
             
-            
+
 
         </div>
+        </nav>
+
         
               @yield('content')      
-        
+              
     </body>
 </html>

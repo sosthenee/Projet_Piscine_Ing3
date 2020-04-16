@@ -42,6 +42,11 @@ Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat')
 Route::get('/vendre','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
 
+// ======= Offers =======
+Route::get('/panier','OfferController@index');
+Route::post('/panier/delete/{offer_id}','OfferController@destroy');
+Route::post('/panier/update/{offer_id}','OfferController@update');
+Route::post('/panier/delivery','OfferController@basketValidation');
 
 
 
@@ -51,6 +56,7 @@ Route::get('/payment/update_payment/{payment_id}', 'PaymentController@updateView
 Route::post('/payment/create','PaymentController@Create');
 Route::delete('/payment/{payment_id}','PaymentController@delete');
 Route::put('/payment/update/{payment_id}','PaymentController@update');
+
 
 
 // ======= USER =========
@@ -67,29 +73,17 @@ Route::put('/adress/update/{adress_id}','DeliveryController@update');
 
 
 //Route::get('/item', 'ItemController@get_all_images') ;
-
+//  ======= ADMIN =======
 Route::get('/ListesVendeurs','AdminController@get_all_vendeurs');
-
 Route::get('/ListesVendeurs/suppVendeur','AdminController@suppVendeur');
-
 Route::post('/ListesVendeurs/action','AdminController@suppressionVendeur');
-
 Route::get('/VendeursAttente','AdminController@vendeurEnAttente');
-
 Route::post('/VendeursAttente/approuver/{user_id}','AdminController@VendeurchoixAjouter');
-
-
 Route::post('/VendeursAttente/refuser/{user_id}','AdminController@VendeurchoixRefuser');
 
 Route::get('/ListesItems','AdminController@get_all_items');
-
 Route::get('/ListesItems/suppItem','AdminController@suppItem');
-
 Route::post('/ListesItems/action','AdminController@suppressionItem');
-
 Route::get('/ItemsAttente','AdminController@ItemsenAttente');
-
 Route::post('/ItemsAttente/approuver/{item_id}','AdminController@ItemschoixAjouter');
-
-
 Route::post('/ItemsAttente/refuser/{item_id}','AdminController@ItemschoixRefuser');
