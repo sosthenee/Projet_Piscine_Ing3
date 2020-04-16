@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
  
 
@@ -10,7 +10,7 @@
         @endphp
         @foreach($items as $item)
             @if($id_item_temp<>$item->item_id)
-                <a href="{{$item->item_id}}"  >
+                <a href="/achat/{{$item->item_id}}"  >
                     <div class="well" style="display: flex; border: 1px grey solid; padding: 10px; margin: 50px;">
                         <div style="margin: 20px; width: 100%;">
                             <h3>{{$item->Title}}</h3>

@@ -16,6 +16,7 @@ $(document).ready(function(){
             },5000); 
     } 
     // on n’oublie pas de lancer la fonction une première fois 
+    $(".carrousel img").eq(numImgDisplay).css('display', 'flex');
     maBoucle(); 
 
     $('#leftArrow').click(function(){

@@ -1,5 +1,25 @@
 $(document).ready(function(){
 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
+    
+    $('#start_date').prop('min', today);
+    $('#end_date').prop('min', today);
+    $('#end_date').change(function(){
+        $('#start_date').prop('max', this.value);
+    });
+    $('#start_date').change(function(){
+        $('#end_date').prop('min', this.value);
+    });
     $('#myCheckBid').change(function(){
         if($('#myCheckBid').is(':checked')){
             $("#myCheckBestOffer").prop( "checked", false );
