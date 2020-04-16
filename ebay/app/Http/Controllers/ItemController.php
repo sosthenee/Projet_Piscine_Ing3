@@ -21,6 +21,7 @@ class ItemController extends Controller
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
+                    ->where('media.type','picture')
                     ->get();
 
         return view('item.items',compact('items'));
@@ -79,13 +80,14 @@ class ItemController extends Controller
             $i=0;
             foreach($files as $file){
                 $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
-                Storage::put("public/".$path,file_get_contents($file));
-                
+                if(strpos(".ogm .wmv .mpg .webm .ogv .asx .mpeg .mp4 .mkv .avi", $file->getClientOriginalExtension())!== false)
+                    $insert['type']="video";
+                else
+                    $insert['type']="picture";
                 $insert['reference'] = $path;
-                $insert['type']="picture";
                 $insert['item_id']=$item->id;
-                
                 $check = Media::insertGetId($insert);
+                Storage::put("public/".$path,file_get_contents($file));
                 $i++;
             }
         }

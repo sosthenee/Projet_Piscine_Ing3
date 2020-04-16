@@ -15,17 +15,23 @@
                 <p>nom vendeur: {{$item->username}}</p>
                 <p>{{$item->Description}}</p>
             </div>
-
-            
-
-            <div class="right" style=" margin: 20px;  width: 30vw; height: 18vw;">
+            <div class="right" style=" margin: 20px;">
                 <div class="carrousel" >
-                    <!--width="500" height="300"-->
                     @foreach($items as $image)
-                        <img  style="width: 30vw; height: 18vw; border: 1px grey solid; display: none;" src="/storage/{{$image->reference}}" alt="{{$image->Title}}" > 
+                        @if($image->type=="picture")
+                            <img  style="width: 30vw; height: 18vw; border: 1px grey solid; display: none;" src="/storage/{{$image->reference}}" alt="{{$image->Title}}" > 
+                        @endif
                     @endforeach
-                </div>
-                
+                </div> 
+                @foreach($items as $image)
+                     @if($image->type=="video")
+                        <video controls style="width: 30vw; height: 18vw; border: 1px grey solid;"  >
+                            <source src="/storage/{{$image->reference}}">
+                            </source>
+                            votre navigateur ne prend pas en charge ce type de vidéo
+                        </video>
+                    @endif
+                @endforeach
             </div>
         </div>
 

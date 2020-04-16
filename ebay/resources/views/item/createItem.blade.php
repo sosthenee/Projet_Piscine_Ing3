@@ -78,12 +78,12 @@
               <td><label >Insertion de média : </label></td>
               <td>
               @csrf
-                <input id="file-upload" type="file" name="file[]" accept="image/*"  multiple > <!--onchange="readURL(this);"-->
+                <input id="file-upload" type="file" name="file[]" accept="image/*, video/*"  multiple > <!--onchange="readURL(this);"-->
                 <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
                 <span id="erreurs"></span>
               </td>
- 
             </tr>
+
             
             <tr>
               <td><label >Type de vente : </label></td>
