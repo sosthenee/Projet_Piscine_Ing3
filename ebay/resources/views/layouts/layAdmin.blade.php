@@ -80,11 +80,10 @@
                         <div class="content">
 
                 <div class="links">
-                    <a href="{{ url('/items/create') }}">Vendre un item</a>
-                    <a href="{{ url('/items') }}">Acheter un item</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ url('/VendeursAttente') }}">Demandes de vendeurs</a>
+                    <a href="{{ url('/ItemsAttente') }}">Demande d'items</a>
+                    <a href="{{ url('/ListesVendeurs') }}">Vendeurs actuels</a>
+                    <a href="{{ url('/ListesItems') }}">Items actuels</a>
                 </div>
             </div>
             
