@@ -22,6 +22,7 @@ class ItemController extends Controller
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
+                    ->orderBy('items.id', 'desc')
                     ->get();
 
         return view('item.items',compact('items'));
@@ -92,7 +93,12 @@ class ItemController extends Controller
             }
         }
         else
-            echo "no files";  
+        { 
+            $insert['type']="picture";
+            $insert['reference'] = "unnamed.png";
+            $insert['item_id']=$item->id;
+            $check = Media::insertGetId($insert);
+        }
  
         return redirect('/vendre')->with('success','Votre item a été ajouté !');
         
