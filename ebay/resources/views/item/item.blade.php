@@ -32,7 +32,8 @@
         <div style=" background: lightgrey;  margin: 20px 50px; padding: 20px;">
            
             @if(strpos($item->sell_type, "enchere")!== false)
-                <form action="" method="post">
+                <form action="/achat/{{$item->item_id}}/addBidOffer" method="post">
+                    {{ csrf_field() }}
                     <h4>Vente aux enchères</h4>
                     <p>Prix actuel : <strong>{{$item->Initial_Price}}€</strong>
                     <br>Date Début : {{$item->start_date}}
@@ -46,7 +47,8 @@
 
             @if(strpos($item->sell_type, "bestoffer")!== false)
             
-                <form action="" method="post">
+                <form action="/achat/{{$item->item_id}}/addBestOffer" method="post">
+                    {{ csrf_field() }}
                     <h4>Vente au meilleur prix</h4>
                     <span> Proposez le prix que vous souhaitez au vendeur : </span>
                     <input type="number" name="price" id="" placeholder="00€00">
@@ -57,7 +59,8 @@
 
             @if(strpos($item->sell_type, "immediat")!== false)
             
-                <form action="" method="post">
+                <form action="/achat/{{$item->item_id}}/addImmediatOffer" method="post">
+                    {{ csrf_field() }}
                     <h4>Vente immediate</h4>
                     <span> Prix : {{$item->Initial_Price}}€ </span>
                     <input type="submit" class="btn btn-primary" value="Ajouter à mon panier">

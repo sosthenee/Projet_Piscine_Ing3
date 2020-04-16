@@ -34,6 +34,10 @@ Route::post('/items/action','ItemController@storeItem');
 
 Route::get('/achat','ItemController@index');
 Route::get('/achat/{item_id}','ItemController@display');
+Route::post('/achat/{item_id}/addBidOffer','OfferController@storeBid');
+Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBest');
+Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
+
 
 Route::get('/vendre','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
