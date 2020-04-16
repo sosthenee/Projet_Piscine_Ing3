@@ -42,6 +42,11 @@ Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat')
 Route::get('/vendre','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
 
+// ======= Offers =======
+Route::get('/panier','OfferController@index');
+Route::post('/panier/delete/{offer_id}','OfferController@destroy');
+Route::post('/panier/update/{offer_id}','OfferController@update');
+Route::post('/panier/delivery/','OfferController@basketValidation');
 
 
 
