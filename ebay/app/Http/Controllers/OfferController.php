@@ -16,7 +16,19 @@ class OfferController extends Controller
      */
     public function index()
     {
-        //
+        $offers  = DB::table('offers')
+                    
+                    ->join('items','offers.item_id', '=','items.id')
+                    ->join('media','items.id', '=','media.item_id')
+                    
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('offers.state','panier')
+                    ->where('media.type','picture')
+                    ->orderBy('offers.item_id', 'desc')
+                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'media.type','media.reference', 'items.Title','items.Description', 'items.Category','items.end_date', 'items.sell_type', 'items.sold', 'users.id as sellerId', 'users.username')
+                    ->get();
+
+        return view('basket.offers',compact('offers'));
     }
 
     /**
@@ -128,7 +140,8 @@ class OfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        return redirect('/panier')->with('error','Aucune modification n\'a été fait la page de modification n\'existe pas encore');
     }
 
     /**
@@ -139,6 +152,22 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $offers  = DB::table('offers')
+                    ->where('offers.id',$id)
+                    ->get();
+
+        if(count($offers)==1&&$offers[0]->state=="panier")
+        {
+            Offer::where('id', '=', $id)->delete(); 
+            return redirect('/panier')->with('success','Vous vener de retirer une offre de votre panier');
+        }
+        else{
+            return redirect('/panier')->with('error','Cet element ne peut pas être supprimer' .count($offers));
+        }
+        
+    }
+    public function basketValidation(Request $request)
+    {
+        return redirect('/achat')->with('error','La page de validation du panier n\'existe pas encore');
     }
 }
