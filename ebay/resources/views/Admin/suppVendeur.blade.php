@@ -1,12 +1,7 @@
 
- 
-<!DOCTYPE html>
-<html>
-<head>
-   
-</head>
-<body>
- 
+@extends('layouts.layAdmin')
+
+ @section('content')
 <h1>All Information About the sellers</h1>
  
 
@@ -26,20 +21,19 @@
   @endif
 @endforeach 
     
-
-    
- 
-     <form method="POST" action="/admin/action">
- 
-        {{ csrf_field() }}
-         @foreach ($users as $user)   
+           @foreach ($users as $user)   
           @if($user->role==='seller')
             {
-            <li> {{ $user->firstname}}  </li>
-             
+            <li> {{ $user-> firstname}}  </li>
             }  
+         
           @endif
         @endforeach
+  
+ 
+     <form method="POST" action="/ListesVendeurs/action">
+ 
+        {{ csrf_field() }}
 
       
       <div>
@@ -51,5 +45,4 @@
       </div>
  
     </form>  
-</body>
-</html>
+@endsection

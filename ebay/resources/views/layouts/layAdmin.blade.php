@@ -7,27 +7,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Ebay SRW</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-         <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <script src="/js/myJS_CreateItem.js" ></script>
-        <script src="/js/myJS_itemCarroussel.js" ></script>
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
-                
+                color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 
                 font-weight: 200;
@@ -72,35 +61,29 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-            .links a:hover{
-                    border-bottom: 2px solid #e67e22;
-                    transition: border-bottom 0.2s;
-            }
+
             .m-b-md {
                 margin-bottom: 30px;
             }
             
             a{
-                color: black;
-                transition: border-bottom 0.2s;
+                    transition: border-bottom 0.2s;
             }
+            
             a:hover{
-                color: black;
-                text-decoration: none;
+                    border-bottom: 2px solid #e67e22;
             }
-            
-            
         </style>
     </head>
     <body>
         <div class="flex-center position-ref ">
-            <div class="content">
+                        <div class="content">
+
                 <div class="links">
-                    <a href="{{ url('/vendre') }}">Vendre un item</a>
-                    <a href="{{ url('/achat') }}">Acheter un item</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ url('/VendeursAttente') }}">Demandes de vendeurs</a>
+                    <a href="{{ url('/ItemsAttente') }}">Demande d'items</a>
+                    <a href="{{ url('/ListesVendeurs') }}">Vendeurs actuels</a>
+                    <a href="{{ url('/ListesItems') }}">Items actuels</a>
                 </div>
             </div>
             
@@ -108,6 +91,7 @@
             @if (Route::has('login'))
 
                 <div class=" links">
+         
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -118,15 +102,14 @@
                         @endif
                     @endauth
                 </div>
-
+          
             @endif
+            
+            
+
         </div>
-        <main>
-            <div class="container" style="margin-top: 40px;">
-                @include('inc.errorsuccess')
-                @yield('content')      
-            </div>
-        </main>
+        
+              @yield('content')      
         
     </body>
 </html>
