@@ -14,8 +14,8 @@ class MediaSeeder extends Seeder
 
     
         $media = new Media();
-        $media->type = 'dsdfd';
-        $media->reference = 'panier';
+        $media->type = 'photo';
+        $media->reference = '';
         $media->item()->associate($item);
 
         $media->save();

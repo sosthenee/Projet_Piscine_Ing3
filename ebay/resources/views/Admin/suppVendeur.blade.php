@@ -21,12 +21,12 @@
 @foreach ($users as $user)   
   @if($user->role==='seller')
     {
-    <li> {{ $user-> firstname}}  </li>
+    <li> {{ $user->firstname}}  </li>
     }  
   @endif
 @endforeach 
     
-$user->delete();
+
     
  
      <form method="POST" action="/admin/action">
@@ -35,7 +35,7 @@ $user->delete();
          @foreach ($users as $user)   
           @if($user->role==='seller')
             {
-            <li> {{ $user-> firstname}}  </li>
+            <li> {{ $user->firstname}}  </li>
              
             }  
           @endif
