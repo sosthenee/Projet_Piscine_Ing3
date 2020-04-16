@@ -31,14 +31,14 @@ Route::get('/items/create','ItemController@create');
  
 Route::post('/items/action','ItemController@storeItem');
 
-
+// ======= Purchase =======
 Route::get('/achat','ItemController@index');
 Route::get('/achat/{item_id}','ItemController@display');
 Route::post('/achat/{item_id}/addBidOffer','OfferController@storeBid');
 Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBest');
 Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
 
-
+// ======= Selling =======
 Route::get('/vendre','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
 

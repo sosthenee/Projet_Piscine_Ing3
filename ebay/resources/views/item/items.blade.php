@@ -41,14 +41,13 @@
                             @endif
                         </div>
 
-                        <div style=" margin: 20px; border: 1px grey solid; width: 20vw;">
-                            <img style="width: 100%; height: 100%; "src="/storage/{{$item->reference}}" alt="{{$item->Title}}"> 
+                        <div style=" margin: 20px; border: 1px grey solid; ">
+                            <img style="width: 18vw; height: 13vw;" src="/storage/{{$item->reference}}" alt="{{$item->Title}}"> 
                         </div>
                     </div>
                 </a>
             @endif
 
-            
         @endforeach
     @else
         <p> Nous n'avons trouvé aucun article disponible pour l'instant.
