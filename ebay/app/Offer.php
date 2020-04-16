@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     public $timestamps = false;
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'price', 'state'
+        'price', 'state', 'type'
     ];
 
     public function user()

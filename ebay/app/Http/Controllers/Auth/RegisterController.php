@@ -50,9 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'rolebuyer' => ['required_without_all: rolebuyer,roleseller'],
+            'roleseller' => ['required_without_all: roleseller,rolebuyer'],
         ]);
     }
 
@@ -64,16 +68,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $roletmp = "";
+
+        if (isset($data['rolebuyer']) && !isset($data['roleseller'])){
+            $roletmp = 'buyer' ;
+        }
+        if (isset($data['roleseller']) && !isset($data['rolebuyer'])){
+            $roletmp = 'askseller';
+        }
+        if (isset($data['roleseller']) && isset($data['rolebuyer'])){
+            $roletmp = 'askseller';
+        }
+
         return User::create([
-            'name' => $data['name'],
+            'username' => $data['username'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role'=>$roletmp
         ]);
 
-
-        $user
-            ->roles()
-            ->attach(Role::where('name', 'buyer')->first());
         return $user;
 
     }

@@ -27,6 +27,7 @@ class CreateItemsTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->boolean('sold')->nullable();
+            $table->string('admin_state')->nullable();
 
 
         });

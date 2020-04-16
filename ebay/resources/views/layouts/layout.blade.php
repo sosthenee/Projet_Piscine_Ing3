@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,13 +11,26 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+         <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <script src="/js/myJS_CreateItem.js" ></script>
+        <script src="/js/myJS_itemCarroussel.js" ></script>
+        <script src="/js/myJS_addPayment.js" ></script>
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                
                 font-family: 'Nunito', sans-serif;
+                
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -40,17 +56,6 @@
                 top: 18px;
             }
 
-            .top-left{
-                position: absolute;
-                left: 70px;
-                top: 18px;
-            }
-
-            .logo{
-                height : 100px;
-            }
-
-
             .content {
                 text-align: center;
             }
@@ -68,20 +73,42 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
+            .links a:hover{
+                    border-bottom: 2px solid #e67e22;
+                    transition: border-bottom 0.2s;
+            }
             .m-b-md {
                 margin-bottom: 30px;
             }
+            
+            a{
+                color: black;
+                transition: border-bottom 0.2s;
+            }
+            a:hover{
+                color: black;
+                text-decoration: none;
+            }
+            
+            
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-            <div class="top-left links">
-             <!--   <img src={{ asset('img/logo_ebay.png') }} >-->
+        <div class="flex-center position-ref ">
+            <div class="content">
+                <div class="links">
+                    <a href="{{ url('/vendre') }}">Vendre un item</a>
+                    <a href="{{ url('/achat') }}">Acheter un item</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://blog.laravel.com">Blog</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
             </div>
-                <div class="top-right links">
-         
+            
+            
+            @if (Route::has('login'))
+
+                <div class=" links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -92,25 +119,15 @@
                         @endif
                     @endauth
                 </div>
-          
+
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    EBAY SRW
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
         </div>
+        <main>
+            <div class="container" style="margin-top: 40px;">
+                @include('inc.errorsuccess')
+                @yield('content')      
+            </div>
+        </main>
+        
     </body>
 </html>
