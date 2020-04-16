@@ -10,5 +10,12 @@
     <li> {{ $item}}  </li>
     @endif
 @endforeach
-    
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    @foreach ($items as $item)
+    @if($item->admin_state==="approve")
+    <li> {{ $item}}  </li>
+    @endif
+@endforeach
+
 @endsection
