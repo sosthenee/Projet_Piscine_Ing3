@@ -5,7 +5,7 @@
     <h1>Mon Panier :</h1>
     @if(count($offers)>0)
 
-        <form action="/panier/delivery/" method="post"></form>
+       
             @php
                 $id_offer_temp=-1;
             @endphp
@@ -17,16 +17,16 @@
                     @endphp
                     <div class="well" style="display: flex; border: 1px grey solid; padding: 10px; margin: 20px 50px;">
                         <div style=" margin: 20px; border: 1px grey solid;  ">
-                            <img style="width: 11vw; height: 7vw;" src="/storage/{{$offer->reference}}" alt="{{$offer->Title}}"> 
+                            <img style="width: 11vw; height: 7vw;" src="/storage/{{$offer->media_reference}}" alt="{{$offer->Title}}"/> 
                         </div>
 
                         <div style="margin: 20px; width: 100%;">
                             <h3>{{$offer->Title}}</h3>
-                            <h6>{{$offer->Category}}</h5>
-                            nom vendeur: {{$offer->username}}
+                            <h6>{{$offer->Category}}</h6>
+                            nom vendeur: {{$offer->seller_username}}
                             <p>Prix : <strong>{{$offer->price}}€</strong></p>
                         </div>
-                        <div >
+                        <div>
                             <form action="panier/update/{{$offer->id}}" method="post">
                                 {{ csrf_field() }}
                                 <input type="submit" class="btn btn-lg btn-info"value="Modifier">
@@ -40,6 +40,7 @@
                 @endif
             
             @endforeach
+        <form action="/panier/delivery" method="post">
             {{ csrf_field() }}
             <input type="submit" class="btn btn-success"value="Valider le panier">
         </form>
