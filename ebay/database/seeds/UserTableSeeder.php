@@ -13,6 +13,12 @@ class UserTableSeeder extends Seeder
     $admin->email = 'admin@example.com';
     $admin->password = bcrypt('secret');
     $admin->role = 'admin';
+    $admin->username = 'admin userName';
+    $admin->lastname = 'admin lastName';
+    $admin->email_verified_at = '2020-04-17';
+    $admin->pseudo = 'ece_admin';
+    $admin->picture = '';
+    $admin->contract = 1;
     $admin->save();
 
     $buyer = new User();
@@ -20,6 +26,12 @@ class UserTableSeeder extends Seeder
     $buyer->email = 'buyer@example.com';
     $buyer->password = bcrypt('secret');
     $buyer->role ='buyer';
+    $buyer->username = 'buyer userName';
+    $buyer->lastname = 'buyer lastName';
+    $buyer->email_verified_at = '2020-04-19';
+    $buyer->pseudo = 'ece_buyer';
+    $buyer->picture = '';
+    $buyer->contract = 1;
     $buyer->save();
 
     $seller = new User();
@@ -27,6 +39,12 @@ class UserTableSeeder extends Seeder
     $seller->email = 'seller@example.com';
     $seller->password = bcrypt('secret');
     $seller->role= 'seller';
+    $seller->username = 'seller userName';
+    $seller->lastname = 'seller lastName';
+    $seller->email_verified_at = '2020-04-37';
+    $seller->pseudo = 'ece_seller';
+    $seller->picture = '';
+    $seller->contract = 0;
     $seller->save();
   }
 }

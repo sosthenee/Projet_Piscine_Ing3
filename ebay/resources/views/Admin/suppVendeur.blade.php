@@ -16,7 +16,7 @@
 @foreach ($users as $user)   
   @if($user->role==='seller')
     {
-    <li> {{ $user-> firstname}}  </li>
+    <li> {{ $user->firstname}}  </li>
     }  
   @endif
 @endforeach 
