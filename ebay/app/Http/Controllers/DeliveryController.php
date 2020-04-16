@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DeliveryController extends Controller
 {
-    public function AllfromUser(Request $request, $user_id){
-       
+    public function AllfromUser(Request $request){
+        
         $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
-        $delivery_addresses = Delivery_address::where('user_id',$user_id)->get();
+        $user = Auth::user();
+        $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
         return view('adress.adress',compact('delivery_addresses'));
     }
 

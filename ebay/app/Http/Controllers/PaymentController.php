@@ -9,9 +9,11 @@ class PaymentController extends Controller
 {
 
 
-    public function AllfromUser(Request $request, $user_id){
+    public function AllfromUser(Request $request){
         $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
-        $payement_infos = Payment_info::where('user_id',$user_id)->get();
+        $user = Auth::user();
+
+        $payement_infos = Payment_info::where('user_id',$user->id)->get();
         return view('payment_info.payment_info',compact('payement_infos'));
     }
 
@@ -34,7 +36,7 @@ class PaymentController extends Controller
         $payement_info->save();
         
         $payement_infos = Payment_info::where('user_id',$user->id)->get();
-        return view('payment_info.payment_info',compact('payement_infos'));
+        return redirect()->action('PaymentController@AllfromUser');
     }
 
     public function delete(Request $request, $payment_id ){

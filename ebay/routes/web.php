@@ -46,7 +46,7 @@ Route::post('/vendre/ajouter/action','ItemController@storeItem');
 
 
 // ======= PAYMENTS =======
-Route::get('/user/{user_id}/payments','PaymentController@AllfromUser');
+Route::get('/user/payments','PaymentController@AllfromUser');
 Route::get('/payment/update_payment/{payment_id}', 'PaymentController@updateView');
 Route::post('/payment/create','PaymentController@Create');
 Route::delete('/payment/{payment_id}','PaymentController@delete');
@@ -58,7 +58,7 @@ Route::put('/payment/update/{payment_id}','PaymentController@update');
 
 
 // ======= ADRESS =======
-Route::get('/user/{user_id}/adress','DeliveryController@AllfromUser');
+Route::get('/user/adress','DeliveryController@AllfromUser');
 Route::get('/adress/update_adress/{adress_id}', 'DeliveryController@updateView');
 Route::post('/adress/create','DeliveryController@Create');
 Route::delete('/adress/{adress_id}','DeliveryController@delete');
