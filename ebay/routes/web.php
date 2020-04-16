@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/admin', 'HomeController@admin_only');
+//Route::get('/admin', 'HomeController@admin_only');
 
 
 // ======= ITEMS =======
@@ -64,8 +64,28 @@ Route::put('/adress/update/{adress_id}','DeliveryController@update');
 
 //Route::get('/item', 'ItemController@get_all_images') ;
 
-Route::get('/admin','AdminController@get_all_vendeurs');
+Route::get('/ListesVendeurs','AdminController@get_all_vendeurs');
 
-Route::get('/admin/supp','AdminController@suppVendeur');
+Route::get('/ListesVendeurs/suppVendeur','AdminController@suppVendeur');
 
-Route::post('/admin/action','AdminController@Suppression');
+Route::post('/ListesVendeurs/action','AdminController@suppressionVendeur');
+
+Route::get('/VendeursAttente','AdminController@vendeurEnAttente');
+
+Route::post('/VendeursAttente/approuver/{user_id}','AdminController@VendeurchoixAjouter');
+
+
+Route::post('/VendeursAttente/refuser/{user_id}','AdminController@VendeurchoixRefuser');
+
+Route::get('/ListesItems','AdminController@get_all_items');
+
+Route::get('/ListesItems/suppItem','AdminController@suppItem');
+
+Route::post('/ListesItems/action','AdminController@suppressionItem');
+
+Route::get('/ItemsAttente','AdminController@ItemsenAttente');
+
+Route::post('/ItemsAttente/approuver/{item_id}','AdminController@ItemschoixAjouter');
+
+
+Route::post('/ItemsAttente/refuser/{item_id}','AdminController@ItemschoixRefuser');
