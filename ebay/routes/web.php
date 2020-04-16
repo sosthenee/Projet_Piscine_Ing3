@@ -31,10 +31,14 @@ Route::get('/items/create','ItemController@create');
  
 Route::post('/items/action','ItemController@storeItem');
 
-
+// ======= Purchase =======
 Route::get('/achat','ItemController@index');
 Route::get('/achat/{item_id}','ItemController@display');
+Route::post('/achat/{item_id}/addBidOffer','OfferController@storeBid');
+Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBest');
+Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
 
+// ======= Selling =======
 Route::get('/vendre','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
 
@@ -42,7 +46,7 @@ Route::post('/vendre/ajouter/action','ItemController@storeItem');
 
 
 // ======= PAYMENTS =======
-Route::get('/user/{user_id}/payments','PaymentController@AllfromUser');
+Route::get('/user/payments','PaymentController@AllfromUser');
 Route::get('/payment/update_payment/{payment_id}', 'PaymentController@updateView');
 Route::post('/payment/create','PaymentController@Create');
 Route::delete('/payment/{payment_id}','PaymentController@delete');
@@ -55,7 +59,7 @@ Route::put('/payment/update/{payment_id}','PaymentController@update');
 
 
 // ======= ADRESS =======
-Route::get('/user/{user_id}/adress','DeliveryController@AllfromUser');
+Route::get('/user/adress','DeliveryController@AllfromUser');
 Route::get('/adress/update_adress/{adress_id}', 'DeliveryController@updateView');
 Route::post('/adress/create','DeliveryController@Create');
 Route::delete('/adress/{adress_id}','DeliveryController@delete');
