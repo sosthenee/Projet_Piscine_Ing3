@@ -25,7 +25,10 @@ class OfferController extends Controller
                     ->where('offers.state','panier')
                     ->where('media.type','picture')
                     ->orderBy('offers.item_id', 'desc')
-                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'media.type','media.reference', 'items.Title','items.Description', 'items.Category','items.end_date', 'items.sell_type', 'items.sold', 'users.id as sellerId', 'users.username')
+                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 
+                    'media.type as media_type','media.reference as media_reference', 
+                    'items.Title','items.Description', 'items.Category','items.start_date','items.end_date','items.Initial_Price', 'items.sell_type', 'items.sold', 
+                    'users.id as seller_id', 'users.username as seller_username')
                     ->get();
 
         return view('basket.offers',compact('offers'));
@@ -58,6 +61,7 @@ class OfferController extends Controller
         $offer->item_id=$item_id;
         $offer->price=request('price');
         $offer->state='panier';
+        $offer->type="bid";
         $offer->user_id=2;
         $offer->save();
         
@@ -71,6 +75,7 @@ class OfferController extends Controller
         ]);
 
         $offer = new Offer();
+        $offer->type="bestoffer";
         $offer->item_id=$item_id;
         $offer->price=request('price');
         $offer->state='panier';
@@ -91,6 +96,7 @@ class OfferController extends Controller
             $item=$items[0];
 
             $offer = new Offer();
+            $offer->type="immediat";
             $offer->item_id=$item_id;
             $offer->price=$item->Initial_Price;
             $offer->state='panier';
@@ -141,7 +147,7 @@ class OfferController extends Controller
     public function update(Request $request, $id)
     {
         
-        return redirect('/panier')->with('error','Aucune modification n\'a été fait la page de modification n\'existe pas encore');
+        return redirect('/panier')->with('error','Aucune modification n\'a été faite. La page de modification n\'existe pas encore');
     }
 
     /**
@@ -159,15 +165,16 @@ class OfferController extends Controller
         if(count($offers)==1&&$offers[0]->state=="panier")
         {
             Offer::where('id', '=', $id)->delete(); 
-            return redirect('/panier')->with('success','Vous vener de retirer une offre de votre panier');
+            return redirect('/panier')->with('success','Vous venez de retirer une offre de votre panier');
         }
         else{
             return redirect('/panier')->with('error','Cet element ne peut pas être supprimer' .count($offers));
         }
         
     }
-    public function basketValidation(Request $request)
+    public function basketValidation()
     {
-        return redirect('/achat')->with('error','La page de validation du panier n\'existe pas encore');
+
+        return redirect('/panier')->with('error','La page de validation du panier n\'existe pas encore');
     }
 }
