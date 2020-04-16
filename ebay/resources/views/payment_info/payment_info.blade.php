@@ -31,7 +31,7 @@ Add a new one
     <input type="text" placeholder=" cardType" name="cardType" required>
     <input type="text" placeholder=" cardNumber" name="cardNumber" required>
     <input type="text" placeholder=" cardName"  name="cardName" required>
-    <input type="date" placeholder=" expirationDate" name="expirationDate" required>
+    <input type="date" id="start_date_payment" placeholder=" expirationDate" name="expirationDate" required>
     <input type="number" placeholder=" securityCode" name="securityCode" required>
 
     <button style="primary" type="submit" >Create</button>

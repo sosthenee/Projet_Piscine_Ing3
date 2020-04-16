@@ -24,7 +24,7 @@ class CreateOffersTable extends Migration
             
             $table->integer('price');
             $table->string('state');
-            
+            $table->string('type');
         });
     }
 

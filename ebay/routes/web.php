@@ -51,11 +51,12 @@ Route::post('/panier/delivery/','OfferController@basketValidation');
 
 
 // ======= PAYMENTS =======
-Route::get('/user/{user_id}/payments','PaymentController@AllfromUser');
+Route::get('/user/payments','PaymentController@AllfromUser');
 Route::get('/payment/update_payment/{payment_id}', 'PaymentController@updateView');
 Route::post('/payment/create','PaymentController@Create');
 Route::delete('/payment/{payment_id}','PaymentController@delete');
 Route::put('/payment/update/{payment_id}','PaymentController@update');
+
 
 
 // ======= USER =========
@@ -63,7 +64,7 @@ Route::put('/payment/update/{payment_id}','PaymentController@update');
 
 
 // ======= ADRESS =======
-Route::get('/user/{user_id}/adress','DeliveryController@AllfromUser');
+Route::get('/user/adress','DeliveryController@AllfromUser');
 Route::get('/adress/update_adress/{adress_id}', 'DeliveryController@updateView');
 Route::post('/adress/create','DeliveryController@Create');
 Route::delete('/adress/{adress_id}','DeliveryController@delete');
@@ -72,29 +73,17 @@ Route::put('/adress/update/{adress_id}','DeliveryController@update');
 
 
 //Route::get('/item', 'ItemController@get_all_images') ;
-
+//  ======= ADMIN =======
 Route::get('/ListesVendeurs','AdminController@get_all_vendeurs');
-
 Route::get('/ListesVendeurs/suppVendeur','AdminController@suppVendeur');
-
 Route::post('/ListesVendeurs/action','AdminController@suppressionVendeur');
-
 Route::get('/VendeursAttente','AdminController@vendeurEnAttente');
-
 Route::post('/VendeursAttente/approuver/{user_id}','AdminController@VendeurchoixAjouter');
-
-
 Route::post('/VendeursAttente/refuser/{user_id}','AdminController@VendeurchoixRefuser');
 
 Route::get('/ListesItems','AdminController@get_all_items');
-
 Route::get('/ListesItems/suppItem','AdminController@suppItem');
-
 Route::post('/ListesItems/action','AdminController@suppressionItem');
-
 Route::get('/ItemsAttente','AdminController@ItemsenAttente');
-
 Route::post('/ItemsAttente/approuver/{item_id}','AdminController@ItemschoixAjouter');
-
-
 Route::post('/ItemsAttente/refuser/{item_id}','AdminController@ItemschoixRefuser');

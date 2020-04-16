@@ -9,20 +9,22 @@ class PaymentController extends Controller
 {
 
 
-    public function AllfromUser(Request $request, $user_id){
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
-        $payement_infos = Payment_info::where('user_id',$user_id)->get();
+    public function AllfromUser(Request $request){
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
+        $user = Auth::user();
+
+        $payement_infos = Payment_info::where('user_id',$user->id)->get();
         return view('payment_info.payment_info',compact('payement_infos'));
     }
 
     public function updateView(Request $request, $payment_id){
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $payment_info = Payment_info::where('id',$payment_id)->first();
         return view('payment_info.change_payment',compact('payment_info'));
     }
     
     public function Create(Request $request) {
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user = Auth::user();
         $payement_info = new Payment_info();
         $payement_info->cardType = request('cardType');
@@ -34,11 +36,11 @@ class PaymentController extends Controller
         $payement_info->save();
         
         $payement_infos = Payment_info::where('user_id',$user->id)->get();
-        return view('payment_info.payment_info',compact('payement_infos'));
+        return redirect()->action('PaymentController@AllfromUser');
     }
 
     public function delete(Request $request, $payment_id ){
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user_id = Auth::id();
         $payement_info = Payment_info::where([
             ['id',$payment_id],
@@ -50,7 +52,7 @@ class PaymentController extends Controller
     }
 
     public function update(Request $request, $payment_id ){
-        $request->user()->authorizeRoles(['buyer','buyer_seller','seller_buyer']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user_id = Auth::id();
         $payement_infos = Payment_info::where('id',$payment_id)->first();
         $payement_infos->cardType = request('cardType');
