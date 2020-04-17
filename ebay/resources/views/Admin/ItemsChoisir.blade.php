@@ -7,7 +7,7 @@
          
          
 @foreach ($items as $item)
-    @if($item->admin_state==="not")
+    @if($item->admin_state==="waiting")
 
     <li> {{ $item}}  </li>
     
