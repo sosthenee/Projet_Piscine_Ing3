@@ -23,20 +23,36 @@ $(document).ready(function(){
     
     $('#myCheckBid').change(function(){
         if($('#myCheckBid').is(':checked')){
+            $('#myCheckBid').prop('required',false);
             $("#myCheckBestOffer").prop( "checked", false );
             $("#BestOfferContent").css("display", "none");
+
             $("#myCheckImmediatPurchase").prop( "checked", false );
             $("#ImmediatPurchaseContent").css("display", "none");
+            $('#price').prop('required',false);
+
             $("#BidContent").css("display", "");
+            $('#start_date').prop('required',true);
+            $('#end_date').prop('required',true);
+            $('#price_min').prop('required',true);
         }
         else{
             $("#BidContent").css("display", "none");
+            $('#start_date').prop('required',false);
+            $('#end_date').prop('required',false);
+            $('#price_min').prop('required',false);
         }
     });
     $('#myCheckBestOffer').change(function(){
         if($('#myCheckBestOffer').is(':checked')){
+
+            $('#myCheckBid').prop('required',false);
+
             $("#myCheckBid").prop( "checked", false );
             $("#BidContent").css("display", "none");
+            $('#start_date').prop('required',false);
+            $('#end_date').prop('required',false);
+            $('#price_min').prop('required',false);
 
             $("#BestOfferContent").css("display", "");
         }
@@ -46,13 +62,21 @@ $(document).ready(function(){
     });
     $('#myCheckImmediatPurchase').change(function(){
         if($('#myCheckImmediatPurchase').is(':checked')){
+
+            $('#myCheckBid').prop('required',false);
+            
             $("#myCheckBid").prop( "checked", false );
             $("#BidContent").css("display", "none");
+            $('#start_date').prop('required',false);
+            $('#end_date').prop('required',false);
+            $('#price_min').prop('required',false);
 
             $("#ImmediatPurchaseContent").css("display", "");
+            $('#price').prop('required',true);
         }
         else{
             $("#ImmediatPurchaseContent").css("display", "none");
+            $('#price').prop('required',false);
         }
     });
 

@@ -55,17 +55,17 @@
 
             <tr>
               <td><label >Nom de l'item : </label></td>
-              <td><input type="text" name="Title" placeholder="ex: montre"></td>
+              <td><input type="text" name="Title" placeholder="ex: montre" required></td>
             </tr>
 
             <tr>
               <td><label >Description : </label></td>
-              <td><TEXTAREA name="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"></textarea></td>
+              <td><TEXTAREA name="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"required></textarea></td>
             </tr>
             <tr>
               <td><label >Catégorie : </label></td>
               <td>
-                <select name="Category" size=1>
+                <select name="Category" size=1 required>
                   <option value="">Choisissez votre catégorie ...</option>
                   <option value="Ferraille ou Trésor">Ferraille ou Trésor</option>
                   <option value="Bon pour le Musée">Bon pour le Musée</option>
@@ -88,7 +88,7 @@
             <tr>
               <td><label >Type de vente : </label></td>
               <td>
-                <input id="myCheckBid" name="myCheckBid" type="checkbox" >&nbsp; Enchère
+                <input id="myCheckBid" name="myCheckBid" type="checkbox" required>&nbsp; Enchère
                 <input id="myCheckBestOffer" name="myCheckBestOffer" type="checkbox" >&nbsp; Meilleure Offre
                 <input id="myCheckImmediatPurchase" name="myCheckImmediatPurchase" type="checkbox" >&nbsp; Achat Immédiat
                
@@ -127,7 +127,10 @@
           <hr>
           <h4> Achat Immédiat</h4>
           <table>
-          <tr><td><label >Prix : </label></td><td><input type="number" name="price" min=0 placeholder="00,00" >€</td></tr>
+            <tr>
+              <td><label >Prix : </label></td>
+              <td><input id="price" type="number" name="price" min=0 placeholder="00,00" >€</td>
+            </tr>
           </table>
         </div>
 
