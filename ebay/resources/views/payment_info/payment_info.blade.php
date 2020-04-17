@@ -1,40 +1,133 @@
 
 @extends('layouts.layout')
 @section('content')
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 <h1>page payment test </h1>
 
 @foreach ($payement_infos as $payment_info)
-<li> {{ $payment_info->cardType}} </li>
-<li> {{ $payment_info->cardNumber}} </li>
-<li> {{ $payment_info->cardName}} </li>
-<li> {{ $payment_info->expirationDate}} </li>
-<li> {{ $payment_info->securityCode}} </li>
+<div class="card">
+    <div class="card-body">
+
+<ul class="list-group list-group-flush">
+<li class="list-group-item"> {{ $payment_info->cardType}} </li>
+<li class="list-group-item"> {{ $payment_info->cardNumber}} </li>
+<li class="list-group-item"> {{ $payment_info->cardName}} </li>
+<li class="list-group-item"> {{ $payment_info->expirationDate}} </li>
+<li class="list-group-item"> {{ $payment_info->securityCode}} </li>
+</ul>
 
 <form method="POST" action="/payment/{{$payment_info->id}}">
     {{ csrf_field() }}
     {{ method_field("DELETE") }}
-
-    <button style="danger" type="submit" >delete</button>
+    <br>
+    <button class="btn btn-outline-danger" type="submit" >delete</button>
+    <a href="{{ url('/payment/update_payment/' . $payment_info->id) }}" style="float: right;" class="btn btn-xs btn-info pull-right">Edit</a>
+    <br>
 </form>
-
-
-<a href="{{ url('/payment/update_payment/' . $payment_info->id) }}" class="btn btn-xs btn-info pull-right">Edit</a>
-
-
+<br> <br>
+    </div>
+</div>
+<br> <br>
 @endforeach
-
-Add a new one
+<br> <br> <br>
+<h2>Add a new one</h2>
 <form method="POST" action="/payment/create">
     {{ csrf_field() }}
-    
-    <input type="text" placeholder=" cardType" name="cardType" required>
-    <input type="text" placeholder=" cardNumber" name="cardNumber" required>
-    <input type="text" placeholder=" cardName"  name="cardName" required>
-    <input type="date" id="start_date_payment" placeholder=" expirationDate" name="expirationDate" required>
-    <input type="number" placeholder=" securityCode" name="securityCode" required>
 
-    <button style="primary" type="submit" >Create</button>
+
+
+    <input class="form-control" type="text" placeholder=" cardType" name="cardType" required><br>
+    
+    <input class="form-control" type="text" placeholder=" cardName"  name="cardName" required><br>
+    <input class="form-control" type="number" placeholder=" cardNumber" name="cardNumber" required><br>
+    <input class="form-control"type="date" id="start_date_payment" placeholder=" expirationDate" name="expirationDate" required><br>
+    <input class="form-control" type="number" placeholder=" securityCode" name="securityCode"  aria-describedby="cardhelp" required><br>
+    <small id="cardhelp" class="form-text text-muted">We'll never share your private informations with anyone else.</small><br>
+
+    <button class="btn btn-outline-success" type="submit" >Create</button>
+
+
 </form>
+<br><br>
+<div class="row">
+	<aside class="col-sm-6">
+<article class="card">
+    <div class="card-body p-5">
+    
+    <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#nav-tab-card">
+            <i class="fa fa-credit-card"></i> Credit Card</a></li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
+            <i class="fa fa-university"></i>  Bank Transfer</a></li>
+    </ul>
+    
+    <div class="tab-content">
+    <div class="tab-pane fade show active" id="nav-tab-card">
+        <p class="alert alert-success">Some text success or error</p>
+        <form role="form">
+        <div class="form-group">
+            <label for="username">Full name (on the card)</label>
+            <input type="text" class="form-control" name="username" placeholder="" required="">
+        </div> <!-- form-group.// -->
+    
+        <div class="form-group">
+            <label for="cardNumber">Card number</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="cardNumber" placeholder="">
+                <div class="input-group-append">
+                    <span class="input-group-text text-muted">
+                        <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>   
+                        <i class="fab fa-cc-mastercard"></i> 
+                    </span>
+                </div>
+            </div>
+        </div> <!-- form-group.// -->
+    
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label><span class="hidden-xs">Expiration</span> </label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" placeholder="MM" name="">
+                        <input type="number" class="form-control" placeholder="YY" name="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
+                    <input type="number" class="form-control" required="">
+                </div> <!-- form-group.// -->
+            </div>
+        </div> <!-- row.// -->
+        <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>
+        </form>
+    </div> <!-- tab-pane.// -->
+    
+    <div class="tab-pane fade" id="nav-tab-bank">
+    <p>Bank accaunt details</p>
+    <dl class="param">
+      <dt>BANK: </dt>
+      <dd> THE WORLD BANK</dd>
+    </dl>
+    <dl class="param">
+      <dt>Accaunt number: </dt>
+      <dd> 12345678912345</dd>
+    </dl>
+    <dl class="param">
+      <dt>IBAN: </dt>
+      <dd> 123456789</dd>
+    </dl>
+    <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. </p>
+    </div> <!-- tab-pane.// -->
+    </div> <!-- tab-content .// -->
+    
+    </div> <!-- card-body.// -->
+    </article> <!-- card.// -->
+	</aside>
+</div> 
 
 @endsection
