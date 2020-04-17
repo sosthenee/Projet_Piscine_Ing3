@@ -24,8 +24,8 @@ class CreateItemsTable extends Migration
             $table->integer('Initial_Price')->unsigned()->nullable();
             $table->string('Category')->nullable();
             $table->string('sell_type')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
             $table->boolean('sold')->nullable();
             $table->string('admin_state')->nullable();
 

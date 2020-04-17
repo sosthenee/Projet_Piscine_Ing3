@@ -112,8 +112,8 @@
           <hr>
           <h4> Enchère</h4>
           <table>
-            <tr><td><label >Date de début : </label></td><td> <input id="start_date" type="date" name="start_date"  ></td></tr>
-            <tr><td><label >Date de fin : </label></td><td><input id="end_date"type="date" name="end_date" ></td></tr>
+            <tr><td><label >Date de début : </label></td><td> <input id="start_date" type="datetime-local" name="start_date"  value="2021-01-01T21:11"></td></tr>
+            <tr><td><label >Date de fin : </label></td><td><input id="end_date"type="datetime-local" name="end_date" ></td></tr>
             <tr><td><label >Prix initial : </label></td><td><input id="price_min"type="number" name="price_min" min=0 placeholder="00,00" >€</td></tr>
           </table>
         </div>
