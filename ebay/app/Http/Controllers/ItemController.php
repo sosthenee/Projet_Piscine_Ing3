@@ -56,13 +56,14 @@ class ItemController extends Controller
         $item->Title = request('Title');
         $item->Description = request('Description');
         $item->Category =request('Category');
+        $item->admin_state="approve";
 
         $mySellType ="";
         if(request('myCheckBid')){
             $mySellType = "enchere";
             $item->initial_Price = request('price_min');
-            $item->start_date= request('Start_date');
-            $item->end_date= request('End_date');
+            $item->start_date= request('start_date');
+            $item->end_date= request('end_date');
         }else{
             if(request('myCheckBestOffer')){
                 $mySellType = "bestoffer ";
