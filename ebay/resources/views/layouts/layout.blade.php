@@ -26,7 +26,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <script src="/js/myJS_CreateItem.js" ></script>
-        <script src="/js/myJS_itemCarroussel.js" ></script>
+        <!--script src="/js/myJS_itemCarroussel.js" ></script-->
         <script src="/js/myJS_addPayment.js" ></script>
         <!-- Styles -->
         <style>

@@ -49,73 +49,91 @@
       {{ csrf_field() }} <!-- I don't know what is it-->
       <h1>Ajout d'un nouvelle Item</h1>
       <hr>
-      <div class="row">
-        <div style ="width: 70%;">
-          <table id="createItemTable" style ="width: 100%;">
+      
+        
+          
 
-            <tr>
-              <td><label >Nom de l'item : </label></td>
-              <td><input type="text" name="Title" placeholder="ex: montre" required></td>
-            </tr>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="Title">Nom de l'item : </label> 
+              <div class="col-sm-10">
+                <input class="form-control form-control-lg" id="Title"type="text" name="Title" placeholder="ex: montre" required> 
+              </div>
+            </div>
 
-            <tr>
-              <td><label >Description : </label></td>
-              <td><TEXTAREA name="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"required></textarea></td>
-            </tr>
-            <tr>
-              <td><label >Catégorie : </label></td>
-              <td>
-                <select name="Category" size=1 required>
+            <div class="form-group row">
+               <label class="col-sm-2 col-form-label" for="Description">Description : </label> 
+               <div class="col-sm-10">
+                <TEXTAREA class="form-control" name="Description" id="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"required></textarea> 
+               </div>
+            </div>
+            <div class="form-group row">
+               <label class="col-sm-2 col-form-label">Catégorie : </label> 
+               <div class="col-sm-10">
+                <select class="form-control" name="Category" size=1 required>
                   <option value="">Choisissez votre catégorie ...</option>
                   <option value="Ferraille ou Trésor">Ferraille ou Trésor</option>
                   <option value="Bon pour le Musée">Bon pour le Musée</option>
                   <option value="Accessoire VIP">Accessoire VIP</option>
                 </select>
-              </td>
-            </tr>
+              </div>
+            </div>
 
-            <tr>
-              <td><label >Insertion de média : </label></td>
-              <td>
-              @csrf
-                <input id="file-upload" type="file" name="file[]" accept="image/*, video/*"  multiple > <!--onchange="readURL(this);"-->
-                <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
-                <span id="erreurs"></span>
-              </td>
-            </tr>
+            <div class="form-group row">
+               <label class="col-sm-2 col-form-label">Insertion de média : </label> 
+               <div class="col-sm-10">
+                  @csrf
+                  <input id="file-upload" class="form-control-file" type="file" name="file[]" accept="image/*, video/*"  multiple > <!--onchange="readURL(this);"-->
+                  <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
+                  <span id="erreurs"></span>
+                </div>
+            </div>
 
             
-            <tr>
-              <td><label >Type de vente : </label></td>
-              <td>
-                <input id="myCheckBid" name="myCheckBid" type="checkbox" required>&nbsp; Enchère
-                <input id="myCheckBestOffer" name="myCheckBestOffer" type="checkbox" >&nbsp; Meilleure Offre
-                <input id="myCheckImmediatPurchase" name="myCheckImmediatPurchase" type="checkbox" >&nbsp; Achat Immédiat
-               
-              </td>
-            </tr>
-          </table>
-
-
-        </div>
-        <div class="right" style="width: 30%; display:flex;">
-            <div  style="background: grey; height: 15vh; width: 15vh; margin: auto;">
-                <img id="file-image0" src="#" alt="Preview" style="display: none;">
-                <img id="file-image1" src="#" alt="Preview" style="display: none;"class="hidden">
-                <img id="file-image2" src="#" alt="Preview" style="display: none;"class="hidden">
-                <img id="file-image3" src="#" alt="Preview" style="display: none;"class="hidden">
+            <div class="form-group row">
+               <label class="col-sm-2 col-form-label">Type de vente : </label> 
+               <div class="col-sm-10">
+                <div class="form-check">
+                  <input id="myCheckBid" name="myCheckBid" class="form-check-input" type="checkbox" required>
+                  <label class="form-check-label" for="myCheckBid">Enchère</label>
+                </div>
+                <div class="form-check">
+                  <input id="myCheckBestOffer" name="myCheckBestOffer" class="form-check-input" type="checkbox" >
+                  <label class="form-check-label" for="myCheckBestOffer">Meilleure Offre</label> 
+                </div>
+                <div class="form-check">
+                  <input id="myCheckImmediatPurchase" name="myCheckImmediatPurchase" class="form-check-input"  type="checkbox" >
+                  <label class="form-check-label" for="myCheckImmediatPurchase">Achat Immédiat</label>
+                </div>
+               </div>
             </div>
-        </div>
-      </div>
+        
 
         <div id="BidContent" style="display: none;">
           <hr>
           <h4> Enchère</h4>
-          <table>
-            <tr><td><label >Date de début : </label></td><td> <input id="start_date" type="datetime-local" name="start_date"  value="2021-01-01T21:11"></td></tr>
-            <tr><td><label >Date de fin : </label></td><td><input id="end_date"type="datetime-local" name="end_date" ></td></tr>
-            <tr><td><label >Prix initial : </label></td><td><input id="price_min"type="number" name="price_min" min=0 placeholder="00,00" >€</td></tr>
-          </table>
+         
+            <div class="form-group row"> 
+              <label class="col-sm-2 col-form-label">Date de début : </label>
+              <div class="col-sm-10">   
+              <input id="start_date" class="form-control"  style="width: 210px;" type="datetime-local" name="start_date"  value="2021-01-01T21:11"> 
+              </div>
+            </div>
+            <div class="form-group row"> 
+              <label class="col-sm-2 col-form-label">Date de fin : </label>  
+              <div class="col-sm-10">
+              <input id="end_date" class="form-control"  style="width: 210px;"type="datetime-local" name="end_date" > 
+              </div>
+            </div>
+            <div class="form-group row"> 
+              <label class="col-sm-2 col-form-label">Prix initial : </label>  
+              <div class="col-sm-10 row" >
+                <input id="price_min" class="form-control"  style="width: 200px;"type="number" name="price_min" min=0 placeholder="00,00" >
+                <div class="input-group-append">
+                  <div class="input-group-text">€</div>
+                </div> 
+              </div>
+            </div>
+          
         </div>
         <div id="BestOfferContent" style="display: none;">
           <hr>
@@ -127,10 +145,15 @@
           <hr>
           <h4> Achat Immédiat</h4>
           <table>
-            <tr>
-              <td><label >Prix : </label></td>
-              <td><input id="price" type="number" name="price" min=0 placeholder="00,00" >€</td>
-            </tr>
+            <div class="form-group row">
+               <label class="col-sm-2 col-form-label">Prix : </label> 
+               <div class="col-sm-10 row" >
+                <input id="price" class="form-control" style="width: 200px;" type="number" name="price" min=0 placeholder="00,00" >
+                <div class="input-group-append">
+                  <div class="input-group-text">€</div>
+                </div>
+               </div>
+            </div>
           </table>
         </div>
 

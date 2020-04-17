@@ -11,7 +11,7 @@ Création d'un item avec photos et/ou vidéo
     -> blindage dans le controller le type de vente
     => BLINDAGE COMPLET
   ! -> la création d'un item ne prend pas en compte l'id du user
-  ! -> state = approuve
+  ! -> state = approuve pour l'instant
   ! -> la page n'est pas sécurisé (accès public)
 
 
