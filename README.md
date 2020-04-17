@@ -10,8 +10,8 @@ Création d'un item avec photos et/ou vidéo
     -> blindage à 80 % sur le type de vente (il faut selectionner au moins une fois une checkbox pour enlever le blindage)
     -> blindage dans le controller le type de vente
     => BLINDAGE COMPLET
-  ! -> mettre l'heure avec la date (datetime-local)
   ! -> la création d'un item ne prend pas en compte l'id du user
+  ! -> state = approuve
   ! -> la page n'est pas sécurisé (accès public)
 
 

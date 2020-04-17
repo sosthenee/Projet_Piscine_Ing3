@@ -102,6 +102,12 @@
                 width: 100%;
                 
             }
+            .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+            .dropdown:hover>.dropdown-menu {
+ display: block;
+}
             
         </style>
     </head>
@@ -164,12 +170,16 @@
                 @endif
             </nav>
         </nav>
+        
         <main>
             <div class="container" style="margin-top: 60px; padding-top: 20px;">
+                
+            <br><br><br>
                 @include('inc.errorsuccess')
                 @yield('content')     
             </div>
         </main>
-        
+
+
     </body>
 </html>
