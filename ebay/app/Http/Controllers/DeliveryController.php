@@ -40,8 +40,7 @@ class DeliveryController extends Controller
         $address->user()->associate($user);
         $address->save();
 
-        $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
-        return view('adress.adress',compact('delivery_addresses'));
+        return redirect()->action('DeliveryController@AllfromUser');
 
     }
 
