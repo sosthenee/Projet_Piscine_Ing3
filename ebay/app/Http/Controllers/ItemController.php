@@ -52,17 +52,23 @@ class ItemController extends Controller
         ]);
 
         $item = new Item();
+
         $item->user_id=3;
         $item->Title = request('Title');
         $item->Description = request('Description');
         $item->Category =request('Category');
+        $item->admin_state="approve";
+        $item->sold=0;
+
+        $item->start_date=date ("c");
+
 
         $mySellType ="";
         if(request('myCheckBid')){
             $mySellType = "enchere";
             $item->initial_Price = request('price_min');
-            $item->start_date= request('Start_date');
-            $item->end_date= request('End_date');
+            $item->start_date= request('start_date');
+            $item->end_date= request('end_date');
         }else{
             if(request('myCheckBestOffer')){
                 $mySellType = "bestoffer ";
@@ -73,34 +79,39 @@ class ItemController extends Controller
             } 
         }
         $item->sell_Type = $mySellType;
-        $item->save();
+        if($mySellType!=="")
+        {
+            $item->save();
 
-
-        $files=$request->file('file');
-        if(!empty($files)){
-            $i=0;
-            foreach($files as $file){
-                $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
-                if(strpos(".ogm .wmv .mpg .webm .ogv .asx .mpeg .mp4 .mkv .avi", $file->getClientOriginalExtension())!== false)
-                    $insert['type']="video";
-                else
-                    $insert['type']="picture";
-                $insert['reference'] = $path;
+            $files=$request->file('file');
+            if(!empty($files)){
+                $i=0;
+                foreach($files as $file){
+                    $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
+                    if(strpos(".ogm .wmv .mpg .webm .ogv .asx .mpeg .mp4 .mkv .avi", $file->getClientOriginalExtension())!== false)
+                        $insert['type']="video";
+                    else
+                        $insert['type']="picture";
+                    $insert['reference'] = $path;
+                    $insert['item_id']=$item->id;
+                    $check = Media::insertGetId($insert);
+                    Storage::put("public/".$path,file_get_contents($file));
+                    $i++;
+                }
+            }
+            else
+            { 
+                $insert['type']="picture";
+                $insert['reference'] = "unnamed.png";
                 $insert['item_id']=$item->id;
                 $check = Media::insertGetId($insert);
-                Storage::put("public/".$path,file_get_contents($file));
-                $i++;
             }
+    
+            return redirect('/vendre')->with('success','Votre item a été ajouté !');
         }
         else
-        { 
-            $insert['type']="picture";
-            $insert['reference'] = "unnamed.png";
-            $insert['item_id']=$item->id;
-            $check = Media::insertGetId($insert);
-        }
- 
-        return redirect('/vendre')->with('success','Votre item a été ajouté !');
+            return redirect('/vendre')->with('error','Votre item n\'a été ajouté ! Merci de bien saisir le champ "type de vente" ');
+        
         
         //$media = new Media();
         //$media->reference = request('reference');
