@@ -8,13 +8,14 @@
        
             @php
                 $id_offer_temp=-1;
+                $id_item_temp=-1;
+                $valid_button="";
+
             @endphp
             @foreach($offers as $offer)
 
                 @if($id_offer_temp<>$offer->id)
-                    @php
-                        $id_offer_temp=$offer->id;
-                    @endphp
+                    
                     <div class="well" style="display: flex; border: 1px grey solid; padding: 10px; margin: 20px 50px;">
                         <div style=" margin: 20px; border: 1px grey solid;  ">
                             <img style="width: 11vw; height: 7vw;" src="/storage/{{$offer->media_reference}}" alt="{{$offer->Title}}"/> 
@@ -25,6 +26,28 @@
                             <h6>{{$offer->Category}}</h6>
                             nom vendeur: {{$offer->seller_username}}
                             <p>Prix : <strong>{{$offer->price}}€</strong></p>
+                        </div>
+                        <div>
+                            @if($id_item_temp==$offer->item_id)
+                                @php
+                                    $valid_button="disabled";
+                                @endphp
+                                <div>
+                                    <img src="/storage/icons/warning.png" alt="Warning" style="width: 30px; height: 30px;">
+                                    Vous ne pouvez pas proposer 2 offres pour un même article merci de bien corriger votre panier
+                                </div>
+
+                            @endif
+                         
+                            @if(($offer->price<$offer->Initial_Price && strpos($offer->offer_type, "immediat")!== false  )||( $offer->price<$offer->Initial_Price&& strpos($offer->offer_type, "enchere")!== false))
+                                @php
+                                    $valid_button="disabled";
+                                @endphp
+                                <div>
+                                    <img src="/storage/icons/warning.png" alt="Warning" style="width: 30px; height: 30px;">
+                                    Le prix actuelle de l'article a évolué. Votre demande est inférieur, elle ne peut être accepter.
+                                </div>
+                            @endif
                         </div>
                         <div>
                             <form action="panier/update/{{$offer->id}}" method="post">
@@ -38,11 +61,14 @@
                         </div> 
                     </div>
                 @endif
-            
+                @php
+                    $id_offer_temp=$offer->id;
+                    $id_item_temp=$offer->item_id;
+                @endphp
             @endforeach
         <form action="/panier/delivery" method="post">
             {{ csrf_field() }}
-            <input type="submit" class="btn btn-success"value="Valider le panier">
+            <input type="submit" class="btn btn-success"value="Valider le panier" {{$valid_button}}>
         </form>
     @else
         <p> Nous n'avons trouvé aucun article dans votre panier pour l'instant.

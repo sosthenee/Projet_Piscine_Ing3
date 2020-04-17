@@ -25,7 +25,7 @@ class OfferController extends Controller
                     ->where('offers.state','panier')
                     ->where('media.type','picture')
                     ->orderBy('offers.item_id', 'desc')
-                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 
+                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'offers.type as offer_type' ,
                     'media.type as media_type','media.reference as media_reference', 
                     'items.Title','items.Description', 'items.Category','items.start_date','items.end_date','items.Initial_Price', 'items.sell_type', 'items.sold', 
                     'users.id as seller_id', 'users.username as seller_username')

@@ -55,17 +55,17 @@
 
             <tr>
               <td><label >Nom de l'item : </label></td>
-              <td><input type="text" name="Title" placeholder="ex: montre"></td>
+              <td><input type="text" name="Title" placeholder="ex: montre" required></td>
             </tr>
 
             <tr>
               <td><label >Description : </label></td>
-              <td><TEXTAREA name="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"></textarea></td>
+              <td><TEXTAREA name="Description" placeholder="ex: cette objet est en cuire..." rows=4 style="width: 100%;"required></textarea></td>
             </tr>
             <tr>
               <td><label >Catégorie : </label></td>
               <td>
-                <select name="Category" size=1>
+                <select name="Category" size=1 required>
                   <option value="">Choisissez votre catégorie ...</option>
                   <option value="Ferraille ou Trésor">Ferraille ou Trésor</option>
                   <option value="Bon pour le Musée">Bon pour le Musée</option>
