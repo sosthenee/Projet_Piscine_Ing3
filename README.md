@@ -11,7 +11,7 @@ Création d'un item avec photos et/ou vidéo
     -> blindage dans le controller le type de vente
     => BLINDAGE COMPLET
   ! -> la création d'un item ne prend pas en compte l'id du user
-  ! -> state = approuve
+  ! -> state = approuve pour l'instant
   ! -> la page n'est pas sécurisé (accès public)
 
 
@@ -34,4 +34,6 @@ Affichage du Panier
   ! -> Ne prend pas en compte l'ID Utilisateur
   ! -> refaire tous les tests blindage au moment de la validation du récapitulatif
 
-
+Achat/SellType & Category
+    Recherche OK
+  ! -> pour category lorsque on regarde un prix on ne regarde plus les achats immédiats 

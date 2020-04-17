@@ -28,7 +28,7 @@
         
         <script src="/js/myJS_getInput.js" ></script>
         <script src="/js/myJS_CreateItem.js" ></script>
-        <script src="/js/myJS_itemCarroussel.js" ></script>
+        <!--script src="/js/myJS_itemCarroussel.js" ></script-->
         <script src="/js/myJS_addPayment.js" ></script>
         <!-- Styles -->
         <style>
