@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Item ;
 use App\Offer ;
+use App\Delivery_address ;
+use App\Payment_info ;
+use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
@@ -14,7 +17,7 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
         $offers  = DB::table('offers')
                     
@@ -31,7 +34,10 @@ class OfferController extends Controller
                     'users.id as seller_id', 'users.username as seller_username')
                     ->get();
 
-        return view('basket.offers',compact('offers'));
+        $user = Auth::user();
+        $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
+        $payment_infos = Payment_info::where('user_id',$user->id)->get();
+        return view('basket.offers',compact('offers','payment_infos','delivery_addresses'));
     }
 
     /**

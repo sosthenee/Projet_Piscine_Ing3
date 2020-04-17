@@ -76,9 +76,70 @@
                     $id_item_temp=$offer->item_id;
                 @endphp
             @endforeach
-        <form action="/panier/delivery" method="post">
+        <form action="/purshase" method="post">
             {{ csrf_field() }}
-            <input type="submit" class="btn btn-success"value="Valider le panier" {{$valid_button}}>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" >Valider le panier
+            </button>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h2>Delivery choice</h2>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="choosenadress">Adress</label>
+                        </div>
+                        <select class="custom-select " name="choosenadress">
+                         
+                          <option selected>Choose...</option>
+                          @foreach($delivery_addresses as $delivery_address)
+                          <option value={{$delivery_address->id}}>{{$delivery_address->street}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <h2>Payment choice</h2>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="choosenPayment">Payment</label>
+                        </div>
+                        <select class="custom-select selectpicker"  name="choosenPayment">
+                          <option selected>Choose...</option>
+                          
+                          @foreach($payment_infos as $payment_info)
+                          <option  value={{$payment_info->id}}>{{$payment_info->cardType}}</option>
+                          
+                         @endforeach
+                        
+                        </select>
+                      </div>
+                      @foreach($payment_infos as $payment_info)
+                    <div hidden class="input-group mb-3" id={{"coco".$payment_info->id}}>
+                       <h3>Card informations</h3>
+                    
+                    <div class="container">
+                     
+                            <ul> 
+                                <li>{{$payment_info->cardType}}</li>
+                                <li>{{$payment_info->cardNumber}}</li>
+                                <li>{{$payment_info->cardName}}</li>                      
+                                <li>{{$payment_info->expirationDate}}</li>
+                            </ul>
+                    </div>
+                    </div>
+                    @endforeach
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-success"value="Buy">Buy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </form>
     @else
         <p> Nous n'avons trouvé aucun article dans votre panier pour l'instant.

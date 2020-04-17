@@ -59,9 +59,10 @@ Route::put('/payment/update/{payment_id}','PaymentController@update');
 
 
 
-// ======= USER =========
+// ======= COMMANDS =========
 
-
+Route::post('/purshase','PurshaseController@buy');
+Route::get('/purshase','PurshaseController@AllfromUser');
 
 // ======= ADRESS =======
 Route::get('/user/adress','DeliveryController@AllfromUser');
