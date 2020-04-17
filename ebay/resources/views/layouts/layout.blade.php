@@ -103,13 +103,10 @@
         </style>
     </head>
     <body>
-        <nav class="sticky">
-
-            
         
             
     
-                <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <nav class="navbar navbar-expand-md navbar-light bg-light sticky">
   <a class="navbar-brand" href="#">Mon site</a>
   <ul class="navbar-nav">
     <li class="nav-item active">
@@ -164,9 +161,9 @@
                 </div>
 
             @endif
-        </div>
+            </nav>
         <main>
-            <div class="container" style="margin-top: 40px;">
+            <div class="container" style="margin-top: 130px;">
                 @include('inc.errorsuccess')
                 @yield('content')      
             </div>
