@@ -13,17 +13,20 @@
                 @if($id_item_temp<>$item->item_id)
                     <div class="card" style="width: 21rem; margin: 10px;">
                         <img class="card-img-top" style="max-height: 40vh;"src="/storage/{{$item->reference}}" alt="Card image cap">
-                        <div class="card-body d-flex align-items-end flex-column">
+                        <div class="card-body d-flex  flex-column">
                             <div > 
-                                <h3 class="card-title">{{$item->Title}}</h3>
+                                <h3 style="display: inline;" class="card-title text-capitalize">{{$item->Title}}</h3>
+                                <label class="card-text"> {{$item->username}}</label>
                                 <h5 class="card-title">{{$item->Category}}</h5>
-                                <p class="card-text">Nom vendeur: {{$item->username}}</p>
-                                <p class="card-text">{{$item->Description}}</p>
+                                
+                                <p class="card-text text-truncate" >{{$item->Description}}</p>
                             </div>
                            
 
-                            <div class="mt-auto p-2 d-flex justify-content-between">
+                            <div class="mt-auto p-2 d-flex justify-content-between" style="border-top: thick double;" >
+                            
                                 <div style="width: 100%;">
+
                                     @if(strpos($item->sell_type, "enchere")!== false)
                                         <h5>Vente aux enchères</h5>
                                            <label> Prix actuel : {{$item->Initial_Price}}€

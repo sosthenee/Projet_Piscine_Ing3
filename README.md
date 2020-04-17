@@ -34,4 +34,6 @@ Affichage du Panier
   ! -> Ne prend pas en compte l'ID Utilisateur
   ! -> refaire tous les tests blindage au moment de la validation du récapitulatif
 
-
+Achat/SellType & Category
+    Recherche OK
+  ! -> pour category lorsque on regarde un prix on ne regarde plus les achats immédiats 

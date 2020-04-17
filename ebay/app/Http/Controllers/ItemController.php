@@ -11,12 +11,8 @@ use Storage;
 
 class ItemController extends Controller
 {
-    public function get_all_images()
-    {
-       
-    }
-   
-    public function index(){
+     
+    public function display_all(){
  
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
@@ -27,7 +23,154 @@ class ItemController extends Controller
 
         return view('item.items',compact('items'));
     }
-    public function display($item_id){
+
+    public function display_sell_type(){
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('media.type','picture')
+                    ->orderBy('items.id', 'desc')
+                    ->get();
+
+        $items_bid=$items->where('sell_type','enchere');
+        
+        $items_bestoffer = $items->where('sell_type','<>','enchere')
+                    ->where('sell_type','<>','immediat');
+                    
+        $items_immediat = $items->where('sell_type','<>','enchere')
+                    ->where('sell_type','<>','bestoffer ');
+                    
+
+        return view('item.items_sell_type',compact('items_bid','items_bestoffer','items_immediat'));
+    }
+    public function display_sell_type_search(){
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('media.type','picture')
+                    ->orderBy('items.id', 'desc')
+                    ->get();
+        
+        if(request('2')==false)
+            $items=$items->where('sell_type','<>','bestoffer ');
+
+        if(request('1')==false)
+            {$items=$items->where('sell_type','<>','enchere');}
+        
+        if(request('3')==false)
+            $items=$items->where('sell_type','<>','immediat');
+
+        if(request('3')==false&&request('2')==false)
+            $items=$items->where('sell_type','<>','bestoffer immediat');
+
+        if(request('a')==false)
+            $items=$items->where('Category','<>','Bon pour le Musée');
+        if(request('b')==false)
+            $items=$items->where('Category','<>','Ferraille ou Trésor');
+        if(request('c')==false)
+            $items=$items->where('Category','<>','Accessoire VIP');
+
+        
+                            
+
+
+
+        $items_bid=$items->where('sell_type','enchere');
+                    
+        $items_bestoffer = $items->where('sell_type','<>','enchere')
+                                ->where('sell_type','<>','immediat');
+                    
+        $items_immediat = $items->where('sell_type','<>','enchere')
+                            ->where('sell_type','<>','bestoffer ');
+
+        if(request('min_price')<>"")
+        {
+            $items_bid=$items_bid->where('Initial_Price','>',request('min_price'));
+            $items_immediat=$items_immediat->where('Initial_Price','>',request('min_price'));
+        }
+        if(request('max_price')<>"")
+        {
+            $items_bid=$items_bid->where('Initial_Price','<',request('max_price'));
+            $items_immediat=$items_immediat->where('Initial_Price','<',request('max_price'));
+        }
+
+        return view('item.items_sell_type',compact('items_bid','items_bestoffer','items_immediat'));
+    }
+    public function display_category(){
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('media.type','picture')
+                    ->orderBy('items.id', 'desc')
+                    ->get();
+
+        $items_museum=$items->where('Category','Bon pour le Musée');
+        
+        $items_jewel = $items->where('Category','Ferraille ou Trésor');
+                    
+        $items_vip = $items->where('Category','Accessoire VIP');
+                    
+
+        return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
+    }
+    public function display_category_search(){
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('media.type','picture')
+                    ->orderBy('items.id', 'desc')
+                    ->get();
+        
+        if(request('2')==false)
+            $items=$items->where('sell_type','<>','bestoffer ');
+
+        if(request('1')==false)
+            {$items=$items->where('sell_type','<>','enchere');}
+        
+        if(request('3')==false)
+            $items=$items->where('sell_type','<>','immediat');
+
+        if(request('3')==false&&request('2')==false)
+            $items=$items->where('sell_type','<>','bestoffer immediat');
+
+        if(request('a')==false)
+            $items=$items->where('Category','<>','Bon pour le Musée');
+        if(request('b')==false)
+            $items=$items->where('Category','<>','Ferraille ou Trésor');
+        if(request('c')==false)
+            $items=$items->where('Category','<>','Accessoire VIP');
+
+        if(request('min_price')<>"")
+        {
+            $items=$items->where('Initial_Price','>',request('min_price'));
+                    }
+        if(request('max_price')<>"")
+        {
+            $items=$items->where('Initial_Price','<',request('max_price'));
+            
+        } 
+                            
+
+
+
+        $items_museum=$items->where('Category','Bon pour le Musée');
+        
+        $items_jewel = $items->where('Category','Ferraille ou Trésor');
+                        
+        $items_vip = $items->where('Category','Accessoire VIP');
+
+        
+        
+
+        return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
+    }
+
+    //Display of 1 item with options To buy it
+    public function display($item_id){ 
 
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
