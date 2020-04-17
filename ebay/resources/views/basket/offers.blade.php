@@ -45,7 +45,17 @@
                                 @endphp
                                 <div>
                                     <img src="/storage/icons/warning.png" alt="Warning" style="width: 30px; height: 30px;">
-                                    Le prix actuelle de l'article a évolué. Votre demande est inférieur, elle ne peut être accepter.
+                                    Le prix actuel de l'article a évolué. Votre demande est inférieur, elle ne peut être accepter.
+                                </div>
+                            @endif
+
+                            @if($offer->sold==1)
+                                @php
+                                    $valid_button="disabled";
+                                @endphp
+                                <div>
+                                    <img src="/storage/icons/warning.png" alt="Warning" style="width: 30px; height: 30px;">
+                                    Cet article est déjà vendu. Il faut être plus rapide ^^
                                 </div>
                             @endif
                         </div>

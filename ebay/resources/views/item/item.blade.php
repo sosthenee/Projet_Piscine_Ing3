@@ -46,7 +46,10 @@
                     <br>Fin Début : {{$item->end_date}}
                     </p>
                     <h5>Enchère automatique :</h5>
-                    Saissisez le montant maximum que vous etes prêt à dépenser: <input type="number" min="{{$item->Initial_Price}}" name="price" id="" placeholder="00€00">
+                    @php
+                        $minimum_price=$item->Initial_Price+1;
+                    @endphp
+                    Saissisez le montant maximum que vous etes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
                     <input type="submit" class="btn btn-primary" value="Encherire"></input>
                 </form>
             @endif
