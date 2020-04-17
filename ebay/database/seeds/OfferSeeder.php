@@ -17,7 +17,8 @@ class OfferSeeder extends Seeder
         $offer = new Offer();
         $offer->price = 223;
         $offer->state = 'panier';
-        $offer->type = 'no';
+        $offer->type='enchere';
+        
         $offer->user()->associate($user);
         $offer->item()->associate($item);
         
@@ -27,8 +28,8 @@ class OfferSeeder extends Seeder
         $offer2 = new Offer();
         $offer2->price = 223;
         $offer2->state = 'wait buyer';
-         $offer2->type = 'no';
-
+        $offer2->type='bestoffer';
+        
         $offer2->user()->associate($user);
         $offer2->item()->associate($item);
         
