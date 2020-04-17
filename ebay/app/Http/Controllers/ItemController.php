@@ -58,6 +58,10 @@ class ItemController extends Controller
         $item->Description = request('Description');
         $item->Category =request('Category');
         $item->admin_state="approve";
+        $item->sold=0;
+
+        $item->start_date=date ("c");
+
 
         $mySellType ="";
         if(request('myCheckBid')){
