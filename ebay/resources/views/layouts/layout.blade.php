@@ -11,7 +11,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
              <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Scripts -->
@@ -24,7 +25,8 @@
     
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+        
+        <script src="/js/myJS_getInput.js" ></script>
         <script src="/js/myJS_CreateItem.js" ></script>
         <!--script src="/js/myJS_itemCarroussel.js" ></script-->
         <script src="/js/myJS_addPayment.js" ></script>
@@ -100,11 +102,17 @@
                 width: 100%;
                 
             }
+            .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+            .dropdown:hover>.dropdown-menu {
+ display: block;
+}
             
         </style>
     </head>
     <body>
-        <nav class="sticky">
+        <nav class="sticky" style="z-index:5;">
             <nav class="navbar navbar-expand-md navbar-light bg-light">
                 <a class="navbar-brand" href="#">Mon site</a>
                 <ul class="navbar-nav">
@@ -162,12 +170,16 @@
                 @endif
             </nav>
         </nav>
+        
         <main>
             <div class="container" style="margin-top: 60px; padding-top: 20px;">
+                
+            <br><br><br>
                 @include('inc.errorsuccess')
                 @yield('content')     
             </div>
         </main>
-        
+
+
     </body>
 </html>
