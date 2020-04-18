@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,6 +25,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->call(function () {
+
+            $data=DB::table('items')
+                    ->join('offers', 'offers.item_id','=', 'items.id')
+                    ->join('purchases','purchases.offer_id', '=','offers.id')
+                    ->where('items.sold','0')
+                    ->where('offers.state','like', 'wait%')
+                    ->get();
+
+        })->everyMinute();
+
         // $schedule->command('inspire')->hourly();
     }
 

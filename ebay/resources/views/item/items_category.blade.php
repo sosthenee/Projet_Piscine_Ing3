@@ -91,6 +91,8 @@
                                         <h5>Vente aux enchères</h5>
                                            <label> Prix actuel : {{$item->Initial_Price}}€
                                         </label>
+                                        <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
+                                        <span class="countdown"></span>
                                     @endif
                                     @if(strpos($item->sell_type, "bestoffer")!== false)
                                         <h5>Vente au meilleur prix</h5>
@@ -148,6 +150,8 @@
                                         <h5>Vente aux enchères</h5>
                                            <label> Prix actuel : {{$item->Initial_Price}}€
                                         </label>
+                                        <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
+                                        <span class="countdown"></span>
                                     @endif
                                     @if(strpos($item->sell_type, "bestoffer")!== false)
                                         <h5>Vente au meilleur prix</h5>
@@ -204,6 +208,8 @@
                                         <h5>Vente aux enchères</h5>
                                            <label> Prix actuel : {{$item->Initial_Price}}€
                                         </label>
+                                        <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
+                                        <span class="countdown"></span>
                                     @endif
                                     @if(strpos($item->sell_type, "bestoffer")!== false)
                                         <h5>Vente au meilleur prix</h5>

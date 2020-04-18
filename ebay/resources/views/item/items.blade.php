@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>All Information About Item</h1>
+    
     @if(count($items)>0)
         @php
             $id_item_temp=-1;
@@ -29,13 +30,14 @@
 
                                     @if(strpos($item->sell_type, "enchere")!== false)
                                         <h5>Vente aux enchères</h5>
-                                           <label> Prix actuel : {{$item->Initial_Price}}€
-                                        </label>
+                                        <label> Prix actuel : {{$item->Initial_Price}}€</label>
+                                        <br>
+                                        <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
+                                        <span class="countdown"></span>
                                     @endif
                                     @if(strpos($item->sell_type, "bestoffer")!== false)
                                         <h5>Vente au meilleur prix</h5>
-                                           <label>  Proposez le prix que vous souhaitez au vendeur !
-                                        </label>
+                                        <label>  Proposez le prix que vous souhaitez au vendeur !</label>
                                     @endif
                                     @if(strpos($item->sell_type, "immediat")!== false)
                                         <h5>Vente immediate</h5>
