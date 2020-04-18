@@ -38,11 +38,17 @@ class OfferController extends Controller
                     'users.id as seller_id', 'users.username as seller_username')
                     ->get();
 
-        
+         $data  = DB::table('offers')
+        ->where('offers.state','panier')        
+        ->where('offers.user_id',$user->id)
+        ->select(DB::raw("SUM(price) as count"))
+        ->get();
+
+
         $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
         $payment_infos = Payment_info::where('user_id',$user->id)->get();
 
-        return view('basket.offers',compact('offers','payment_infos','delivery_addresses'));
+        return view('basket.offers',compact('offers','payment_infos','delivery_addresses','data'));
     }
 
     /**

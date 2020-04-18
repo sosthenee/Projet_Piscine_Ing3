@@ -5,9 +5,19 @@
 
 <h1>Historic Commands  </h1>
 <br> <br><br>
+
 <div class="row justify-content-center">
 @foreach ($offers as $offer)
-<div class="card border-warning mb-3" style="margin: 0px 20px 0px 0px; max-width: 18rem;">
+@if($offer->state == "wait seller")
+<div class="card border-warning mb-3" style="margin: 0px 20px 0px 0px; max-width: 18rem;"> 
+@endif
+@if($offer->state == "refuse")
+<div class="card border-danger mb-3" style="margin: 0px 20px 0px 0px; max-width: 18rem;"> 
+@endif
+@if($offer->state == "valid")
+<div class="card border-success mb-3" style="margin: 0px 20px 0px 0px; max-width: 18rem;"> 
+@endif
+
   <div class="card-header">{{$offer->Title}}</div>
   <div class="card-body">
     
@@ -26,5 +36,6 @@
 </div>
 
 @endforeach
+
 </div>
 @endsection
