@@ -86,7 +86,9 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                 
+                      <h5 class="modal-title" id="exampleModalLongTitle">Basket total : {{$data->first()->count}} €</h5>
+               
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -103,7 +105,11 @@
                           @foreach($delivery_addresses as $delivery_address)
                           <option value={{$delivery_address->id}}>{{$delivery_address->street}}</option>
                           @endforeach
+             
                         </select>
+                        <a href="/user/payments">
+                        <button type="button"  class="btn btn-outline-primary"><i class="fa fa-plus"></i>
+                        </a>
                       </div>
                       <h2>Payment choice</h2>
                       <div class="input-group mb-3">
@@ -119,6 +125,9 @@
                          @endforeach
                         
                         </select>
+                        <a href="/user/adress">
+                          <button type="button"  class="btn btn-outline-primary"><i class="fa fa-plus"></i>
+                          </a>
                       </div>
                       @foreach($payment_infos as $payment_info)
                     <div hidden class="input-group mb-3" id={{"coco".$payment_info->id}}>
