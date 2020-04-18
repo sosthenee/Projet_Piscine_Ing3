@@ -19,6 +19,7 @@ class OfferController extends Controller
      */
     public function index( Request $request )
     {
+        $user = Auth::user();
         $offers  = DB::table('offers')
                     
                     ->join('items','offers.item_id', '=','items.id')
@@ -27,6 +28,7 @@ class OfferController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('offers.state','panier')
                     ->where('media.type','picture')
+                    ->where('offers.user_id',$user->id)
                     ->orderBy('offers.item_id', 'desc')
                     ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'offers.type as offer_type' ,
                     'media.type as media_type','media.reference as media_reference', 
@@ -34,7 +36,7 @@ class OfferController extends Controller
                     'users.id as seller_id', 'users.username as seller_username')
                     ->get();
 
-        $user = Auth::user();
+    
         $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
         $payment_infos = Payment_info::where('user_id',$user->id)->get();
         return view('basket.offers',compact('offers','payment_infos','delivery_addresses'));

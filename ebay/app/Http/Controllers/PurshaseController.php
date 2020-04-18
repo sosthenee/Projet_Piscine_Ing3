@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Offer;
+use App\Item;
+use App\Media;
 use Illuminate\Support\Facades\Auth;
 use App\Purchase;
 use DateTime , DateInterval;
 use App\User;
+
 use Illuminate\Support\Facades\DB;
 
 class PurshaseController extends Controller
@@ -22,7 +25,7 @@ class PurshaseController extends Controller
         ])->get();
         
         Offer::where([['user_id',$user->id],
-            ['state', 'panier']])->update(['state' => 'waitsseller']);
+            ['state', 'panier']])->update(['state' => 'waitseller']);
 
         foreach($buys as $buy){
             $purshase = new Purchase();
@@ -42,17 +45,49 @@ class PurshaseController extends Controller
     public function AllfromUser(Request $request){
 
         $user = Auth::user();
+        $offers  = DB::table('offers')
+                    
+                    ->join('items','offers.item_id', '=','items.id')
+                    ->join('purchases','offers.id', '=','purchases.offer_id')
+                    
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('offers.state','waitseller')
+                    ->where('offers.user_id',$user->id)
+                    ->groupBy('offers.id')
+                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'offers.type as offer_type' , 'items.id as item_id',
+                    'items.Title','items.Description', 'items.Category','items.start_date','items.end_date','items.Initial_Price', 'items.sell_type', 'items.sold', 
+                    'users.id as seller_id', 'users.username as seller_username')
+                    ->get();
+
+
+        $user = Auth::user();
         $purshases  = DB::table('purchases')
         ->join('delivery_addresses','purchases.delivery_adress_id', '=','delivery_addresses.id')
         ->join('users','delivery_addresses.user_id', '=','users.id')
         ->join('offers','purchases.offer_id', '=','offers.id')
         ->where('users.id',$user->id)
-        ->select('purchases.id','purchases.paiement_date','purchases.delivery_date','purchases.state')
+        ->select('purchases.id','purchases.paiement_date','purchases.delivery_date','purchases.state',
+         'delivery_addresses.firstName as firstName', 'delivery_addresses.street', 'delivery_addresses.city', 'purchases.offer_id')
         ->get();
 
+        foreach ($offers as $offer) {
+            $offer->inject_medias = Media::where('item_id',$offer->item_id)->first();
+            //return var_dump($offer->inject_medias->reference);
+            foreach ($purshases as $purshase) {
+                if ($purshase->offer_id == $offer->id) {
+                    $offer->inject_firstName = $purshase->firstName;
+                    $offer->inject_street = $purshase->street;
+                    $offer->inject_city = $purshase->city;
+                    $offer->inject_date_dely = $purshase->delivery_date;
+                    $offer->inject_date = $purshase->paiement_date;
+
+                }
+            }
+        }
 
 
-        return view('purshase.purshase',compact('purshases'));
+
+        return view('purshase.purshase',compact('purshases', 'offers'));
 
     }
 }
