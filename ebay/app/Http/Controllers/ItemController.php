@@ -19,7 +19,7 @@ class ItemController extends Controller
         $datas=DB::table('items')
                     ->join('offers', 'offers.item_id','=', 'items.id')
                     ->join('purchases','purchases.offer_id', '=','offers.id')
-                    ->where('items.sold','0')
+                    ->where('items.sold',false)
                     ->where('offers.state','like', 'wait%')
                     
                     ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
@@ -65,17 +65,24 @@ class ItemController extends Controller
                 $test=DB::table('items')
                         ->join('offers', 'offers.item_id','=', 'items.id')
                         ->join('purchases','purchases.offer_id', '=','offers.id')
-                        ->where('items.sold','0')
+                        ->where('items.sold',false)
                         ->where('offers.state','like', 'wait%')
                         ->where('items.id','=',$data->item_id)
-                        ->orderBy('offers.price')
+                        ->orderBy('offers.price','desc')
                         ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
                             'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
                             'purchases.id as purchase_id')
                         ->get();
+                $j=0;
+                foreach($test as $bb)
+                {
+                    
+                    echo "$bb->offer_price";$j++;
+                }
                 if(count($test)>1)
                 {
-                    $new_price=$test[1]->offer_price+1;
+                    $new_price=($test[1]->offer_price)+1;
+
                     Item::find($test[0]->item_id)
                         ->update([ 'Initial_Price' => $new_price ]); 
                     
@@ -88,7 +95,7 @@ class ItemController extends Controller
                     $datas=DB::table('items')
                     ->join('offers', 'offers.item_id','=', 'items.id')
                     ->join('purchases','purchases.offer_id', '=','offers.id')
-                    ->where('items.sold','0')
+                    ->where('items.sold',false)
                     ->where('offers.state','like', 'wait%')
                     ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
                             'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
@@ -121,7 +128,7 @@ class ItemController extends Controller
                     ->orderBy('items.id', 'desc')
 
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
 
         return view('item.items',compact('items'));
@@ -135,7 +142,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
 
         $items_bid=$items->where('sell_type','enchere');
@@ -157,7 +164,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
         
         if(request('2')==false)
@@ -213,7 +220,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
 
         $items_museum=$items->where('Category','Bon pour le Musée');
@@ -233,7 +240,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
         
         if(request('2')==false)
