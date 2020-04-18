@@ -60,6 +60,7 @@
             }
         </script>
 
+        <script src="/js/myJS_sellerInfo.js" ></script>
         <!-- Styles -->
         <style>
             html, body {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item ;
 use App\Media ;
+use App\Offer ;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Storage;
@@ -43,9 +45,9 @@ class ItemController extends Controller
                 //si il y en a plusieurs c'est plus compliqué on fait rien ( best offer et achat immédiat etc)
                 if(count($test)==1)
                 {
-                    echo "<strong>L'article va être attribué</strong> ";
-                    Item::find($data->item_id)->update([ 'sold' => '1' ]);
-                    Offers::find($data->offer_id)->update(['state' => 'valid']);
+                    echo "<strong>L'article va être attribué</strong> item id :$data->item_id offer id $data->offer_id ";
+                    Item::find($data->item_id)->update([ 'sold' => true ]);
+                    Offer::find($data->offer_id)->update(['state' => 'valid']);
                    //Send email
                 }
                 else{
@@ -374,5 +376,17 @@ class ItemController extends Controller
         //$media->save();
  
     }
+   /*    public function display2($item_id){
+        $offer=Offer::where('item_id', '=', $item_id)->get();
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('items.id',$item_id)
+              ->select('items.title','items.Description','items.Category',
+                            'media.type as media_type','media.reference as media_reference',
+                            'offers.price','offers.id')
+                    ->get();
+        return view('offer.bestOffer',compact('items','offer'));
+    }*/
  
 }

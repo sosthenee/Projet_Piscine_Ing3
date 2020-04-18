@@ -82,7 +82,7 @@
                         $minimum_price=$item->Initial_Price+1;
                     @endphp
                     Saissisez le montant maximum que vous etes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
-                    <input type="submit" class="btn btn-primary" value="Encherire"></input>
+                    <input type="submit" class="btn btn-primary" value="Encherire">
                 </form>
             @endif
 
@@ -91,6 +91,7 @@
                 <form action="/achat/{{$item->item_id}}/addBestOffer" method="post">
                     {{ csrf_field() }}
                     <h4>Vente au meilleur prix</h4>
+                    
                     <span> Proposez le prix que vous souhaitez au vendeur : </span>
                     <input type="number" name="price" id="" placeholder="00€00">
                     <input type="submit" class="btn btn-primary" value="Faire une proposition">
