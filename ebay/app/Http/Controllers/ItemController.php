@@ -328,6 +328,24 @@ class ItemController extends Controller
 
     }
 
+    public function updateView(Request $request, $item_id){
+        $item_infos = Item::where('id',$item_id)->first();
+        return view('item.changeSellerHome',compact('item_infos'));
+    }
+
+    public function update(Request $request, $item_id ){
+      
+        $user_id = Auth::id();
+        $items = Item::where('id',$item_id)->first();
+        $items->Title = request('title');
+        $items->Description = request('description');
+        $items->save();
+
+        //$items = Item::where('user_id',$user_id)->get();
+        //return view('item.sellerHome',compact('items'));
+        return redirect()->action('ItemController@displayHomeSeller');
+    }
+
     public function create(){
 
         return view('item.createItem');

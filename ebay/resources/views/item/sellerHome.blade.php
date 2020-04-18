@@ -25,12 +25,13 @@
                         <img class="card-img-top" style="max-height: 40vh;"src="/storage/{{$item->reference}}" alt="Card image cap">
                         <div class="card-body d-flex  flex-column">
                             <div > 
+                               
                                 <h3 style="display: inline;" class="card-title text-capitalize">{{$item->Title}}</h3>
                                 <h5 class="card-title">{{$item->Category}}</h5>
                                 
                                 <p class="card-text text-truncate" >{{$item->Description}}</p>
                             </div>
-                           
+                    
 
                             <div class="mt-auto p-2 d-flex justify-content-between" style="border-top: thick double;" >
                             
@@ -63,6 +64,12 @@
                                     <!--<a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>-->
                                 </div>
                             </div>
+                            <form action="" method="POST">
+                                {{ csrf_field() }}
+                                
+                                <a href="{{ url('/vendre/update_vendre/' . $item->item_id) }}" style="float: right;" class="btn btn-xs btn-info pull-right">Edit </a>
+
+                            </form>
                             
                         </div>
                     </div>
