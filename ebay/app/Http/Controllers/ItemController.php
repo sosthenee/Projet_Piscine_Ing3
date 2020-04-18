@@ -128,8 +128,6 @@ class ItemController extends Controller
 
     public function display_all(){
  
-      
-        
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
@@ -296,6 +294,9 @@ class ItemController extends Controller
         return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
     }
 
+    /*************************************************************************
+     *                         POUR L'ACHETEUR
+     *************************************************************************/
     //Display of 1 item with options To buy it
     public function display(Request $request, $item_id){ 
 
@@ -308,13 +309,34 @@ class ItemController extends Controller
         return view('item.item',compact('items'));
     }
  
+    /************************************************************************
+     * *******************     POUR LE VENDEUR         **********************
+     * ********************************************************************** */
+
+    public function displayHomeSeller(){
+        //$request->user()->authorizeRoles(['seller','buyerseller']);
+        $user = Auth::user();
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->where('media.type','picture')
+                    ->where('items.user_id',$user->id)
+                    ->orderBy('items.id', 'desc')               
+                    ->get();
+
+        return view('item.sellerHome',compact('items'));
+
+    }
+
     public function create(){
 
         return view('item.createItem');
     }
- 
+    
+    //function POST
     public function storeItem(Request $request){
  
+        $user = Auth::user();
         $this->validate($request, [
             'Title' => 'required',
             'Description' => 'required',
@@ -322,7 +344,7 @@ class ItemController extends Controller
             'Title' => 'required',
         ]);
         
-        $user = Auth::user();
+        
 
         $item = new Item();
 
@@ -333,14 +355,14 @@ class ItemController extends Controller
         $item->admin_state="waiting";
         $item->sold=0;
 
-        $item->start_date=date ("c");
-
+        
+        $item->start_date= request('start_date');
 
         $mySellType ="";
         if(request('myCheckBid')){
             $mySellType = "enchere";
             $item->initial_Price = request('price_min');
-            $item->start_date= request('start_date');
+            
             $item->end_date= request('end_date');
         }else{
             if(request('myCheckBestOffer')){
@@ -384,25 +406,8 @@ class ItemController extends Controller
         }
         else
             return redirect('/vendre')->with('error','Votre item n\'a été ajouté ! Merci de bien saisir le champ "type de vente" ');
-        
-        
-        //$media = new Media();
-        //$media->reference = request('reference');
+
         //$item->media()->saveMany([$media]);
-        //$media->save();
  
     }
-   /*    public function display2($item_id){
-        $offer=Offer::where('item_id', '=', $item_id)->get();
-        $items  = DB::table('items')
-                    ->join('media','items.id', '=','media.item_id')
-                    ->join('users','items.user_id', '=','users.id')
-                    ->where('items.id',$item_id)
-              ->select('items.title','items.Description','items.Category',
-                            'media.type as media_type','media.reference as media_reference',
-                            'offers.price','offers.id')
-                    ->get();
-        return view('offer.bestOffer',compact('items','offer'));
-    }*/
- 
 }

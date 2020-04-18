@@ -40,8 +40,11 @@ Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBest');
 Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
 
 // ======= Selling =======
-Route::get('/vendre','ItemController@create');
+Route::get('/vendre/add','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
+
+// ====== Affichage des items d'un vendeur pour un vendeur
+Route::get('/vendre','ItemController@displayHomeSeller');
 
 
 // ======= Offers =======
