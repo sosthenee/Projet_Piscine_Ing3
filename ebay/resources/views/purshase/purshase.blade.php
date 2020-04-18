@@ -11,6 +11,5 @@
   <li>{{$purshase->paiement_date}}</li>
   <li>{{$purshase->delivery_date}}</li>                      
   <li>{{$purshase->state}}</li>
-</ul>  
-  @endforeach
+@endforeach
 @endsection

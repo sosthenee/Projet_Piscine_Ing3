@@ -45,6 +45,7 @@ class PurshaseController extends Controller
         $purshases  = DB::table('purchases')
         ->join('delivery_addresses','purchases.delivery_adress_id', '=','delivery_addresses.id')
         ->join('users','delivery_addresses.user_id', '=','users.id')
+        ->join('offers','purchases.offer_id', '=','offers.id')
         ->where('users.id',$user->id)
         ->select('purchases.id','purchases.paiement_date','purchases.delivery_date','purchases.state')
         ->get();
