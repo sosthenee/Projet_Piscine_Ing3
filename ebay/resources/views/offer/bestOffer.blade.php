@@ -40,23 +40,23 @@
            
 
             @if(strpos($item->sell_type, "bestoffer")!== false)
-            
-                <form action="/achat/{{$item->item_id}}/addBestOffer" method="post">
-                    {{ csrf_field() }}
-                    <h4>Vente au meilleur prix</h4>
-                     @if($item->price!==NULL)
-                    
-                    <p>Une personne évalue cette article à: {{$item->price}} €             <input type="submit" class="btn btn-primary" value="Accepter l'offre"></p>
-                    @endif
-                </form>
-                 <form action="/achat/{{$item->item_id}}/addBestOffer" method="post">  
-                     {{ csrf_field() }}
-                     <input type="number" name="idduuser" id="" value="{{$item->user_id}}" hidden>
-                     <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
-                    <span> Proposez le prix que vous souhaitez au vendeur : </span>
-                    <input type="number" name="price" id="" placeholder="00€00">
-                    <input type="submit" class="btn btn-primary" value="Faire une proposition">
-                </form>
+          
+                    <form action="/mybestoff/{{$item->item_id}}/addBestOffer" method="post">
+                        {{ csrf_field() }}
+                        <h4>Vente au meilleur prix</h4>
+                         @if($item->price!==NULL)
+
+                        <p>Une personne évalue cette article à: {{$item->price}} €             <input type="submit" class="btn btn-primary" value="Accepter l'offre"></p>
+                        @endif
+                    </form>
+                     <form action="/mybestoff/{{$item->item_id}}" method="post">  
+                         {{ csrf_field() }}
+                         <input type="number" name="idduuser" id="" value="{{$item->user_id}}" hidden>
+                         <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
+                        <span> Proposez le prix que vous souhaitez au vendeur : </span>
+                        <input type="number" name="price" id="" placeholder="00€00">
+                        <input type="submit" class="btn btn-primary" value="Faire une proposition">
+                    </form>
                 
             @endif
         </div>

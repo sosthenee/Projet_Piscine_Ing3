@@ -205,7 +205,6 @@
         <main>
             <div class="container" style="margin-top: 60px; padding-top: 20px;">
                 
-            <br><br><br>
                 @include('inc.errorsuccess')
                 @yield('content')     
             </div>
