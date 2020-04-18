@@ -61,9 +61,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div> 
-                @foreach($items as $image)
-                     
-                @endforeach
+               
             </div>
         </div>
 

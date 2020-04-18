@@ -31,6 +31,35 @@
         
         <script src="/js/myJS_addPayment.js" ></script>
         <script src="/js/myJS_countdown.js" ></script>
+
+        <script>
+            function readURL(input, id) {
+                
+                
+                if (input.files&& input.files[0]) {
+
+                    var input1;
+                    var input2;
+                    //$('#first_picture').attr('src', window.URL.createObjectURL(input.files[0]));
+                    input1= "<div class= \"carousel-item active\" > <img class=\"d-inline-block \" style=\"width: 30vw; height: 18vw; \" src=\"" + window.URL.createObjectURL(input.files[0])+ "\" alt=\"Video can't be show here but be sure that it will be online when you will submit\" >  </div> "; 
+                    input2="<li data-target=\"#carouselControls\" data-slide-to=\"0\" class=\"active\"></li>";
+                    for(var i=1; input.files[i];i++)
+                    {
+                    input1+= "<div class= \"carousel-item \" > <img class=\"d-inline-block \" style=\"width: 30vw; height: 18vw; \" src=\"" + window.URL.createObjectURL(input.files[i])+ "\" alt=\"Video can't be show here but be sure that it will be online when you will submit\" >  </div> "; 
+                    input2+="<li data-target=\"#carouselControls\" data-slide-to=\""+i+"\" class=\"active\"></li>";
+                    }
+                    document.getElementById('carousel-inner').innerHTML=input1;
+                    document.getElementById('carousel-indicators').innerHTML=input2;
+                    
+                   
+                } 
+                
+                 
+                
+                             
+            }
+        </script>
+
         <!-- Styles -->
         <style>
             html, body {
@@ -104,11 +133,11 @@
                 
             }
             .dropdown:hover>.dropdown-menu {
-  display: block;
-}
-            .dropdown:hover>.dropdown-menu {
- display: block;
-}
+            display: block;
+            }
+                        .dropdown:hover>.dropdown-menu {
+            display: block;
+            }
             
         </style>
     </head>
