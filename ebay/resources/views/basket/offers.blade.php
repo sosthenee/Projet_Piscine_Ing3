@@ -97,9 +97,9 @@
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="choosenadress">Adress</label>
                         </div>
-                        <select class="custom-select " name="choosenadress">
+                        <select class="custom-select " name="choosenadress" required>
                          
-                          <option selected>Choose...</option>
+                          <option selected value="">Choose...</option>
                           @foreach($delivery_addresses as $delivery_address)
                           <option value={{$delivery_address->id}}>{{$delivery_address->street}}</option>
                           @endforeach
@@ -110,8 +110,8 @@
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="choosenPayment">Payment</label>
                         </div>
-                        <select class="custom-select selectpicker"  name="choosenPayment">
-                          <option selected>Choose...</option>
+                        <select class="custom-select selectpicker"  name="choosenPayment" required>
+                          <option selected value="">Choose...</option>
                           
                           @foreach($payment_infos as $payment_info)
                           <option  value={{$payment_info->id}}>{{$payment_info->cardType}}</option>

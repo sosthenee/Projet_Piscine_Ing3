@@ -26,9 +26,10 @@ class OfferController extends Controller
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
+                    ->where('offers.user_id',$user->id)
                     ->orderBy('offers.item_id', 'desc')
                     ->where('offers.state','panier')
-                    ->where('offers.user_id',$user->id)
+                    
 
                     ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'offers.type as offer_type' ,
                     'media.type as media_type','media.reference as media_reference', 
