@@ -16,7 +16,11 @@ Création d'un item avec photos et/ou vidéo
 
 
 Affichage de tous les items
-  ! -> ne prend pas en compte la disponibilité de l'article (date et déjà vendu)
+  ! -> conditions d'affichage d'un item à vendre:
+              * sold=0
+              * admin_state=approuve
+  !            * start_date < aujd
+  !            * si enchère : end_date > aujd
 
 Affichage d'un item pour achat
     -> affichage en carrousel des images

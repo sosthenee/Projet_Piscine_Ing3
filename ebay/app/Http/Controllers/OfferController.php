@@ -22,15 +22,14 @@ class OfferController extends Controller
         //$request->user()->authorizeRoles(['buyer','buyerseller']);
         $user = Auth::user();
         $offers  = DB::table('offers')
-                    
                     ->join('items','offers.item_id', '=','items.id')
                     ->join('media','items.id', '=','media.item_id')
-                    
                     ->join('users','items.user_id', '=','users.id')
-                    ->where('offers.state','panier')
-                    ->where('offers.user_id',$user->id)
                     ->where('media.type','picture')
                     ->orderBy('offers.item_id', 'desc')
+                    ->where('offers.state','panier')
+                    ->where('offers.user_id',$user->id)
+
                     ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'offers.type as offer_type' ,
                     'media.type as media_type','media.reference as media_reference', 
                     'items.Title','items.Description', 'items.Category','items.start_date','items.end_date','items.Initial_Price', 'items.sell_type', 'items.sold', 

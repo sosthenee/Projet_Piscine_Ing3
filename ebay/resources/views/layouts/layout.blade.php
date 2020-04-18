@@ -30,6 +30,7 @@
         <script src="/js/myJS_CreateItem.js" ></script>
         
         <script src="/js/myJS_addPayment.js" ></script>
+        <script src="/js/myJS_countdown.js" ></script>
         <!-- Styles -->
         <style>
             html, body {

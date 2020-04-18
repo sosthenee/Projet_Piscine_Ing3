@@ -76,6 +76,8 @@
                     <p>Prix actuel : <strong>{{$item->Initial_Price}}€</strong>
                     <br>Date Début : {{$item->start_date}}
                     <br>Fin Début : {{$item->end_date}}
+                    <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
+                    <span class="countdown"></span>
                     </p>
                     <h5>Enchère automatique :</h5>
                     @php

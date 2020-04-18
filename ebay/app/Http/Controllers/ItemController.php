@@ -21,6 +21,9 @@ class ItemController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
+
+                    ->where('items.admin_state','approve')
+                    ->where('items.sold',0)
                     ->get();
 
         return view('item.items',compact('items'));
@@ -33,6 +36,8 @@ class ItemController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
+                    ->where('items.admin_state','approve')
+                    ->where('items.sold',0)
                     ->get();
 
         $items_bid=$items->where('sell_type','enchere');
@@ -53,6 +58,8 @@ class ItemController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
+                    ->where('items.admin_state','approve')
+                    ->where('items.sold',0)
                     ->get();
         
         if(request('2')==false)
@@ -107,6 +114,8 @@ class ItemController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
+                    ->where('items.admin_state','approve')
+                    ->where('items.sold',0)
                     ->get();
 
         $items_museum=$items->where('Category','Bon pour le Musée');
@@ -125,6 +134,8 @@ class ItemController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
+                    ->where('items.admin_state','approve')
+                    ->where('items.sold',0)
                     ->get();
         
         if(request('2')==false)
