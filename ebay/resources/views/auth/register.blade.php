@@ -94,12 +94,40 @@
                             
                             <div style="padding-top: 8px; margin-left: 16px;" >
                                 
-                                <input id="buyer"  value="rolebuyer" name="rolebuyer" type="checkbox" > Buyer
+                                <input id="buyer"  value="rolebuyer" name="rolebuyer" type="checkbox"  > Buyer
                                 <input id="Seller"  value="roleseller" name="roleseller" type="checkbox" > Seller
                                
                             </div>
                         </div>
+                        <div id="sellercontent" style="display: none;">
+                          <hr>
+                          <h4> Veuillez completer les champs ci dessous:</h4>
+                          <table>
+                             <div class="form-group row">
+                            <label for="pseudo" class="col-md-4 col-form-label text-md-right">{{ __('Pseudo') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="pseudo" type="text" class="form-control @error('pseudo') is-invalid @enderror" name="pseudo" value="{{ old('pseudo') }}" required autocomplete="pseudo" autofocus>
+
+                                @error('pseudo') 
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                            <tr>
+                              <td><label >Ajouter une photo de fond: </label></td>
+                              <td>
+                              @csrf
+                                <input id="file-upload" type="file" name="file[]" accept="image/*"  multiple > <!--onchange="readURL(this);"-->
+                                <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
+                                <span id="erreurs"></span>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <hr>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -28,6 +28,7 @@
         <script src="/js/myJS_CreateItem.js" ></script>
         <script src="/js/myJS_itemCarroussel.js" ></script>
         <script src="/js/myJS_addPayment.js" ></script>
+        <script src="/js/myJS_sellerInfo.js" ></script>
         <!-- Styles -->
         <style>
             html, body {
@@ -101,11 +102,11 @@
                 
             }
             .dropdown:hover>.dropdown-menu {
-  display: block;
-}
+            display: block;
+            }
             .dropdown:hover>.dropdown-menu {
- display: block;
-}
+            display: block;
+            }
             
         </style>
     </head>

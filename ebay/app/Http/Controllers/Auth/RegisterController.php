@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'rolebuyer' => ['required_without_all: rolebuyer,roleseller'],
             'roleseller' => ['required_without_all: roleseller,rolebuyer'],
+            'pseudo' =>['required', 'string', 'max:255'],
         ]);
     }
 
@@ -79,14 +80,17 @@ class RegisterController extends Controller
         if (isset($data['roleseller']) && isset($data['rolebuyer'])){
             $roletmp = 'askseller';
         }
-
+        
+           
+            
         return User::create([
             'username' => $data['username'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role'=>$roletmp
+            'role'=>$roletmp,
+            'pseudo' => $data['pseudo']
         ]);
 
         return $user;

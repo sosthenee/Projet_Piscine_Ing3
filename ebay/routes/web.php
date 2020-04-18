@@ -57,6 +57,11 @@ Route::post('/payment/create','PaymentController@Create');
 Route::delete('/payment/{payment_id}','PaymentController@delete');
 Route::put('/payment/update/{payment_id}','PaymentController@update');
 
+// ======= BEST OFFER =========
+//Route::get('/bestoff/{item_id}','ItemController@display2');
+Route::get('/mybestoff','OfferController@get_my_best_offersVendeurs');
+Route::get('/mybestoff/{offer_id}','OfferController@propose_my_offersVendeurs');
+
 
 
 // ======= USER =========
