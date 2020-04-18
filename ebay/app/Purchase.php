@@ -10,7 +10,7 @@ class Purchase extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'transaction', 'delivery_date', 'paiement_date'
+       'delivery_date', 'paiement_date' ,'state' 
     ];
 
     public function delivery_adress()

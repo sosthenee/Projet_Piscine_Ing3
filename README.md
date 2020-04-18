@@ -10,13 +10,17 @@ Création d'un item avec photos et/ou vidéo
     -> blindage à 80 % sur le type de vente (il faut selectionner au moins une fois une checkbox pour enlever le blindage)
     -> blindage dans le controller le type de vente
     => BLINDAGE COMPLET
-  ! -> la création d'un item ne prend pas en compte l'id du user
-  ! -> state = approuve
-  ! -> la page n'est pas sécurisé (accès public)
+  A -> la création d'un item  prend  en compte l'id du user
+    -> state = waiting
+  ! -> la page n'est pas sécurisé (accès public)  function display
 
 
 Affichage de tous les items
-  ! -> ne prend pas en compte la disponibilité de l'article (date et déjà vendu)
+  ! -> conditions d'affichage d'un item à vendre:
+              * sold=0
+              * admin_state=approuve
+  !            * start_date < aujd
+  !            * si enchère : end_date > aujd
 
 Affichage d'un item pour achat
     -> affichage en carrousel des images
@@ -31,7 +35,10 @@ Affichage du Panier
 
     -> Button delete OK
   ! -> Button Modif NO
-  ! -> Ne prend pas en compte l'ID Utilisateur
+  A -> Prend en compte l'ID Utilisateur
   ! -> refaire tous les tests blindage au moment de la validation du récapitulatif
+  ! -> la page n'est pas sécurisé (accès public)  function index
 
-
+Achat/SellType & Category
+    Recherche OK
+  ! -> pour category lorsque on regarde un prix on ne regarde plus les achats immédiats 

@@ -23,17 +23,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/admin', 'HomeController@admin_only');
 
+Route::get('/testCron','ItemController@testCron');
 
-// ======= ITEMS =======
-Route::get('/items','ItemController@index');
- 
-Route::get('/items/create','ItemController@create');
- 
-Route::post('/items/action','ItemController@storeItem');
 
 // ======= Purchase =======
-Route::get('/achat','ItemController@index');
+Route::get('/achat','ItemController@display_all');
+Route::get('/achat/SellType','ItemController@display_sell_type' );
+Route::get('/achat/SellType/search','ItemController@display_sell_type_search' );
+Route::get('/achat/Category','ItemController@display_category' );
+Route::get('/achat/Category/search','ItemController@display_category_search' );
+
 Route::get('/achat/{item_id}','ItemController@display');
+
 Route::post('/achat/{item_id}/addBidOffer','OfferController@storeBid');
 Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBest');
 Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
@@ -42,13 +43,15 @@ Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat')
 Route::get('/vendre','ItemController@create');
 Route::post('/vendre/ajouter/action','ItemController@storeItem');
 
+
 // ======= Offers =======
 Route::get('/panier','OfferController@index');
 Route::post('/panier/delete/{offer_id}','OfferController@destroy');
 Route::post('/panier/update/{offer_id}','OfferController@update');
-Route::post('/panier/delivery','OfferController@basketValidation');
+Route::post('/panier/delivery','OfferController@basketValidation'); //inutiles je crois
 
-
+// ======= myAccount=======
+Route::get('/myAccount',function(){return view('myAccount.myAccount');});
 
 // ======= PAYMENTS =======
 Route::get('/user/payments','PaymentController@AllfromUser');
@@ -64,9 +67,10 @@ Route::get('/mybestoff/{offer_id}','OfferController@propose_my_offersVendeurs');
 
 
 
-// ======= USER =========
+// ======= COMMANDS =========
 
-
+Route::post('/purshase','PurshaseController@buy');
+Route::get('/purshase','PurshaseController@AllfromUser');
 
 // ======= ADRESS =======
 Route::get('/user/adress','DeliveryController@AllfromUser');
