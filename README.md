@@ -47,14 +47,22 @@ Achat/SellType & Category
 Reste à faire:
   * Gestions des dates avec BDD
     -> ne pas afficher les items si on n'est pas dans les dates
-    -> valider l'achat d'une enchère
+    
+FAIT -> valider l'achat d'une enchère 
 
-  -> afficher le sous totale d'un panier
+  -> afficher le sous total d'un panier
   -> modification d'un item par le vendeur (ajout de photos suppression de photo)
+
   -> envoie d'un mail
   -> gestion des photos du vendeur (import)
   -> affichages des items d'un vendeur (avec photo de profil et image d'arrière plan)
 
+page d'accueil vendeur
+page d'un vendeur avec ses items
+
+
+
   à vérifier
     -> le process d'achat (items -> panier -> purchase -> mesCommandes -> valider ou refuser)
+    -> test Cron  OK
     -> le process de best offer
