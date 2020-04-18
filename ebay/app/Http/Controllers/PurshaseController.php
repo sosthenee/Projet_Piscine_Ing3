@@ -25,7 +25,7 @@ class PurshaseController extends Controller
         ])->get();
         
         Offer::where([['user_id',$user->id],
-            ['state', 'panier']])->update(['state' => 'waitseller']);
+            ['state', 'panier']])->update(['state' => 'wait seller']);
 
         foreach($buys as $buy){
             $purshase = new Purchase();
@@ -51,10 +51,12 @@ class PurshaseController extends Controller
                     ->join('purchases','offers.id', '=','purchases.offer_id')
                     
                     ->join('users','items.user_id', '=','users.id')
-                    ->where('offers.state','waitseller')
+                    ->where('offers.state','wait seller')
+                    ->orWhere('offers.state','valid')
+                    ->orWhere('offers.state','refuse')
                     ->where('offers.user_id',$user->id)
                     ->groupBy('offers.id')
-                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state', 'offers.type as offer_type' , 'items.id as item_id',
+                    ->select('offers.id', 'offers.item_id', 'offers.price', 'offers.state as state', 'offers.type as offer_type' , 'items.id as item_id',
                     'items.Title','items.Description', 'items.Category','items.start_date','items.end_date','items.Initial_Price', 'items.sell_type', 'items.sold', 
                     'users.id as seller_id', 'users.username as seller_username')
                     ->get();
@@ -72,7 +74,7 @@ class PurshaseController extends Controller
 
         foreach ($offers as $offer) {
             $offer->inject_medias = Media::where('item_id',$offer->item_id)->first();
-            //return var_dump($offer->inject_medias->reference);
+            
             foreach ($purshases as $purshase) {
                 if ($purshase->offer_id == $offer->id) {
                     $offer->inject_firstName = $purshase->firstName;
@@ -84,6 +86,7 @@ class PurshaseController extends Controller
                 }
             }
         }
+//        return var_dump($offers->first()->state);
 
 
 
