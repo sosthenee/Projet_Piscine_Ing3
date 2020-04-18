@@ -9,7 +9,6 @@ use App\Item ;
 use App\Offer ;
 use App\Delivery_address ;
 use App\Payment_info ;
-use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class OfferController extends Controller
