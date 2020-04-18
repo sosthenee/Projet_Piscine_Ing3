@@ -45,9 +45,9 @@ class ItemController extends Controller
                 //si il y en a plusieurs c'est plus compliqué on fait rien ( best offer et achat immédiat etc)
                 if(count($test)==1)
                 {
-                    echo "<strong>L'article va être attribué</strong> ";
-                    Item::find($data->item_id)->update([ 'sold' => '1' ]);
-                    Offers::find($data->offer_id)->update(['state' => 'valid']);
+                    echo "<strong>L'article va être attribué</strong> item id :$data->item_id offer id $data->offer_id ";
+                    Item::find($data->item_id)->update([ 'sold' => true ]);
+                    Offer::find($data->offer_id)->update(['state' => 'valid']);
                    //Send email
                 }
                 else{

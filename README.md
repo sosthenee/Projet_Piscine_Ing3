@@ -42,3 +42,19 @@ Affichage du Panier
 Achat/SellType & Category
     Recherche OK
   ! -> pour category lorsque on regarde un prix on ne regarde plus les achats immédiats 
+
+
+Reste à faire:
+  * Gestions des dates avec BDD
+    -> ne pas afficher les items si on n'est pas dans les dates
+    -> valider l'achat d'une enchère
+
+  -> afficher le sous totale d'un panier
+  -> modification d'un item par le vendeur (ajout de photos suppression de photo)
+  -> envoie d'un mail
+  -> gestion des photos du vendeur (import)
+  -> affichages des items d'un vendeur (avec photo de profil et image d'arrière plan)
+
+  à vérifier
+    -> le process d'achat (items -> panier -> purchase -> mesCommandes -> valider ou refuser)
+    -> le process de best offer
