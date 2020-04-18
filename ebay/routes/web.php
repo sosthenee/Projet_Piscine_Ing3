@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/admin', 'HomeController@admin_only');
 
-
+Route::get('/testCron','ItemController@testCron');
 
 
 // ======= Purchase =======

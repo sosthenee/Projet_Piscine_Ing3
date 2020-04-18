@@ -13,7 +13,103 @@ use Storage;
 
 class ItemController extends Controller
 {
-     
+    public function testCron(){
+        $datas=DB::table('items')
+                    ->join('offers', 'offers.item_id','=', 'items.id')
+                    ->join('purchases','purchases.offer_id', '=','offers.id')
+                    ->where('items.sold','0')
+                    ->where('offers.state','like', 'wait%')
+                    
+                    ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
+                            'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
+                            'purchases.id as purchase_id')
+                    ->get();
+
+        for($i=0; $i<count($datas);$i++)  
+        {
+            $data=$datas[$i];
+            echo "<br>Nouvelle data en cours d'analyse: ";
+
+            if($data->offer_type=='immediat')
+            {
+                echo "Cette achat est un achat immédiat. ";
+                $test=DB::table('items')
+                        ->join('offers', 'offers.item_id','=', 'items.id')
+                        ->join('purchases','purchases.offer_id', '=','offers.id')
+                        ->where('items.id','=',$data->item_id)
+                        ->get();
+
+                //on regarde toutes les offres proposé pour cette article si il n'y en a qu'une alors on l'attribut
+                //si il y en a plusieurs c'est plus compliqué on fait rien ( best offer et achat immédiat etc)
+                if(count($test)==1)
+                {
+                    echo "<strong>L'article va être attribué</strong> ";
+                    Item::find($data->item_id)->update([ 'sold' => '1' ]);
+                    Offers::find($data->offer_id)->update(['state' => 'valid']);
+                   //Send email
+                }
+                else{
+                    echo "Probleme correspondance BDD : demande intervention d'un administrateur. ";
+                }
+            }
+            if($data->offer_type=='bestoffer')
+            {
+                echo " Cette achat est une bestoffer. ";
+                echo " Aucune action ne sera réalisé sur cette data. ";
+            }
+            if($data->offer_type=='bid')
+            {
+                echo "Cette achat est une enchère, nous allons update le prix initial de l'enchère en fonction de toutes les offres proposées pour cette enchère ";
+                $test=DB::table('items')
+                        ->join('offers', 'offers.item_id','=', 'items.id')
+                        ->join('purchases','purchases.offer_id', '=','offers.id')
+                        ->where('items.sold','0')
+                        ->where('offers.state','like', 'wait%')
+                        ->where('items.id','=',$data->item_id)
+                        ->orderBy('offers.price')
+                        ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
+                            'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
+                            'purchases.id as purchase_id')
+                        ->get();
+                if(count($test)>1)
+                {
+                    $new_price=$test[1]->offer_price+1;
+                    Item::find($test[0]->item_id)
+                        ->update([ 'Initial_Price' => $new_price ]); 
+                    
+                    DB::table('offers')
+                            ->where('price','<',$new_price)
+                            ->update(['state' => 'refuse']);
+                    echo "mise à jour des enchères réalisées le nouveau prix est $new_price";
+
+                    //on réactualise nos données
+                    $datas=DB::table('items')
+                    ->join('offers', 'offers.item_id','=', 'items.id')
+                    ->join('purchases','purchases.offer_id', '=','offers.id')
+                    ->where('items.sold','0')
+                    ->where('offers.state','like', 'wait%')
+                    ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
+                            'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
+                            'purchases.id as purchase_id')
+                    ->get();
+                    $i=0;
+                                        
+                }else
+                    echo "une seule offre proposée pour cet item, le prix initial reste inchangé";
+                
+
+                
+
+            }
+            
+
+            
+
+        }
+        //return view('testCron',compact('datas'));
+       
+    }
+
     public function display_all(){
  
         $items  = DB::table('items')
