@@ -25,7 +25,7 @@ class PurshaseController extends Controller
         ])->get();
         
         Offer::where([['user_id',$user->id],
-            ['state', 'panier']])->update(['state' => 'waitseller']);
+            ['state', 'panier']])->update(['state' => 'wait seller']);
 
         foreach($buys as $buy){
             $purshase = new Purchase();
