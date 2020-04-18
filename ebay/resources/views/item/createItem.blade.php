@@ -66,17 +66,18 @@
             </div>
         </div>
         
+        <div class="form-group row"> 
+          <label class="col-sm-2 col-form-label">Date de début : </label>
+          <div class="col-sm-10">   
+          <input id="start_date" class="form-control"  style="width: 210px;" type="datetime-local" name="start_date"  value="2021-01-01T21:11" required> 
+          </div>
+        </div>
 
       <div id="BidContent" style="display: none;">
         <hr>
         <h4> Enchère</h4>
         
-          <div class="form-group row"> 
-            <label class="col-sm-2 col-form-label">Date de début : </label>
-            <div class="col-sm-10">   
-            <input id="start_date" class="form-control"  style="width: 210px;" type="datetime-local" name="start_date"  value="2021-01-01T21:11"> 
-            </div>
-          </div>
+          
           <div class="form-group row"> 
             <label class="col-sm-2 col-form-label">Date de fin : </label>  
             <div class="col-sm-10">
