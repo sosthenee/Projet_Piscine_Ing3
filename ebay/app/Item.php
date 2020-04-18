@@ -11,7 +11,7 @@ class Item extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Title', 'Description', 'Initial_price', 'Category', 'Start_date', 'End_date', 'Sell_type', 'Sold','admin_state'
+        'Title', 'Description', 'Initial_Price', 'Category', 'Start_date', 'End_date', 'Sell_type', 'Sold','admin_state'
     ];
     
     public function media()
