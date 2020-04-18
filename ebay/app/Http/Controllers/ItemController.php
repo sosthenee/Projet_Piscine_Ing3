@@ -19,7 +19,7 @@ class ItemController extends Controller
         $datas=DB::table('items')
                     ->join('offers', 'offers.item_id','=', 'items.id')
                     ->join('purchases','purchases.offer_id', '=','offers.id')
-                    ->where('items.sold','0')
+                    ->where('items.sold',false)
                     ->where('offers.state','like', 'wait%')
                     
                     ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
@@ -30,7 +30,7 @@ class ItemController extends Controller
         for($i=0; $i<count($datas);$i++)  
         {
             $data=$datas[$i];
-            echo "<br>Nouvelle data en cours d'analyse: ";
+            echo "<br>Nouvelle data en cours d'analyse $i : ";
 
             if($data->offer_type=='immediat')
             {
@@ -45,9 +45,9 @@ class ItemController extends Controller
                 //si il y en a plusieurs c'est plus compliqué on fait rien ( best offer et achat immédiat etc)
                 if(count($test)==1)
                 {
-                    echo "<strong>L'article va être attribué</strong> ";
-                    Item::find($data->item_id)->update([ 'sold' => '1' ]);
-                    Offers::find($data->offer_id)->update(['state' => 'valid']);
+                    echo "<strong>L'article va être attribué</strong> item id :$data->item_id offer id $data->offer_id ";
+                    Item::find($data->item_id)->update([ 'sold' => true ]);
+                    Offer::find($data->offer_id)->update(['state' => 'valid']);
                    //Send email
                 }
                 else{
@@ -65,51 +65,65 @@ class ItemController extends Controller
                 $test=DB::table('items')
                         ->join('offers', 'offers.item_id','=', 'items.id')
                         ->join('purchases','purchases.offer_id', '=','offers.id')
-                        ->where('items.sold','0')
-                        ->where('offers.state','like', 'wait%')
+                        ->where('items.sold',false) //inutile
+                        ->where('offers.state','like', 'wait%') //
                         ->where('items.id','=',$data->item_id)
-                        ->orderBy('offers.price')
+                        ->orderBy('offers.price','desc')
                         ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
                             'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
                             'purchases.id as purchase_id')
                         ->get();
+
+               echo "count". count($test) ;
                 if(count($test)>1)
                 {
-                    $new_price=$test[1]->offer_price+1;
+
+                    $new_price=($test[1]->offer_price)+1;
+
                     Item::find($test[0]->item_id)
                         ->update([ 'Initial_Price' => $new_price ]); 
                     
                     DB::table('offers')
+                            ->where('offers.item_id','=',$test[0]->item_id)
                             ->where('price','<',$new_price)
                             ->update(['state' => 'refuse']);
+
                     echo "mise à jour des enchères réalisées le nouveau prix est $new_price";
 
                     //on réactualise nos données
                     $datas=DB::table('items')
                     ->join('offers', 'offers.item_id','=', 'items.id')
                     ->join('purchases','purchases.offer_id', '=','offers.id')
-                    ->where('items.sold','0')
+                    ->where('items.sold',false)
                     ->where('offers.state','like', 'wait%')
                     ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
                             'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
                             'purchases.id as purchase_id')
                     ->get();
-                    $i=0;
+                    $i=-1;
                                         
                 }else
+                {
                     echo "une seule offre proposée pour cet item, le prix initial reste inchangé";
-                
+                }
+                $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
+                if($test[0]->end_date<$today){ //si la date de l'enchère est terminé on atribut un gagnant
+                    
+                    echo "l'enchère est terminer on attribut un gagnant";
 
-                
-
+                    if(count($test)==1 ||$test[0]->offer_price!=$test[1]->offer_price)
+                    {
+                        //le gagnant est le numero 0
+                        Offer::find($test[0]->offer_id)
+                                ->update(['state'=> 'valid']);
+                        Item::find($test[0]->item_id)->update([ 'sold' => true ]);
+                            echo "l'objet :". $test[0]->item_id ."est vendu pour l'utilisateur". $test[0]->buyer_id. "avec l'offre".$test[0]->offer_id;
+                            //envoie du mail 
+                    }
+                }
+                    
             }
-            
-
-            
-
-        }
-        //return view('testCron',compact('datas'));
-       
+        }      
     }
 
     public function display_all(){
@@ -119,9 +133,9 @@ class ItemController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
-
+                    
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
 
         return view('item.items',compact('items'));
@@ -135,7 +149,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
 
         $items_bid=$items->where('sell_type','enchere');
@@ -157,7 +171,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
         
         if(request('2')==false)
@@ -213,7 +227,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
 
         $items_museum=$items->where('Category','Bon pour le Musée');
@@ -233,7 +247,7 @@ class ItemController extends Controller
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
-                    ->where('items.sold',0)
+                    ->where('items.sold',false)
                     ->get();
         
         if(request('2')==false)
@@ -280,6 +294,9 @@ class ItemController extends Controller
         return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
     }
 
+    /*************************************************************************
+     *                         POUR L'ACHETEUR
+     *************************************************************************/
     //Display of 1 item with options To buy it
     public function display(Request $request, $item_id){ 
 
@@ -292,13 +309,34 @@ class ItemController extends Controller
         return view('item.item',compact('items'));
     }
  
+    /************************************************************************
+     * *******************     POUR LE VENDEUR         **********************
+     * ********************************************************************** */
+
+    public function displayHomeSeller(){
+        //$request->user()->authorizeRoles(['seller','buyerseller']);
+        $user = Auth::user();
+
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->where('media.type','picture')
+                    ->where('items.user_id',$user->id)
+                    ->orderBy('items.id', 'desc')               
+                    ->get();
+
+        return view('item.sellerHome',compact('items'));
+
+    }
+
     public function create(){
 
         return view('item.createItem');
     }
- 
+    
+    //function POST
     public function storeItem(Request $request){
  
+        $user = Auth::user();
         $this->validate($request, [
             'Title' => 'required',
             'Description' => 'required',
@@ -306,7 +344,7 @@ class ItemController extends Controller
             'Title' => 'required',
         ]);
         
-        $user = Auth::user();
+        
 
         $item = new Item();
 
@@ -317,14 +355,14 @@ class ItemController extends Controller
         $item->admin_state="waiting";
         $item->sold=0;
 
-        $item->start_date=date ("c");
-
+        
+        $item->start_date= request('start_date');
 
         $mySellType ="";
         if(request('myCheckBid')){
             $mySellType = "enchere";
             $item->initial_Price = request('price_min');
-            $item->start_date= request('start_date');
+            
             $item->end_date= request('end_date');
         }else{
             if(request('myCheckBestOffer')){
@@ -368,25 +406,8 @@ class ItemController extends Controller
         }
         else
             return redirect('/vendre')->with('error','Votre item n\'a été ajouté ! Merci de bien saisir le champ "type de vente" ');
-        
-        
-        //$media = new Media();
-        //$media->reference = request('reference');
+
         //$item->media()->saveMany([$media]);
-        //$media->save();
  
     }
-   /*    public function display2($item_id){
-        $offer=Offer::where('item_id', '=', $item_id)->get();
-        $items  = DB::table('items')
-                    ->join('media','items.id', '=','media.item_id')
-                    ->join('users','items.user_id', '=','users.id')
-                    ->where('items.id',$item_id)
-              ->select('items.title','items.Description','items.Category',
-                            'media.type as media_type','media.reference as media_reference',
-                            'offers.price','offers.id')
-                    ->get();
-        return view('offer.bestOffer',compact('items','offer'));
-    }*/
- 
 }

@@ -56,13 +56,13 @@ $(document).ready(function(){
             $('#price').prop('required',false);
 
             $("#BidContent").css("display", "");
-            $('#start_date').prop('required',true);
+            
             $('#end_date').prop('required',true);
             $('#price_min').prop('required',true);
         }
         else{
             $("#BidContent").css("display", "none");
-            $('#start_date').prop('required',false);
+            
             $('#end_date').prop('required',false);
             $('#price_min').prop('required',false);
         }
@@ -74,7 +74,7 @@ $(document).ready(function(){
 
             $("#myCheckBid").prop( "checked", false );
             $("#BidContent").css("display", "none");
-            $('#start_date').prop('required',false);
+            
             $('#end_date').prop('required',false);
             $('#price_min').prop('required',false);
 
@@ -91,7 +91,6 @@ $(document).ready(function(){
             
             $("#myCheckBid").prop( "checked", false );
             $("#BidContent").css("display", "none");
-            $('#start_date').prop('required',false);
             $('#end_date').prop('required',false);
             $('#price_min').prop('required',false);
 
