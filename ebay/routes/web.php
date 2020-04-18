@@ -48,9 +48,10 @@ Route::post('/vendre/ajouter/action','ItemController@storeItem');
 Route::get('/panier','OfferController@index');
 Route::post('/panier/delete/{offer_id}','OfferController@destroy');
 Route::post('/panier/update/{offer_id}','OfferController@update');
-Route::post('/panier/delivery','OfferController@basketValidation');
+Route::post('/panier/delivery','OfferController@basketValidation'); //inutiles je crois
 
-
+// ======= myAccount=======
+Route::get('/myAccount',function(){return view('myAccount.myAccount');});
 
 // ======= PAYMENTS =======
 Route::get('/user/payments','PaymentController@AllfromUser');

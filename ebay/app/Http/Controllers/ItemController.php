@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Item ;
 use App\Media ;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Storage;
+
 
 
 class ItemController extends Controller
@@ -170,8 +172,9 @@ class ItemController extends Controller
     }
 
     //Display of 1 item with options To buy it
-    public function display($item_id){ 
+    public function display(Request $request, $item_id){ 
 
+        //$request->user()->authorizeRoles(['buyer','buyerseller']);
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
@@ -193,14 +196,16 @@ class ItemController extends Controller
             'Category' => 'required',
             'Title' => 'required',
         ]);
+        
+        $user = Auth::user();
 
         $item = new Item();
 
-        $item->user_id=3;
+        $item->user_id=$user->id;
         $item->Title = request('Title');
         $item->Description = request('Description');
         $item->Category =request('Category');
-        $item->admin_state="approve";
+        $item->admin_state="waiting";
         $item->sold=0;
 
         $item->start_date=date ("c");

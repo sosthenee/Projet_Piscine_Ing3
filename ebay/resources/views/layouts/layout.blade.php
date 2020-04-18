@@ -28,7 +28,7 @@
         
         <script src="/js/myJS_getInput.js" ></script>
         <script src="/js/myJS_CreateItem.js" ></script>
-        <!--script src="/js/myJS_itemCarroussel.js" ></script-->
+        
         <script src="/js/myJS_addPayment.js" ></script>
         <!-- Styles -->
         <style>
@@ -117,10 +117,10 @@
                 <a class="navbar-brand" href="#">Mon site</a>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Accueil <span class="sr-only">Accueil</span></a>
+                        <a class="nav-link" href="/achat">Accueil <span class="sr-only">Accueil</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/achat/Category" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Categories
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -128,7 +128,7 @@
                             <a class="dropdown-item" href="#">Bon pour le musée</a>
                             <a class="dropdown-item" href="#">Accessoires VIP</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">TOUT</a>
+                            <a class="dropdown-item" href="/achat/Category">TOUT</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -140,17 +140,17 @@
                             <a class="dropdown-item" href="#">Enchère</a>
                             <a class="dropdown-item" href="#">Meilleure offre</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">TOUT</a>
+                            <a class="dropdown-item" href="/achat/SellType">TOUT</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Vendre</a>
+                        <a class="nav-link" href="/vendre">Vendre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Votre compte</a>
+                        <a class="nav-link" href="/myAccount">Votre compte</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Panier</a>
+                        <a class="nav-link" href="/panier">Panier</a>
                     </li>
                 </ul>
                 @if (Route::has('login'))
