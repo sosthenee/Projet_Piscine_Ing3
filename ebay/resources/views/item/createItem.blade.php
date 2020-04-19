@@ -12,6 +12,7 @@
       <h1>Ajout d'un nouvelle Item</h1>
       <hr>
 
+
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="Title">Nom de l'item : </label> 
           <div class="col-sm-10">
@@ -37,41 +38,68 @@
           </div>
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Insertion de média : </label> 
-            <div class="col-sm-10">
-              @csrf
-              <input id="file-upload" class="form-control-file" type="file" name="file[]" accept="image/*, video/*"  onchange="readURL(this);" multiple > 
-              <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
-              <span id="erreurs"></span>
-            </div>
-        </div>
+      <div class="form-group row">
+        <div class="col-sm-5">
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Insertion de média : </label> 
+              <div class="col-sm-8">
+                @csrf
+                <input id="file-upload" class="form-control-file" type="file" name="file[]" accept="image/*, video/*"  onchange="readURL(this);" multiple > 
+                <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
+                <span id="erreurs"></span>
+              </div>
+          </div>
 
-        
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Type de vente : </label> 
-            <div class="col-sm-10">
-            <div class="form-check">
-              <input id="myCheckBid" name="myCheckBid" class="form-check-input" type="checkbox" required>
-              <label class="form-check-label" for="myCheckBid">Enchère</label>
+          
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Type de vente : </label> 
+              <div class="col-sm-8">
+              <div class="form-check">
+                <input id="myCheckBid" name="myCheckBid" class="form-check-input" type="checkbox" required>
+                <label class="form-check-label" for="myCheckBid">Enchère</label>
+              </div>
+              <div class="form-check">
+                <input id="myCheckBestOffer" name="myCheckBestOffer" class="form-check-input" type="checkbox" >
+                <label class="form-check-label" for="myCheckBestOffer">Meilleure Offre</label> 
+              </div>
+              <div class="form-check">
+                <input id="myCheckImmediatPurchase" name="myCheckImmediatPurchase" class="form-check-input"  type="checkbox" >
+                <label class="form-check-label" for="myCheckImmediatPurchase">Achat Immédiat</label>
+              </div>
+              </div>
+          </div>
+          
+          <div class="form-group row"> 
+            <label class="col-sm-4 col-form-label">Date de début : </label>
+            <div class="col-sm-8">   
+            <input id="start_date" class="form-control"  style="width: 210px;" type="datetime-local" name="start_date"  value="2021-01-01T21:11" required> 
             </div>
-            <div class="form-check">
-              <input id="myCheckBestOffer" name="myCheckBestOffer" class="form-check-input" type="checkbox" >
-              <label class="form-check-label" for="myCheckBestOffer">Meilleure Offre</label> 
-            </div>
-            <div class="form-check">
-              <input id="myCheckImmediatPurchase" name="myCheckImmediatPurchase" class="form-check-input"  type="checkbox" >
-              <label class="form-check-label" for="myCheckImmediatPurchase">Achat Immédiat</label>
-            </div>
-            </div>
-        </div>
-        
-        <div class="form-group row"> 
-          <label class="col-sm-2 col-form-label">Date de début : </label>
-          <div class="col-sm-10">   
-          <input id="start_date" class="form-control"  style="width: 210px;" type="datetime-local" name="start_date"  value="2021-01-01T21:11" required> 
           </div>
         </div>
+
+        <div class="col-sm-7">
+        <div id="carouselControls" class="carousel slide" data-ride="carousel" style="border: 1px solid; width: 30vw; height: 18vw;">
+          <ol id="carousel-indicators" class="carousel-indicators">
+              <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
+              <!--iiiiiiiiiiiiiiiiii-->
+          </ol>
+          <div id="carousel-inner"class="carousel-inner ">
+                  
+              <div class= "carousel-item active" >
+                <img id="first_picture" class="d-inline-block " style="width: 30vw; height: 18vw; " src="/storage/unnamed.png" alt="no pictures" > 
+              </div>          
+          </div>
+          <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+          </a>
+        </div> 
+        </div>
+      </div>
 
       <div id="BidContent" style="display: none;">
         <hr>
@@ -124,27 +152,8 @@
     </form> 
 
 
-    <div id="carouselControls" class="carousel slide" data-ride="carousel" style="border: 1px solid; width: 30vw; height: 18vw;">
-      <ol id="carousel-indicators" class="carousel-indicators">
-          <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
-          <!--iiiiiiiiiiiiiiiiii-->
-      </ol>
-      <div id="carousel-inner"class="carousel-inner ">
-               
-          <div class= "carousel-item active" >
-            <img id="first_picture" class="d-inline-block " style="width: 30vw; height: 18vw; " src="/storage/unnamed.png" alt="no pictures" > 
-          </div>          
-      </div>
-      <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-      </a>
-    </div> 
-    <span id="testdemerde" class="testdemerde"></span> 
+   
+  
     
      
   </div>
