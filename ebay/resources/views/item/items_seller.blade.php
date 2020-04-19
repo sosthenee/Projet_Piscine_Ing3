@@ -3,8 +3,14 @@
  
 
 @section('content')
-    <h1>Vendeur: {{$mySeller->pseudo}}</h1>
-    
+    <h1 style=" position: absolute; top: 19vh;left: 26vw;">Vendeur: {{$mySeller->pseudo}}</h1>
+    <img class="rounded-circle img-thumbnail" src="/storage/{{$mySeller->profil_picture}}" style="position: absolute; top: 14vh;left: 13vw; height: 12vw; width:12vw;"alt="">
+    <img src="/storage/{{$mySeller->background_picture}}" style="height: 20vw; width:100%;"alt="">
+   
+  
+    @if($mySeller->profil_picture!=="")
+        
+    @endif
     @if(count($items)>0)
         @php
             $id_item_temp=-1;
