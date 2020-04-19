@@ -52,21 +52,21 @@ Reste à faire:
     
 
 
-FAIT -> valider l'achat d'une enchère
+DONE -> valider l'achat d'une enchère
 
-FAIT -> afficher le sous total d'un panier
+DONE -> afficher le sous total d'un panier
 
-  -> ne pas afficher les items si la date de début n'a pas commencé 
-      (pour la date de fin auto grâce au cron except si aucune offre n'a été faite)
+DONE  -> ne pas afficher les items si la date de début n'a pas commencé 
+         (pour la date de fin auto grâce au cron except si aucune offre n'a été faite)
 
- ! -> Attention une enchère qui à 0 offre n'est pas actualisé, si personne ne l'achète avant la date limite elle reste présente.
+ /!\ -> Attention une enchère qui à 0 offre n'est pas actualisé, si personne ne l'achète avant la date limite elle reste présente.
 
-FAIT -> Envoie d'un mail
+DONE -> Envoie d'un mail
 
 
-FAIT page d'accueil vendeur
+DONE page d'accueil vendeur
 
-FAIT -> AFFICHAGE ITEM POUR VENDEUR:
+DONE -> AFFICHAGE ITEM POUR VENDEUR:
       -> Modification d'un item par le vendeur (ajout de photos suppression de photos)
       Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
       

@@ -169,8 +169,16 @@ class Kernel extends ConsoleKernel
                     }
                         
                 }
-            }   
-            sleep(10);   
+            } 
+            
+            // gerer les items supprimer
+            //$today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
+            //$enchere=DB::table('items')
+            //        ->where('items.sold',false)
+            //        ->where('items.Sell_type','enchere')
+            //        ->get(); 
+
+            sleep(10);   //sleep of 10 seconds between each update
         }    
         })->everyMinute()
         ->appendOutputTo(storage_path('logs/schedule.log'));

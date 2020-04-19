@@ -153,14 +153,16 @@ class ItemController extends Controller
         }      
     }
 
+    /*********************************************************************** */
     public function display_all(){
  
+        $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
                     ->orderBy('items.id', 'desc')
-                    
+                    ->where('items.Start_date','<',$today)
                     ->where('items.admin_state','approve')
                     ->where('items.sold',false)
                     ->get();
@@ -169,11 +171,12 @@ class ItemController extends Controller
     }
 
     public function display_sell_type(){
-
+        $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
+                    ->where('items.Start_date','<',$today)
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
                     ->where('items.sold',false)
@@ -191,11 +194,12 @@ class ItemController extends Controller
         return view('item.items_sell_type',compact('items_bid','items_bestoffer','items_immediat'));
     }
     public function display_sell_type_search(){
-
+        $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
+                    ->where('items.Start_date','<',$today)
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
                     ->where('items.sold',false)
@@ -220,11 +224,6 @@ class ItemController extends Controller
         if(request('c')==false)
             $items=$items->where('Category','<>','Accessoire VIP');
 
-        
-                            
-
-
-
         $items_bid=$items->where('sell_type','enchere');
                     
         $items_bestoffer = $items->where('sell_type','<>','enchere')
@@ -247,11 +246,12 @@ class ItemController extends Controller
         return view('item.items_sell_type',compact('items_bid','items_bestoffer','items_immediat'));
     }
     public function display_category(){
-
+        $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
+                    ->where('items.Start_date','<',$today)
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
                     ->where('items.sold',false)
@@ -267,11 +267,12 @@ class ItemController extends Controller
         return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
     }
     public function display_category_search(){
-
+        $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
         $items  = DB::table('items')
                     ->join('media','items.id', '=','media.item_id')
                     ->join('users','items.user_id', '=','users.id')
                     ->where('media.type','picture')
+                    ->where('items.Start_date','<',$today)
                     ->orderBy('items.id', 'desc')
                     ->where('items.admin_state','approve')
                     ->where('items.sold',false)
