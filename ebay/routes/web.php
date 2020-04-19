@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');  ///////////////////////////////////////
 
 
 //Route::get('/admin', 'HomeController@admin_only');
@@ -48,7 +48,7 @@ Route::post('/vendre/ajouter/action','ItemController@storeItem'); //creation an 
 
 
 // ====== Affichage des items d'un vendeur pour un vendeur===
-Route::get('/vendre','ItemController@displayHomeSeller');
+Route::get('/vendre','ItemController@displayHomeSeller'); 
 Route::put('/vendre/update/{item_id}','ItemController@update');
 Route::get('/vendre/update_vendre/{item_id}', 'ItemController@updateView');
 

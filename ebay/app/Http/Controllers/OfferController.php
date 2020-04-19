@@ -19,9 +19,16 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index( Request $request )
-    {
-        //$request->user()->authorizeRoles(['buyer','buyerseller']);
-        $user = Auth::user();
+    {   
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas vendeur. Identifiez vous ou faites une création de compte !');
+            }else{
+        
         $offers  = DB::table('offers')
                     ->join('items','offers.item_id', '=','items.id')
                     ->join('media','items.id', '=','media.item_id')
@@ -50,7 +57,7 @@ class OfferController extends Controller
         foreach($payment_infos as $payment_info){
             $payment_info->cardNumber =  "***********" . substr($payment_info->cardNumber,-4);
         }
-        return view('basket.offers',compact('offers','payment_infos','delivery_addresses','data'));
+        return view('basket.offers',compact('offers','payment_infos','delivery_addresses','data'));}}
     }
 
     /**
@@ -256,8 +263,16 @@ class OfferController extends Controller
     }
     public function get_my_best_offersAcheteurs(Request $request)
     {
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
+            }else{
         $request->user()->authorizeRoles(['buyer','buyerseller']);
-        $user = Auth::user();
+        
 
         $items  = DB::table('items')
                     ->join('offers','items.id', '=','offers.item_id')
@@ -271,7 +286,7 @@ class OfferController extends Controller
                ->get();
    
            
-         return view('offer.myBestOffers',compact('items','user'));
+         return view('offer.myBestOffers',compact('items','user'));}}
 }
     
      public function propose_my_offersAcheteurs(Request $request, $id)
@@ -306,8 +321,14 @@ class OfferController extends Controller
     
     public function get_my_best_offersVendeurs(Request $request)
     {
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            
+
         $request->user()->authorizeRoles(['seller','buyerseller','admin']);
-        $user = Auth::user();
+        
 
         $items  = DB::table('items')
                     ->join('offers','items.id', '=','offers.item_id')
@@ -322,7 +343,7 @@ class OfferController extends Controller
                             'offers.price')
                ->get();
 
-         return view('offer.myBestOffers',compact('items','user'));
+         return view('offer.myBestOffers',compact('items','user'));}
 }
     public function propose_my_offersVendeurs(Request $request, $id)
     {

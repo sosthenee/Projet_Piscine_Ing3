@@ -44,7 +44,10 @@ class PurshaseController extends Controller
 
     public function AllfromUser(Request $request){
 
-        $user = Auth::user();
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
         $offers  = DB::table('offers')
                     ->join('items','offers.item_id', '=','items.id')
                     ->join('purchases','offers.id', '=','purchases.offer_id')
@@ -84,6 +87,7 @@ class PurshaseController extends Controller
                 }
             }
         }
+    }
 //        return var_dump($offers->first()->state);
 
 
