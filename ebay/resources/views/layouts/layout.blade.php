@@ -29,7 +29,9 @@
         
         <script src="/js/myJS_addPayment.js" ></script>
         <script src="/js/myJS_countdown.js" ></script>
-        <script src="/js/myJS_sellerInfo.js" ></script>
+        <script src="/js/myJS_createAccount.js" ></script>
+        
+        
         <!--------------------------------------------
         ------script to add elements to carrousel-----
         ------it works only to create item------------>
@@ -53,8 +55,7 @@
         </script>
 
 
-        <script src="/js/myJS_sellerInfo.js" ></script>
-        <script src="/js/myJS_BuyerInfo.js" ></script>
+        
 
         <!-- Styles -->
         <style>
@@ -177,20 +178,30 @@
                                 <a class="nav-link dropdown-toggle" href="/myAccount" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Votre compte
                                 </a>
+                                @php
+                                    $myuserconnect= Auth::user();
+                                @endphp
+                        
+                        
                                 <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Mes informations</a>
-                                    
-                                        <a class="dropdown-item" href="#">Mes adresses de livraison</a>
-                                        <a class="dropdown-item" href="#">Mes options de paiement</a>
-                                        <a class="dropdown-item" href="#">Mes commandes</a>
-                                        <a class="dropdown-item" href="#">Mes meilleurs offres en cours</a>
-                                    
                                     <div class="dropdown-divider"></div>
-
+                                    @if($myuserconnect->role =='buyer'||$myuserconnect->role =='buyerseller')
+                                        <a class="dropdown-item" href="/user/adress">Mes adresses de livraison</a>
+                                        <a class="dropdown-item" href="/user/payments">Mes options de paiement</a>
+                                        <a class="dropdown-item" href="/purshase">Mes commandes</a>
+                                        <a class="dropdown-item" href="/mybestoffA">Mes meilleurs offres en cours</a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif
+                                    @if($myuserconnect->role =='seller'||$myuserconnect->role =='buyerseller')
+                                        <a class="dropdown-item" href="/mybestoffV">Mes ventes meilleurs offres</a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif
+                                    @if($myuserconnect->role =='admin')
+                                        <a class="dropdown-item" href="/">Admin option??</a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif
                                     
-                                        <a class="dropdown-item" href="/mybestoffV">Mes ventes</a>
-                                    
-                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Deconnexion</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/myAccount">TOUT</a>
@@ -204,6 +215,7 @@
                                 <a href="{{ route('register') }}">Register</a>
                             @endif
                         @endauth
+                        
                     </div>
                 @endif
             </nav>
