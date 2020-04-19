@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -13,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-             <!-- CSRF Token -->
+        <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -31,13 +29,13 @@
         
         <script src="/js/myJS_addPayment.js" ></script>
         <script src="/js/myJS_countdown.js" ></script>
-
-        <script>
+        <script src="/js/myJS_sellerInfo.js" ></script>
+        <!--------------------------------------------
+        ------script to add elements to carrousel-----
+        ------it works only to create item------------>
+        <script> 
             function readURL(input, id) {
-                
-                
                 if (input.files&& input.files[0]) {
-
                     var input1;
                     var input2;
                     //$('#first_picture').attr('src', window.URL.createObjectURL(input.files[0]));
@@ -50,17 +48,11 @@
                     }
                     document.getElementById('carousel-inner').innerHTML=input1;
                     document.getElementById('carousel-indicators').innerHTML=input2;
-                    
-                   
                 } 
-                
-                 
-                
-                             
             }
         </script>
 
-        <script src="/js/myJS_sellerInfo.js" ></script>
+        
         <!-- Styles -->
         <style>
             html, body {
@@ -144,51 +136,64 @@
     </head>
     <body>
         <nav class="sticky" style="z-index:5;">
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <a class="navbar-brand" href="#">Mon site</a>
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/achat">Accueil <span class="sr-only">Accueil</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/achat/Category" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Feraille ou trésor</a>
-                            <a class="dropdown-item" href="#">Bon pour le musée</a>
-                            <a class="dropdown-item" href="#">Accessoires VIP</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/achat/Category">TOUT</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Options d'achats
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Achat immédiat</a>
-                            <a class="dropdown-item" href="#">Enchère</a>
-                            <a class="dropdown-item" href="#">Meilleure offre</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/achat/SellType">TOUT</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vendre">Vendre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/myAccount">Votre compte</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/panier">Panier</a>
-                    </li>
-                </ul>
-                @if (Route::has('login'))
 
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">Mon site</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/achat">Accueil <span class="sr-only">Accueil</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/achat/Category" >
+                                Categories
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/achat/SellType">
+                                Options d'achats
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/vendre">Vendre</a>
+                        </li>
+                        
+                        
+                    </ul>
+                    <div class=" my-2 my-lg-0 active">
+                        <a class="nav-link" href="/panier">Panier</a>
+                    </div>
+                </div>
+                @if (Route::has('login'))
                     <div class=" links">
                         @auth
-                            <a href="{{ url('/home') }}">Home</a>
+                            <div class="nav-item active dropdown">
+                                <a class="nav-link dropdown-toggle" href="/myAccount" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Votre compte
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Mes informations</a>
+                                    
+                                        <a class="dropdown-item" href="#">Mes adresses de livraison</a>
+                                        <a class="dropdown-item" href="#">Mes options de paiement</a>
+                                        <a class="dropdown-item" href="#">Mes commandes</a>
+                                        <a class="dropdown-item" href="#">Mes meilleurs offres en cours</a>
+                                    
+                                    <div class="dropdown-divider"></div>
+
+                                    
+                                        <a class="dropdown-item" href="/mybestoffV">Mes ventes</a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Deconnexion</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/myAccount">TOUT</a>
+                                </div>
+                            </div>
+                            <!--a href="{{ url('/home') }}">Home</a-->
                         @else
                             <a href="{{ route('login') }}">Login </a>
 
@@ -197,19 +202,15 @@
                             @endif
                         @endauth
                     </div>
-
                 @endif
             </nav>
         </nav>
         
         <main>
             <div class="container" style="margin-top: 60px; padding-top: 20px;">
-                
                 @include('inc.errorsuccess')
                 @yield('content')     
             </div>
         </main>
-
-
     </body>
 </html>
