@@ -46,5 +46,18 @@ class UserTableSeeder extends Seeder
     $seller->picture = '';
     $seller->contract = 0;
     $seller->save();
+      
+    $both = new User();
+    $both->firstname = 'buyerseller Name';
+    $both->email = 'buyerseller@example.com';
+    $both->password = bcrypt('secret');
+    $both->role= 'buyerseller';
+    $both->username = 'buyerseller userName';
+    $both->lastname = 'buyerseller lastName';
+    $both->email_verified_at = '2020-04-37';
+    $both->pseudo = 'ece_seller';
+    $both->picture = '';
+    $both->contract = 1;
+    $both->save();
   }
 }
