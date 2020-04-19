@@ -212,7 +212,7 @@
                                         <div class="dropdown-divider"></div>
                                     @endif
                                     
-                                    <a class="dropdown-item" href="#">Deconnexion</a>
+                                    <a class="dropdown-item" href="/logout">Deconnexion</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/myAccount">TOUT</a>
                                 </div>
