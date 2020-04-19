@@ -87,7 +87,7 @@ class OfferController extends Controller
         return redirect('/achat')->with('success','L\'élèment a été ajouté à votre panier !');
 
     }
-    public function storeBest(Request $request, $item_id)
+    public function storeBestFirst(Request $request, $item_id)
     {
         $this->validate($request, [
             'price' => 'required',
@@ -101,15 +101,39 @@ class OfferController extends Controller
             $offer->type="bestoffer";
             $offer->item_id=$item_id;
             $offer->price=request('price');
-            $offer->state='wait seller';
+            $offer->state='panier';
             $offer->user_id=$user->id;
             $offer->save();
         
         return redirect('/achat')->with('success','L\'élèment a été ajouté à votre panier !');
         }
+
+    }
+    public function storeBest(Request $request, $item_id)
+    {
+        $this->validate($request, [
+            'price' => 'required',
+        ]);
+        $request->user()->authorizeRoles(['buyer','seller','buyerseller','admin']);
+        $user = Auth::user();
+        if($user->role==='buyer')
+        {
+                        $i=request('iddepreoffre');
+            Offer::find($i)->update(['state' => 'refuse']);
+            $user = Auth::user();
+            $offer = new Offer();
+            $offer->type="bestoffer";
+            $offer->item_id=$item_id;
+            $offer->price=request('price');
+            $offer->state='wait seller';
+            $offer->user_id=$user->id;
+            $offer->save();
+        
+        return redirect('/achat')->with('success','L\'offre a été envoyée !');
+        }
         if($user->role==='seller' || $user->role==='admin'){
             $i=request('iddepreoffre');
-            Offer::find($i)->update(['state' => 'refused']);
+            Offer::find($i)->update(['state' => 'refuse']);
             $user = Auth::user();
             $offer = new Offer();
             $offer->type="bestoffer";
@@ -125,6 +149,19 @@ class OfferController extends Controller
         }
 
     }
+    public function saveOffer(Request $request, $id)
+    {
+        Offer::find($id)->update(['state' => 'valid']);
+        
+        return redirect('/myAccount')->with('success','L\'offre a été accéptée !');
+    }
+    public function refuseOffer(Request $request, $id)
+    {
+        Offer::find($id)->update(['state' => 'refuse']);
+        
+        return redirect('/myAccount')->with('success','L\'offre a été refusée !');
+    }
+    
     public function storeImmediat(Request $request, $item_id)
     {   
         $items  = DB::table('items')
@@ -233,10 +270,41 @@ class OfferController extends Controller
                             'offers.price','offers.id')
                ->get();
    
-        
-
-         return view('offer.myBestOffers',compact('items'));
+           
+         return view('offer.myBestOffers',compact('items','user'));
 }
+    
+     public function propose_my_offersAcheteurs(Request $request, $id)
+    {
+        $request->user()->authorizeRoles(['buyer','buyerseller','']);
+        $user = Auth::user();
+              $items  = DB::table('items')
+                    ->join('offers','items.id', '=','offers.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                     ->join('media','items.id', '=','media.item_id')
+                    ->where('offers.state','wait buyer')
+                    ->where('offers.id',$id)
+                    ->where('offers.user_id',$user->id)
+                    ->select('items.Title','items.Description',
+                             'items.Category','items.sell_type',
+                             'users.username',
+                            'media.type as media_type','media.reference as media_reference',
+                    'offers.id','offers.price','offers.item_id','offers.user_id')
+               ->get();
+      $offers  = DB::table('offers')
+                    ->where('offers.id',$id)
+                    ->get();
+          $nboffers=DB::table('offers')
+                ->where('offers.item_id', $offers->item_id)
+                ->where('offers.user_id', $offers->user_id)
+               ->get();
+         
+         $nombreoffers=count($nboffers);
+         
+         
+         return view('offer.bestOffer',compact('items','nombreoffers'));
+}
+    
     public function get_my_best_offersVendeurs(Request $request)
     {
         $request->user()->authorizeRoles(['seller','buyerseller','admin']);
@@ -246,16 +314,17 @@ class OfferController extends Controller
                     ->join('offers','items.id', '=','offers.item_id')
                     ->join('users','items.user_id', '=','users.id')
                      ->join('media','items.id', '=','media.item_id')
-                    ->where('offers.state','wait buyer')
+                    ->where('offers.type','bestoffer')
+                    ->where('offers.state','wait seller')
                     ->where('items.user_id',$user->id)
                     ->select('items.title','items.Description','items.Category',
+                             'items.id',
                             'media.type as media_type','media.reference as media_reference',
-                            'offers.price','offers.id')
+                            'offers.price')
                ->get();
-   
-        
 
-         return view('offer.myBestOffers',compact('items'));
+        
+         return view('offer.myBestOffers',compact('items','user'));
 }
     public function propose_my_offersVendeurs(Request $request, $id)
     {
@@ -266,7 +335,7 @@ class OfferController extends Controller
                     ->join('users','items.user_id', '=','users.id')
                      ->join('media','items.id', '=','media.item_id')
                     ->where('offers.state','wait seller')
-                    ->where('items.id',$id)
+                    ->where('offers.id',$id)
                     ->where('items.user_id',$user->id)
                     ->select('items.Title','items.Description',
                              'items.Category','items.sell_type',
@@ -274,8 +343,7 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                     'offers.id','offers.price','offers.item_id','offers.user_id')
                ->get();
-   
-        
+    
          return view('offer.bestOffer',compact('items'));
 }
 }
