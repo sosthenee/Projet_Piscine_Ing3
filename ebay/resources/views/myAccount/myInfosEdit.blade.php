@@ -24,6 +24,9 @@
                 <td><input type="email" name="user_email" value="{{$user->email}}"></td>
             </tr> 
             @if($user->role!=='buyer')
+                <hr>
+                <tr>  <td><br><strong>Mes données en tant que acheteur :</strong></td>
+                </tr> 
                 <tr> 
                     <td> <label >Pseudo :</label></td>
                     <td><input type="text" name="user_pseudo" value="{{$user->pseudo}}"></td>
@@ -49,8 +52,8 @@
             @endif
         </table>
         
-         
-        <input type="submit" class="btn btn-primary" value="Enregistrer les modifications">
+         <br>
+        <input type="submit" class="btn btn-lg btn-primary" value="Enregistrer les modifications">
 </form>
      
 @endsection
