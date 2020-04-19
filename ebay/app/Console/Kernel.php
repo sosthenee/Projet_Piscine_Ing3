@@ -10,6 +10,7 @@ use App\Item ;
 use App\Media ;
 use App\Offer ;
 use App\User ;
+use App\Purchase ;
 
 
 
@@ -47,7 +48,7 @@ class Kernel extends ConsoleKernel
                     
                     ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
                             'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
-                            'purchases.id as purchase_id')
+                            'purchases.id as purchase_id','purchases.delivery_date' )
                     ->get();
 
             for($i=0; $i<count($datas);$i++)  
@@ -71,15 +72,19 @@ class Kernel extends ConsoleKernel
                         echo "<strong>L'article va être attribué</strong> item id :$data->item_id offer id $data->offer_id ";
                         
                         //Mail::to("willy.martin@edu.ece.fr")->send(new NewMail);
-                        
+                        $later=date("Y-m").'-'.(date('d')+2);
                         Item::find($data->item_id)->update([ 'sold' => true ]);
                         Offer::find($data->offer_id)->update(['state' => 'valid']);
+                        DB::table('purchases')
+                                ->where('purchases.id',$data->offer_id)->update([ 'delivery_date' => $later ]);
 
                         //Send email
                         $to_name = User::find($data->buyer_id)->get()->first()->lastname;
-                        $to_email = 'willy.martin@edu.ece.fr';
-                        $subject = 'Votre commande vient d etre valider';
-                        $message = 'Bonjour '.$to_name.', <br><br> Votre commande vient d\'etre valider ! Elle sera transmise à notre transporteur dés demain. Votre date de livraison estimé est le : ';
+                        $to_email = 'willy.martin@edu.ece.fr';//User::find($data->buyer_id)->get()->first()->email;
+                        $subject = 'Commande validée !';
+                        $message = 'Bonjour '.$to_name.', \\n Votre commande vient d\'etre validée ! ';
+                        $message.='Elle sera transmise à notre transporteur dés demain. Votre date de livraison estimé est le : '.$data->delivery_date;
+                        
                         $headers = 'From: ECE SRW <connected.letterbox@gmail.com>';
                         if(mail($to_email,$subject,$message,$headers))
                             echo "L'email a été envoyé.";
@@ -169,8 +174,16 @@ class Kernel extends ConsoleKernel
                     }
                         
                 }
-            }   
-            sleep(10);   
+            } 
+
+            // gerer les items supprimer
+            //$today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
+            //$enchere=DB::table('items')
+            //        ->where('items.sold',false)
+            //        ->where('items.Sell_type','enchere')
+            //        ->get(); 
+
+            sleep(10);   //sleep of 10 seconds between each update
         }    
         })->everyMinute()
         ->appendOutputTo(storage_path('logs/schedule.log'));
