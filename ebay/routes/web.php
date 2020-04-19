@@ -44,7 +44,12 @@ Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat')
 Route::get('/vendre/add','ItemController@create'); //display view of creation an item
 Route::post('/vendre/ajouter/action','ItemController@storeItem'); //creation an item
 
-Route::get('/vendre','ItemController@displayHomeSeller'); //display list of items of a seller for the seller
+
+// ====== Affichage des items d'un vendeur pour un vendeur
+Route::get('/vendre','ItemController@displayHomeSeller');
+Route::put('/vendre/update/{item_id}','ItemController@update');
+Route::get('/vendre/update_vendre/{item_id}', 'ItemController@updateView');
+
 
 
 // =============== Offers =================
@@ -78,6 +83,7 @@ Route::post('/mybestoffA/{id}','OfferController@propose_my_offersAcheteurs');
 
 Route::post('/mybestoff/{id}','OfferController@storeBest');
 Route::post('/myAccount/{id}','OfferController@saveOffer');
+Route::post('/mybestoff/{id}/refuse','OfferController@refuseOffer');
 
 // ======= COMMANDS =========
 

@@ -107,7 +107,7 @@
                           @endforeach
              
                         </select>
-                        <a href="/user/payments">
+                        <a href="/user/adress">
                         <button type="button"  class="btn btn-outline-primary"><i class="fa fa-plus"></i>
                         </a>
                       </div>
@@ -125,7 +125,7 @@
                          @endforeach
                         
                         </select>
-                        <a href="/user/adress">
+                        <a href="/user/payments">
                           <button type="button"  class="btn btn-outline-primary"><i class="fa fa-plus"></i>
                           </a>
                       </div>
@@ -146,6 +146,8 @@
                     @endforeach
                     </div>
                     <div class="modal-footer">
+                      <h5 class="modal-title">Basket total : {{$data->first()->count}} €</h5>
+
                       <button type="submit" class="btn btn-success"value="Buy">Buy</button>
                     </div>
                   </div>

@@ -47,7 +47,9 @@ class OfferController extends Controller
 
         $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
         $payment_infos = Payment_info::where('user_id',$user->id)->get();
-
+        foreach($payment_infos as $payment_info){
+            $payment_info->cardNumber =  "***********" . substr($payment_info->cardNumber,-4);
+        }
         return view('basket.offers',compact('offers','payment_infos','delivery_addresses','data'));
     }
 
@@ -153,7 +155,12 @@ class OfferController extends Controller
         
         return redirect('/myAccount')->with('success','L\'offre a été accéptée !');
     }
-    
+    public function refuseOffer(Request $request, $id)
+    {
+        Offer::find($id)->update(['state' => 'refuse']);
+        
+        return redirect('/myAccount')->with('success','L\'offre a été refusée !');
+    }
     
     public function storeImmediat(Request $request, $item_id)
     {   
@@ -284,8 +291,18 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                     'offers.id','offers.price','offers.item_id','offers.user_id')
                ->get();
-
-         return view('offer.bestOffer',compact('items'));
+      $offers  = DB::table('offers')
+                    ->where('offers.id',$id)
+                    ->get();
+          $nboffers=DB::table('offers')
+                ->where('offers.item_id', $offers->item_id)
+                ->where('offers.user_id', $offers->user_id)
+               ->get();
+         
+         $nombreoffers=count($nboffers);
+         
+         
+         return view('offer.bestOffer',compact('items','nombreoffers'));
 }
     
     public function get_my_best_offersVendeurs(Request $request)

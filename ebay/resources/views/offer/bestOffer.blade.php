@@ -49,6 +49,14 @@
                         <p>Une personne évalue cette article à: {{$item->price}} €             <input type="submit" class="btn btn-primary" value="Accepter l'offre"></p>
                         @endif
                     </form>
+                    @if($nombreoffers===10||$nombreoffers===9)
+                     <form action="/mybestoff/{{$item->item_id}}/refuse" method="post">  
+                         {{ csrf_field() }}
+                         <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
+                        <input type="submit" class="btn btn-primary" value="Refuser">
+                    </form>
+                   @endif
+                @if($nombreoffers!==10)
                      <form action="/mybestoff/{{$item->item_id}}" method="post">  
                          {{ csrf_field() }}
                          <input type="number" name="idduuser" id="" value="{{$item->user_id}}" hidden>
@@ -57,6 +65,7 @@
                         <input type="number" name="price" id="" placeholder="00€00">
                         <input type="submit" class="btn btn-primary" value="Faire une proposition">
                     </form>
+                   @endif
                 
             @endif
         </div>
