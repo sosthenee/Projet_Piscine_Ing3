@@ -191,7 +191,7 @@
                                 @endphp
 
                                 <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Mes informations</a>
+                                    <a class="dropdown-item" href="/myAccount/myInfos">Mes informations</a>
                                     <div class="dropdown-divider"></div>
                                     @if($myuserconnect->role =='buyer'||$myuserconnect->role =='buyerseller')
                                         <a class="dropdown-item" href="/user/adress">Mes adresses de livraison</a>

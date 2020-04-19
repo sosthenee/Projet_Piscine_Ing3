@@ -118,24 +118,7 @@
                                     </div>
                                 </div>
                             
-                                <!--<tr>
-                                    <td><label >Ajouter une photo de profil : </label></td>
-                                    <td>
-                                        @csrf
-                                        <input id="file-upload_profil" type="file" name="file_profil" accept="image/*" > 
-                                        <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
-                                        <span id="erreurs"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label >Ajouter une photo de fond : </label></td>
-                                    <td>
-                                        @csrf
-                                        <input id="file-upload_background" type="file" name="file_backgroud" accept="image/*" > 
-                                        <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
-                                        <span id="erreurs"></span>
-                                    </td>
-                                </tr>-->
+                                
                             </table>
                         </div>
                         <div id="buyercontent" style="display: none;">

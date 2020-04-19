@@ -206,14 +206,25 @@ class ItemController extends Controller
      *************************************************************************/
     //Display of 1 item with options To buy it
     public function display(Request $request, $item_id){ 
-
-        //$request->user()->authorizeRoles(['buyer','buyerseller']);
-        $items  = DB::table('items')
-                    ->join('media','items.id', '=','media.item_id')
-                    ->join('users','items.user_id', '=','users.id')
-                    ->where('items.id',$item_id)
-                    ->get();
-        return view('item.item',compact('items'));
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas acheteur. Identifiez vous ou faites une création de compte !');
+            }else{
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+                $items  = DB::table('items')
+                            ->join('media','items.id', '=','media.item_id')
+                            ->join('users','items.user_id', '=','users.id')
+                            ->where('items.id',$item_id)
+                            ->get();
+                return view('item.item',compact('items'));
+            }
+        }
+        
+        
     }
  
     /************************************************************************
@@ -221,23 +232,36 @@ class ItemController extends Controller
      * ********************************************************************** */
 
     public function displayHomeSeller(){
-        //$request->user()->authorizeRoles(['seller','buyerseller']);
-        $user = Auth::user();
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='seller'&&$user->role!=='buyerseller'&&$user->role!=='admin')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas vendeur. Identifiez vous ou faites une création de compte !');
+            }else{
 
-        $items  = DB::table('items')
-                    ->join('media','items.id', '=','media.item_id')
-                    ->where('media.type','picture')
-                    ->where('items.user_id',$user->id)
-                    ->orderBy('items.id', 'desc')               
-                    ->get();
+                $items  = DB::table('items')
+                            ->join('media','items.id', '=','media.item_id')
+                            ->where('media.type','picture')
+                            ->where('items.user_id',$user->id)
+                            ->orderBy('items.id', 'desc')               
+                            ->get();
 
-        return view('item.sellerHome',compact('items'));
-
+                return view('item.sellerHome',compact('items'));
+            }}
     }
     //get
     public function updateView(Request $request, $item_id){
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='seller'&&$user->role!=='buyerseller'&&$user->role!=='admin')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas vendeur. Identifiez vous ou faites une création de compte !');
+            }else{
         $item_infos = Item::where('id',$item_id)->first();
-        $user = Auth::user();
 
         $items  = DB::table('items')
         ->join('media','items.id', '=','media.item_id')
@@ -246,7 +270,7 @@ class ItemController extends Controller
         ->where('items.id',$item_id)
         ->orderBy('items.id', 'desc')               
         ->get();
-        return view('item.changeSellerHome',compact('item_infos','items'));
+        return view('item.changeSellerHome',compact('item_infos','items'));}}
     }
     //post
     public function update(Request $request, $item_id ){
@@ -296,8 +320,15 @@ class ItemController extends Controller
     }
 
     public function create(){
-
-        return view('item.createItem');
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='seller'&&$user->role!=='buyerseller'&&$user->role!=='admin')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas vendeur. Identifiez vous ou faites une création de compte !');
+            }else{
+        return view('item.createItem');}}
     }
     
     //function POST

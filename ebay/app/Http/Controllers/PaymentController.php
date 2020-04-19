@@ -10,17 +10,32 @@ class PaymentController extends Controller
 
 
     public function AllfromUser(Request $request){
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
+            }else{
         $request->user()->authorizeRoles(['buyer','buyerseller']);
-        $user = Auth::user();
-
+     
         $payement_infos = Payment_info::where('user_id',$user->id)->get();
-        return view('payment_info.payment_info',compact('payement_infos'));
+        return view('payment_info.payment_info',compact('payement_infos'));}}
     }
 
     public function updateView(Request $request, $payment_id){
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
+            }else{
         $request->user()->authorizeRoles(['buyer','buyerseller']);
         $payment_info = Payment_info::where('id',$payment_id)->first();
-        return view('payment_info.change_payment',compact('payment_info'));
+        return view('payment_info.change_payment',compact('payment_info'));}}
     }
     
     public function Create(Request $request) {

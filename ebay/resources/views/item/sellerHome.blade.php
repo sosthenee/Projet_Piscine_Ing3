@@ -10,7 +10,7 @@
         <input type="submit" value="AJOUTER UN ITEM" class="btn btn-lg btn-primary">
     </form>
     <br>
-    <form action="" method="get">
+    <form action="/mybestoffV" method="get">
         <input type="submit" value="VOIR LES DEMANDES DE MEILLEURS OFFRES" class="btn btn-lg btn-primary">
     </form>
     <hr>
@@ -59,9 +59,9 @@
                                         <label>VENDU</label>
                                     @endif
                                     @if($item->sold==false)
-                                        <label>En cours de vente</label>
+
+                                        <label>En vente depuis le: {{substr($item->start_date,0,10)}}</label>
                                     @endif
-                                    <!--<a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>-->
                                 </div>
                             </div>
                             <form action="" method="POST">
