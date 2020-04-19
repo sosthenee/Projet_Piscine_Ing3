@@ -32,6 +32,8 @@ Route::get('/achat/SellType','ItemController@display_sell_type' );
 Route::get('/achat/SellType/search','ItemController@display_sell_type_search' );
 Route::get('/achat/Category','ItemController@display_category' );
 Route::get('/achat/Category/search','ItemController@display_category_search' );
+Route::get('/achat/Seller/{seller_id}','ItemController@display_seller_items');
+
 
 // Display details of an item (only for buyer)
 Route::get('/achat/{item_id}','ItemController@display');
@@ -45,7 +47,7 @@ Route::get('/vendre/add','ItemController@create'); //display view of creation an
 Route::post('/vendre/ajouter/action','ItemController@storeItem'); //creation an item
 
 
-// ====== Affichage des items d'un vendeur pour un vendeur
+// ====== Affichage des items d'un vendeur pour un vendeur===
 Route::get('/vendre','ItemController@displayHomeSeller');
 Route::put('/vendre/update/{item_id}','ItemController@update');
 Route::get('/vendre/update_vendre/{item_id}', 'ItemController@updateView');
