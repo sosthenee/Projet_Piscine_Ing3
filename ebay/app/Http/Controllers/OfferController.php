@@ -117,7 +117,7 @@ class OfferController extends Controller
         if($user->role==='buyer')
         {
                         $i=request('iddepreoffre');
-            Offer::find($i)->update(['state' => 'refused']);
+            Offer::find($i)->update(['state' => 'refuse']);
             $user = Auth::user();
             $offer = new Offer();
             $offer->type="bestoffer";
@@ -131,7 +131,7 @@ class OfferController extends Controller
         }
         if($user->role==='seller' || $user->role==='admin'){
             $i=request('iddepreoffre');
-            Offer::find($i)->update(['state' => 'refused']);
+            Offer::find($i)->update(['state' => 'refuse']);
             $user = Auth::user();
             $offer = new Offer();
             $offer->type="bestoffer";
@@ -147,6 +147,14 @@ class OfferController extends Controller
         }
 
     }
+    public function saveOffer(Request $request, $id)
+    {
+        Offer::find($id)->update(['state' => 'valid']);
+        
+        return redirect('/myAccount')->with('success','L\'offre a été accéptée !');
+    }
+    
+    
     public function storeImmediat(Request $request, $item_id)
     {   
         $items  = DB::table('items')
@@ -255,8 +263,7 @@ class OfferController extends Controller
                             'offers.price','offers.id')
                ->get();
    
-        
-
+           
          return view('offer.myBestOffers',compact('items','user'));
 }
     
@@ -277,7 +284,7 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                     'offers.id','offers.price','offers.item_id','offers.user_id')
                ->get();
-    
+
          return view('offer.bestOffer',compact('items'));
 }
     
@@ -298,9 +305,8 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                             'offers.price')
                ->get();
-   
-        
 
+        
          return view('offer.myBestOffers',compact('items','user'));
 }
     public function propose_my_offersVendeurs(Request $request, $id)
