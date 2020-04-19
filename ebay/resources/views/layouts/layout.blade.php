@@ -29,7 +29,9 @@
         
         <script src="/js/myJS_addPayment.js" ></script>
         <script src="/js/myJS_countdown.js" ></script>
-        <script src="/js/myJS_sellerInfo.js" ></script>
+        <script src="/js/myJS_createAccount.js" ></script>
+        
+        
         <!--------------------------------------------
         ------script to add elements to carrousel-----
         ------it works only to create item------------>
@@ -53,8 +55,7 @@
         </script>
 
 
-        <script src="/js/myJS_sellerInfo.js" ></script>
-        <script src="/js/myJS_BuyerInfo.js" ></script>
+        
 
         <!-- Styles -->
         <style>
