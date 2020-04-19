@@ -15,6 +15,7 @@
             <input type="checkbox" name={{"d".$items[$i]->id}}> 
         </div>
             @endfor
+
     
     <br>
     <br>
@@ -26,6 +27,7 @@
             <span id="erreurs"></span>
         </div>
     </div>
+
     <input class="form-control" type="text" value={{ $item_infos->Title}} name="title" required><br>
     <input class="form-control" type="text" value={{ $item_infos->Description}}  name="description" required><br>
     

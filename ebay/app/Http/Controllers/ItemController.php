@@ -38,6 +38,26 @@ class ItemController extends Controller
         return view('item.items',compact('items'));
     }
 
+    public function display_seller_items($seller_id){
+ 
+        $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
+        $items  = DB::table('items')
+                    ->join('media','items.id', '=','media.item_id')
+                    ->join('users','items.user_id', '=','users.id')
+                    ->where('media.type','picture')
+                    ->where('items.user_id',$seller_id)
+                    ->orderBy('items.id', 'desc')
+                    ->where('items.Start_date','<',$today)
+                    ->where('items.admin_state','approve')
+                    ->where('items.sold',false)
+                    ->get();
+        $mySeller=DB::table('users')
+                    ->where('users.id',$seller_id)
+                    ->get()->first();
+
+        return view('item.items_seller',compact('items', 'mySeller'));
+    }
+
     public function display_sell_type(){
         $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
         $items  = DB::table('items')
@@ -240,10 +260,18 @@ class ItemController extends Controller
         foreach($items->media()->get() as $media)
         {
             if ( null != request("d".$media->id)){
+                
+            if($items->media()->get()->count()== 1){
+                $media->reference = "unnamed.png";
+                $media->save();
+            } else {
                 $media->delete();
             }
+            }
+            
 
         }
+
         $files=$request->file('files');
         if(!empty($files)){
             $i=0;
@@ -263,7 +291,7 @@ class ItemController extends Controller
         }
         else
             echo "pas d'images";
-  
+
         return redirect()->action('ItemController@displayHomeSeller');
     }
 
