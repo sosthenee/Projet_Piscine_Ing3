@@ -129,13 +129,8 @@
                               <label for="contrat" class="col-md-4 col-form-label text-md-right">{{ __('Contrat :') }}</label>
                                    
                               <div class="col-md-6">
-                                  <input id="contrat" type="checkbox" class="form-control @error('Contrat') is-invalid @enderror" name="contrat"   autofocus>
+                                  <input id="contrat" type="checkbox" class="form-control " name="contrat"    >
                                 
-                                  @error('contrat') 
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                  @enderror
                               </div>
                             </div>
                         </div>
