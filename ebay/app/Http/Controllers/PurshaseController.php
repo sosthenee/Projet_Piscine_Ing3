@@ -63,7 +63,6 @@ class PurshaseController extends Controller
                     'users.id as seller_id', 'users.username as seller_username')
                     ->get();
 
-
         $purshases  = DB::table('purchases')
                         ->join('delivery_addresses','purchases.delivery_adress_id', '=','delivery_addresses.id')
                         ->join('users','delivery_addresses.user_id', '=','users.id')
@@ -75,7 +74,7 @@ class PurshaseController extends Controller
 
         foreach ($offers as $offer) {
             $offer->inject_medias = Media::where('item_id',$offer->item_id)->first();
-            
+           
             foreach ($purshases as $purshase) {
                 if ($purshase->offer_id == $offer->id) {
                     $offer->inject_firstName = $purshase->firstName;
@@ -83,14 +82,15 @@ class PurshaseController extends Controller
                     $offer->inject_city = $purshase->city;
                     $offer->inject_date_dely = $purshase->delivery_date;
                     $offer->inject_date = $purshase->paiement_date;
+                    //return var_dump($offer);
                     
                 }
             }
         }
-    }
-//        return var_dump($offers->first()->state);
 
 
+    //    return var_dump($purshases);
+      //  return var_dump($offers);
 
         return view('purshase.purshase',compact('purshases', 'offers'));
 

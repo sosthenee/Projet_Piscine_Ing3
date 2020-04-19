@@ -28,7 +28,7 @@
             </h5>
           </div>
       
-          <div id="{{"i".$item->id}}" class="collapse show"  data-parent="#accordion">
+          <div id="{{"i".$item->id}}" class="collapse "  data-parent="#accordion">
             <div class="card-body">
                 <ul>
                 <li><strong>Description :</strong> {{$item->Description}}</li>
