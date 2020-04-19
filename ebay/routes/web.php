@@ -136,3 +136,7 @@ Route::post('/ListesItems/action','AdminController@suppressionItem');
 Route::get('/ItemsAttente','AdminController@ItemsenAttente');
 Route::post('/ItemsAttente/approuver/{item_id}','AdminController@ItemschoixAjouter');
 Route::post('/ItemsAttente/refuser/{item_id}','AdminController@ItemschoixRefuser');
+
+
+//  ======= Logout =======
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
