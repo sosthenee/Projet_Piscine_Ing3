@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,7 @@ Route::get('/achat/Category/search','ItemController@display_category_search' );
 Route::get('/achat/{item_id}','ItemController@display');
 
 Route::post('/achat/{item_id}/addBidOffer','OfferController@storeBid');
-Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBest');
+Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBestFirst');
 Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
 
 // ======= Selling =======
@@ -54,7 +56,10 @@ Route::post('/panier/update/{offer_id}','OfferController@update');
 Route::post('/panier/delivery','OfferController@basketValidation'); //inutiles je crois
 
 // ======= myAccount=======
-Route::get('/myAccount',function(){return view('myAccount.myAccount');});
+Route::get('/myAccount',function(Request $request){
+    
+    $user = Auth::user();
+    return view('myAccount.myAccount',compact('user'));});
 
 // ======= PAYMENTS =======
 Route::get('/user/payments','PaymentController@AllfromUser');
@@ -65,11 +70,13 @@ Route::put('/payment/update/{payment_id}','PaymentController@update');
 
 // ======= BEST OFFER =========
 //Route::get('/bestoff/{item_id}','ItemController@display2');
-Route::get('/mybestoff','OfferController@get_my_best_offersVendeurs');
-Route::get('/mybestoff/{offer_id}','OfferController@propose_my_offersVendeurs');
+Route::get('/mybestoffV','OfferController@get_my_best_offersVendeurs');
+Route::post('/mybestoffV/{id}','OfferController@propose_my_offersVendeurs');
 
+Route::get('/mybestoffA','OfferController@get_my_best_offersAcheteurs');
+Route::post('/mybestoffA/{id}','OfferController@propose_my_offersAcheteurs');
 
-
+Route::post('/mybestoff/{id}','OfferController@storeBest');
 // ======= COMMANDS =========
 
 Route::post('/purshase','PurshaseController@buy');
