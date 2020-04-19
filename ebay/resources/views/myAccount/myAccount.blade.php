@@ -5,7 +5,7 @@
     <br>
     <br>
 
-    <a href="#"><button class="btn btn-lg btn-secondary">Informations Utilisateur</button></a>
+    <a href="/myAccount/myInfos"><button class="btn btn-lg btn-secondary">Informations Utilisateur</button></a>
     <div class="btn-group">
 
         @if($user->role==='buyer'||$user->role==='buyerseller')
