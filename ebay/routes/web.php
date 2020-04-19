@@ -78,6 +78,7 @@ Route::post('/mybestoffA/{id}','OfferController@propose_my_offersAcheteurs');
 
 Route::post('/mybestoff/{id}','OfferController@storeBest');
 Route::post('/myAccount/{id}','OfferController@saveOffer');
+Route::post('/mybestoff/{id}/refuse','OfferController@refuseOffer');
 
 // ======= COMMANDS =========
 
