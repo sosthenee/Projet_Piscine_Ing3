@@ -69,7 +69,8 @@ DONE page d'accueil vendeur
 DONE -> AFFICHAGE ITEM POUR VENDEUR:
       -> Modification d'un item par le vendeur (ajout de photos suppression de photos)
       Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
-      
+
+
   -> Gestion des photos du vendeur (import)
   -> Page d'un vendeur avec ses items pour client (avec photo de profil et image d'arrière plan)
 

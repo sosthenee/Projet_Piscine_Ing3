@@ -15,18 +15,16 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () { return view('welcome');});
 
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 //Route::get('/admin', 'HomeController@admin_only');
 
-Route::get('/testCron','ItemController@testCron');
-
+Route::get('/','ItemController@display_all');
 
 // ======= Purchase =======
 Route::get('/achat','ItemController@display_all');
@@ -35,34 +33,36 @@ Route::get('/achat/SellType/search','ItemController@display_sell_type_search' );
 Route::get('/achat/Category','ItemController@display_category' );
 Route::get('/achat/Category/search','ItemController@display_category_search' );
 
+// Display details of an item (only for buyer)
 Route::get('/achat/{item_id}','ItemController@display');
-
+// Make an offer for an item (only for buyer)
 Route::post('/achat/{item_id}/addBidOffer','OfferController@storeBid');
 Route::post('/achat/{item_id}/addBestOffer','OfferController@storeBestFirst');
 Route::post('/achat/{item_id}/addImmediatOffer','OfferController@storeImmediat');
 
-// ======= Selling =======
-Route::get('/vendre/add','ItemController@create');
-Route::post('/vendre/ajouter/action','ItemController@storeItem');
+// ============== Selling ===============
+Route::get('/vendre/add','ItemController@create'); //display view of creation an item
+Route::post('/vendre/ajouter/action','ItemController@storeItem'); //creation an item
 
-// ====== Affichage des items d'un vendeur pour un vendeur
-Route::get('/vendre','ItemController@displayHomeSeller');
+Route::get('/vendre','ItemController@displayHomeSeller'); //display list of items of a seller for the seller
 
 
-// ======= Offers =======
-Route::get('/panier','OfferController@index');
+// =============== Offers =================
+Route::get('/panier','OfferController@index'); //display basket
 Route::post('/panier/delete/{offer_id}','OfferController@destroy');
 Route::post('/panier/update/{offer_id}','OfferController@update');
-Route::post('/panier/delivery','OfferController@basketValidation'); //inutiles je crois
+Route::post('/panier/delivery','OfferController@basketValidation'); // !!!! inutiles je crois !!! 
 
 // ======= myAccount=======
 Route::get('/myAccount',function(Request $request){
-    
     $user = Auth::user();
-    return view('myAccount.myAccount',compact('user'));});
+    return view('myAccount.myAccount',compact('user'));
+});
 
-// ======= PAYMENTS =======
-Route::get('/user/payments','PaymentController@AllfromUser');
+
+
+// ============ PAYMENTS ==========
+Route::get('/user/payments','PaymentController@AllfromUser');//display list of payment of the conneceted user
 Route::get('/payment/update_payment/{payment_id}', 'PaymentController@updateView');
 Route::post('/payment/create','PaymentController@Create');
 Route::delete('/payment/{payment_id}','PaymentController@delete');
