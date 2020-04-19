@@ -67,8 +67,8 @@ DONE -> Envoie d'un mail
 DONE page d'accueil vendeur
 
 DONE -> AFFICHAGE ITEM POUR VENDEUR:
-      -> Modification d'un item par le vendeur (ajout de photos suppression de photos)
-      Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
+DONE -> Modification d'un item par le vendeur (ajout de photos suppression de photos)
+        Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
 
 
   -> Gestion des photos du vendeur (import)

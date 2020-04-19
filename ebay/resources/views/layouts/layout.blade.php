@@ -59,6 +59,7 @@
 
         <!-- Styles -->
         <style>
+         
             html, body {
                 background-color: #fff;
                 
@@ -107,7 +108,7 @@
                 text-transform: uppercase;
             }
             .links a:hover{
-                    border-bottom: 2px solid #e67e22;
+                    background:  rgba(0, 0, 0, 0.03);
                     transition: border-bottom 0.2s;
             }
             .m-b-md {
@@ -135,13 +136,16 @@
                         .dropdown:hover>.dropdown-menu {
             display: block;
             }
+
             
         </style>
     </head>
     <body>
         <nav class="sticky" style="z-index:5;">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light links">
+            
+                
                 <a class="navbar-brand" href="/">Mon site</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -161,18 +165,21 @@
                                 Options d'achats
                             </a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/vendre">Vendre</a>
-                        </li>
                         
                         
                     </ul>
-                    <div class=" my-2 my-lg-0 active">
-                        <a class="nav-link" href="/panier">Panier</a>
-                    </div>
+                    
                 </div>
+                
                 @if (Route::has('login'))
-                    <div class=" links">
+                    <div class="collapse navbar-collapse">
+                        <div class="nav-item active">
+                            <a class="nav-link" href="/vendre">Vendre</a>
+                        </div>
+                        
+                        <div class=" my-2 my-lg-0 active">
+                            <a class="nav-link" href="/panier">Panier</a>
+                        </div>
                         @auth
                             <div class="nav-item active dropdown">
                                 <a class="nav-link dropdown-toggle" href="/myAccount" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -181,8 +188,7 @@
                                 @php
                                     $myuserconnect= Auth::user();
                                 @endphp
-                        
-                        
+
                                 <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Mes informations</a>
                                     <div class="dropdown-divider"></div>
@@ -193,12 +199,15 @@
                                         <a class="dropdown-item" href="/mybestoffA">Mes meilleurs offres en cours</a>
                                         <div class="dropdown-divider"></div>
                                     @endif
-                                    @if($myuserconnect->role =='seller'||$myuserconnect->role =='buyerseller')
+                                    @if($myuserconnect->role =='seller'||$myuserconnect->role =='buyerseller'||$myuserconnect->role =='admin')
                                         <a class="dropdown-item" href="/mybestoffV">Mes ventes meilleurs offres</a>
                                         <div class="dropdown-divider"></div>
                                     @endif
                                     @if($myuserconnect->role =='admin')
-                                        <a class="dropdown-item" href="/">Admin option??</a>
+                                        <a class="dropdown-item" href="/VendeursAttente">Demandes vendeurs</a>
+                                        <a class="dropdown-item" href="/ItemsAttente">Demandes Items</a>
+                                        <a class="dropdown-item" href="/ListesVendeurs">Les vendeurs</a>
+                                        <a class="dropdown-item" href="/ListesItems">Les items</a>
                                         <div class="dropdown-divider"></div>
                                     @endif
                                     
@@ -218,6 +227,7 @@
                         
                     </div>
                 @endif
+            
             </nav>
         </nav>
         

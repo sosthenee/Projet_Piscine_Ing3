@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
     $admin->lastname = 'admin lastName';
     $admin->email_verified_at = '2020-04-17';
     $admin->pseudo = 'ece_admin';
-    $admin->picture = '';
+    $admin->profil_picture = '';
     $admin->contract = 1;
     $admin->save();
 
@@ -30,7 +30,7 @@ class UserTableSeeder extends Seeder
     $buyer->lastname = 'buyer lastName';
     $buyer->email_verified_at = '2020-04-19';
     $buyer->pseudo = 'ece_buyer';
-    $buyer->picture = '';
+    $buyer->profil_picture = '';
     $buyer->contract = 1;
     $buyer->save();
 
@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder
     $seller->lastname = 'seller lastName';
     $seller->email_verified_at = '2020-04-37';
     $seller->pseudo = 'ece_seller';
-    $seller->picture = '';
+    $seller->profil_picture = '';
     $seller->contract = 0;
     $seller->save();
   }
