@@ -79,8 +79,8 @@
                         <div class="card-body d-flex  flex-column">
                             <div > 
                                 <h3 style="display: inline;" class="card-title text-capitalize">{{$item->Title}}</h3>
-                                <label class="card-text"> {{$item->username}}</label>
-                                <h5 class="card-title">{{$item->Category}}</h5>
+                                <a class="linkseller" href="/achat/Seller/{{$item->user_id}}">de <label class="card-text" style="font-size: 1.2rem; color: #6610f2;"> {{$item->pseudo}}</label></a>
+                                 <h5 class="card-title">{{$item->Category}}</h5>
                                 
                                 <p class="card-text text-truncate" >{{$item->Description}}</p>
                             </div>
@@ -138,7 +138,7 @@
                         <div class="card-body d-flex  flex-column">
                             <div > 
                                 <h3 style="display: inline;" class="card-title text-capitalize">{{$item->Title}}</h3>
-                                <label class="card-text"> {{$item->username}}</label>
+                                <a class="linkseller" href="/achat/Seller/{{$item->user_id}}">de <label class="card-text" style="font-size: 1.2rem; color: #6610f2;"> {{$item->pseudo}}</label></a>
                                 <h5 class="card-title">{{$item->Category}}</h5>
                                 
                                 <p class="card-text text-truncate" >{{$item->Description}}</p>
@@ -196,8 +196,8 @@
                         <div class="card-body d-flex  flex-column">
                             <div > 
                                 <h3 style="display: inline;" class="card-title text-capitalize">{{$item->Title}}</h3>
-                                <label class="card-text"> {{$item->username}}</label>
-                                <h5 class="card-title">{{$item->Category}}</h5>
+                                <a class="linkseller" href="/achat/Seller/{{$item->user_id}}">de <label class="card-text" style="font-size: 1.2rem; color: #6610f2;"> {{$item->pseudo}}</label></a>
+                                 <h5 class="card-title">{{$item->Category}}</h5>
                                 
                                 <p class="card-text text-truncate" >{{$item->Description}}</p>
                             </div>
