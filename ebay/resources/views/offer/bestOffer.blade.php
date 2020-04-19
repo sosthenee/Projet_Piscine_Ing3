@@ -41,7 +41,7 @@
 
             @if(strpos($item->sell_type, "bestoffer")!== false)
           
-                    <form action="/mybestoff/{{$item->item_id}}/addBestOffer" method="post">
+                    <form action="/myAccount/{{$item->id}}" method="post">
                         {{ csrf_field() }}
                         <h4>Vente au meilleur prix</h4>
                          @if($item->price!==NULL)
