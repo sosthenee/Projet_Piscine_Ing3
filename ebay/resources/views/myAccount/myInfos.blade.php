@@ -1,23 +1,80 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="card border-primary mb-3" style="max-width: 18rem;" >
-        <h3 class="card-header">Mes informations</h3>
-        <div class="card-body"> 
-              
-        <p><strong>Username: </strong>{{$user->username}}</p>
-        <p><strong>firstname: </strong>{{$user->firstname}}</p>
-        <p><strong>lastname: </strong>{{$user->lastname}}</p>
-        <p><strong>role: </strong>{{$user->role}}</p>
-        <p><strong>email: </strong>{{$user->email}}</p>
+
+<h1>Mes informations</h1>
+
+@if($user->role!=='buyer')
+<img class="rounded-circle img-thumbnail" src="/storage/{{$user->profil_picture}}" style="position: absolute; top: 17vh;left: 13vw; height: 12vw; width:12vw;"alt="">
+    <img src="/storage/{{$user->background_picture}}" style="height: 20vw; width:100%;"alt="">
+@endif
+        <table>
+        <tr>
+                <td>
+                <p>Username: </p>
+                </td>
+                <td>
+                <p>{{$user->username}}</p>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                <p>firstname:</p>
+                </td>
+                <td>
+                <p>{{$user->firstname}}</p>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                <p>lastname:</p>
+                </td>
+                <td>
+                <p>{{$user->lastname}}</p>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                <p>role:</p>
+
         
-        
-           @if($user->role!=='buyer')
-        <p>pseudo:{{$user->pseudo}}</p>
-        <p>image de fond:{{$user->pseudo}}</p>
+                </td>
+                <td>
+                <p>{{$user->role}}</p>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                <p>email:</p>
+                </td>
+                <td>
+                <p>{{$user->email}}</p>
+                </td>
+        </tr>
+        @if($user->role!=='buyer')
+        <tr>
+                <td>
+                <p>pseudo:</p>
+                </td>
+                <td>
+                <p>{{$user->pseudo}}</p>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                <p>image de fond:</p>
+                </td>
+                <td>
+                <p>{{$user->pseudo}}</p>
+                </td>
+        </tr>
         @endif
 
-        <a href="/myAccount/myInfos/edit"><button class="btn btn-outline-primary">Modifier</button></a>
+        </table>
+        
+        
+        <a href="/myAccount/myInfos/edit"><button class="btn btn-lg btn-primary">Modifier</button></a>
+
     
         </div>
 </div>

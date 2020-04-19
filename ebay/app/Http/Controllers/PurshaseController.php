@@ -44,13 +44,15 @@ class PurshaseController extends Controller
 
     public function AllfromUser(Request $request){
 
-        $user = Auth::user();
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
         $offers  = DB::table('offers')
-                    
                     ->join('items','offers.item_id', '=','items.id')
                     ->join('purchases','offers.id', '=','purchases.offer_id')
-                    
                     ->join('users','items.user_id', '=','users.id')
+                    
                     ->where('offers.state','wait seller')
                     ->orWhere('offers.state','valid')
                     ->orWhere('offers.state','refuse')
@@ -61,15 +63,14 @@ class PurshaseController extends Controller
                     'users.id as seller_id', 'users.username as seller_username')
                     ->get();
 
-        
         $purshases  = DB::table('purchases')
-        ->join('delivery_addresses','purchases.delivery_adress_id', '=','delivery_addresses.id')
-        ->join('users','delivery_addresses.user_id', '=','users.id')
-        ->join('offers','purchases.offer_id', '=','offers.id')
-        ->where('users.id',$user->id)
-        ->select('purchases.id','purchases.paiement_date','purchases.delivery_date','purchases.state',
-         'delivery_addresses.firstName as firstName', 'delivery_addresses.street', 'delivery_addresses.city', 'purchases.offer_id')
-        ->get();
+                        ->join('delivery_addresses','purchases.delivery_adress_id', '=','delivery_addresses.id')
+                        ->join('users','delivery_addresses.user_id', '=','users.id')
+                        ->join('offers','purchases.offer_id', '=','offers.id')
+                        ->where('users.id',$user->id)
+                        ->select('purchases.id','purchases.paiement_date','purchases.delivery_date','purchases.state',
+                        'delivery_addresses.firstName as firstName', 'delivery_addresses.street', 'delivery_addresses.city', 'purchases.offer_id')
+                        ->get();
 
         foreach ($offers as $offer) {
             $offer->inject_medias = Media::where('item_id',$offer->item_id)->first();
@@ -86,6 +87,7 @@ class PurshaseController extends Controller
                 }
             }
         }
+
 
     //    return var_dump($purshases);
       //  return var_dump($offers);

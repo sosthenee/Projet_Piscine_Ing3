@@ -38,7 +38,8 @@ class Kernel extends ConsoleKernel
             
             
         function () {
-            while(true){
+            
+            while(true){echo "ANALYSE \n ";
                 
             $datas=DB::table('items')
                     ->join('offers', 'offers.item_id','=', 'items.id')
@@ -182,7 +183,7 @@ class Kernel extends ConsoleKernel
             //        ->where('items.sold',false)
             //        ->where('items.Sell_type','enchere')
             //        ->get(); 
-
+            
             sleep(10);   //sleep of 10 seconds between each update
         }    
         })->everyMinute()
