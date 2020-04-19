@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ItemController@display_all')->name('home');
 
 
 //Route::get('/admin', 'HomeController@admin_only');
