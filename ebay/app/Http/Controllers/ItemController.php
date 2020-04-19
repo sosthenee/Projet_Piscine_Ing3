@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Item ;
 use App\Media ;
 use App\Offer ;
+use App\User ;
+
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 use Storage;
 
 
@@ -46,12 +49,26 @@ class ItemController extends Controller
                 if(count($test)==1)
                 {
                     echo "<strong>L'article va être attribué</strong> item id :$data->item_id offer id $data->offer_id ";
+                    
+                    //Mail::to("willy.martin@edu.ece.fr")->send(new NewMail);
+                    
                     Item::find($data->item_id)->update([ 'sold' => true ]);
                     Offer::find($data->offer_id)->update(['state' => 'valid']);
+
                    //Send email
+                    $to_name = User::find($data->buyer_id)->get()->first()->lastname;
+                    $to_email = 'willy.martin@edu.ece.fr';
+                    $subject = 'Votre commande vient d etre valider';
+                    $message = 'Bonjour '.$to_name.', <br><br> Votre commande vient d\'etre valider ! Elle sera transmise à notre transporteur dés demain. Votre date de livraison estimé est le : ';
+                    $headers = 'From: ECE SRW <connected.letterbox@gmail.com>';
+                    if(mail($to_email,$subject,$message,$headers))
+                        echo "L'email a été envoyé.";
+                    else
+                        echo "L'email n'a pas été envoyé.";
+                   
                 }
                 else{
-                    echo "Probleme correspondance BDD : demande intervention d'un administrateur. ";
+                    echo "<strong>Probleme correspondance BDD : demande intervention d'un administrateur. </strong>";
                 }
             }
             if($data->offer_type=='bestoffer')
@@ -119,7 +136,17 @@ class ItemController extends Controller
                         Item::find($test[0]->item_id)->update([ 'sold' => true ]);
                             echo "l'objet :". $test[0]->item_id ."est vendu pour l'utilisateur". $test[0]->buyer_id. "avec l'offre".$test[0]->offer_id;
                             //envoie du mail 
-                    }
+                        //Send email
+                        $to_name = User::find($test[0]->buyer_id)->get()->first()->lastname;
+                        $to_email = 'willy.martin@edu.ece.fr';
+                        $subject = 'Votre commande vient d etre valider';
+                        $message = 'Bonjour '.$to_name.', <br><br> L\'enchere '.$test[0]->Title.' vient de vous etre attribuer ! Votre commande sera transmise à notre transporteur dés demain. Votre date de livraison estimé est le : ';
+                        $headers = 'From: ECE SRW <connected.letterbox@gmail.com>';
+                        if(mail($to_email,$subject,$message,$headers))
+                            echo "L'email de confirmation de commande a été envoyé.";
+                        else
+                            echo "L'email de confirmation de commande n'a pas été envoyé.";
+                        }
                 }
                     
             }

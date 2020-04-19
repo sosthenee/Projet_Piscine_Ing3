@@ -29,13 +29,12 @@
                                 <h5 class="card-title">{{$item->Category}}</h5>
                                 
                                 <p class="card-text text-truncate" >{{$item->Description}}</p>
+                                <p class="card-text">Admin state: {{$item->admin_state}}</p>
                             </div>
-                           
 
                             <div class="mt-auto p-2 d-flex justify-content-between" style="border-top: thick double;" >
                             
                                 <div style="width: 100%;">
-
                                     @if(strpos($item->sell_type, "enchere")!== false)
                                         <h5>Vente aux enchères</h5>
                                         <label> Prix actuel : {{$item->Initial_Price}}€</label>
