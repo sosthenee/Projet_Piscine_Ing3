@@ -166,16 +166,10 @@ class ItemController extends Controller
             $items=$items->where('Category','<>','Accessoire VIP');
 
         if(request('min_price')<>"")
-        {
-            $items=$items->where('Initial_Price','>',request('min_price'));
-                    }
+            $items=$items->where('Initial_Price','>',request('min_price'));  
         if(request('max_price')<>"")
-        {
             $items=$items->where('Initial_Price','<',request('max_price'));
-            
-        } 
-                            
-
+        
 
 
         $items_museum=$items->where('Category','Bon pour le Musée');
@@ -183,9 +177,6 @@ class ItemController extends Controller
         $items_jewel = $items->where('Category','Ferraille ou Trésor');
                         
         $items_vip = $items->where('Category','Accessoire VIP');
-
-        
-        
 
         return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
     }
@@ -222,6 +213,58 @@ class ItemController extends Controller
 
         return view('item.sellerHome',compact('items'));
 
+    }
+    //get
+    public function updateView(Request $request, $item_id){
+        $item_infos = Item::where('id',$item_id)->first();
+        $user = Auth::user();
+
+        $items  = DB::table('items')
+        ->join('media','items.id', '=','media.item_id')
+        ->where('media.type','picture')
+        ->where('items.user_id',$user->id)
+        ->where('items.id',$item_id)
+        ->orderBy('items.id', 'desc')               
+        ->get();
+        return view('item.changeSellerHome',compact('item_infos','items'));
+    }
+    //post
+    public function update(Request $request, $item_id ){
+      
+        $user_id = Auth::id();
+        $items = Item::where('id',$item_id)->first();
+        $items->Title = request('title');
+        $items->Description = request('description');
+        $items->save();
+        
+        foreach($items->media()->get() as $media)
+        {
+            if ( null != request("d".$media->id)){
+                $media->delete();
+            }
+
+        }
+        $files=$request->file('files');
+        if(!empty($files)){
+            $i=0;
+            foreach($files as $file){
+                $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
+                if(strpos(".ogm .wmv .mpg .webm .ogv .asx .mpeg .mp4 .mkv .avi", $file->getClientOriginalExtension())!== false)
+                    $insert['type']="video";
+                else
+                    $insert['type']="picture";
+                $insert['reference'] = $path;
+                $insert['item_id']=$item_id;
+                $check = Media::insertGetId($insert);
+                Storage::put("public/".$path,file_get_contents($file));
+                $i++;
+            }
+            echo "$i images ajoutées";
+        }
+        else
+            echo "pas d'images";
+  
+        return redirect()->action('ItemController@displayHomeSeller');
     }
 
     public function create(){

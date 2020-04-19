@@ -27,9 +27,9 @@
   <p>Price : <strong>{{$offer->price}}€</strong></p>
   <p>Delivery adress : <strong>{{$offer->inject_street}}<br>{{$offer->inject_city}}</strong></p>
   <p>Name <strong>{{$offer->inject_firstName}}</strong></p>
-  <p>Delivery Date <strong>{{$offer->inject_date_dely}}</strong></p>
+  <p>Delivery Date <strong>will be sent in your bill</strong></p>
   <p>Pay date <strong>{{$offer->inject_date}}</strong></p>
-  
+  <p>Type <strong>{{$offer->offer_type}}</strong></p>
 </div>
   <img class="img-thumbnail" style="height: 100px; margin: 20px;" src="/storage/{{$offer->inject_medias->reference}}"/> 
 </div>
