@@ -29,7 +29,7 @@ class PurshaseController extends Controller
 
         foreach($buys as $buy){
             $purshase = new Purchase();
-            $purshase->paiement_date = $now ;
+            $purshase->paiement_date = date("Y-m-d").'T'.(date("H")+2).':'.date('i'); ;
             $purshase->delivery_date = $now->add($interval);;
             $purshase->state = '';
             $purshase->delivery_adress_id = request('choosenadress') ;
@@ -82,7 +82,7 @@ class PurshaseController extends Controller
                     $offer->inject_city = $purshase->city;
                     $offer->inject_date_dely = $purshase->delivery_date;
                     $offer->inject_date = $purshase->paiement_date;
-
+                    
                 }
             }
         }

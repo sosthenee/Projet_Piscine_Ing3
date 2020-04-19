@@ -99,11 +99,12 @@
                                
                             </div>
                         </div>
+                        
                         <div id="sellercontent" style="display: none;">
                           <hr>
                           <h4> Veuillez completer les champs ci dessous:</h4>
                           <table>
-                             <div class="form-group row">
+                            <div class="form-group row">
                             <label for="pseudo" class="col-md-4 col-form-label text-md-right">{{ __('Pseudo') }}</label>
 
                             <div class="col-md-6">
@@ -115,7 +116,9 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                            </div>
+                        
+
                             <tr>
                               <td><label >Ajouter une photo de fond: </label></td>
                               <td>
@@ -126,6 +129,24 @@
                               </td>
                             </tr>
                           </table>
+                        </div>
+                        <div id="buyercontent" style="display: none;">
+                            <hr>
+                            <h3> Veuillez signer le contrat des règles d'achat:</h3><br>
+                            <table>
+                               <div class="form-group row">
+                              <label for="contrat" class="col-md-4 col-form-label text-md-right">{{ __('Contrat :') }}</label>
+                                   
+                              <div class="col-md-6">
+                                  <input id="contrat" type="checkbox" class="form-control @error('Contrat') is-invalid @enderror" name="contrat" required  autofocus>
+                                
+                                  @error('contrat') 
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                              </div>
+                          </div>
                         </div>
                         <hr>
                         <div class="form-group row mb-0">

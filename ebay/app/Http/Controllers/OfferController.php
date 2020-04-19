@@ -47,7 +47,9 @@ class OfferController extends Controller
 
         $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
         $payment_infos = Payment_info::where('user_id',$user->id)->get();
-
+        foreach($payment_infos as $payment_info){
+            $payment_info->cardNumber =  "***********" . substr($payment_info->cardNumber,-4);
+        }
         return view('basket.offers',compact('offers','payment_infos','delivery_addresses','data'));
     }
 
