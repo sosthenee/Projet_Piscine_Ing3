@@ -76,12 +76,12 @@ Route::get('/myAccount/myInfos/edit',function(Request $request){
 Route::post('/myInfos/modification',function(Request $request){
     $user = Auth::user();
     $user->update(['username' => request('user_username')]);
-    $user->update(['firstname' => request('user_firstname']));
-    $user->update(['lastname' => request('user_lastname']));
-    $user->update(['email' => request('user_email']));
+    $user->update(['firstname' => request('user_firstname')]);
+    $user->update(['lastname' => request('user_lastname')]);
+    $user->update(['email' => request('user_email')]);
     if($user->role!='buyer')
     {
-        $user->update(['pseudo' => request('user_pseudo']));
+        $user->update(['pseudo' => request('user_pseudo')]);
     }
 
     return view('myAccount.myAccount',compact('user'));
