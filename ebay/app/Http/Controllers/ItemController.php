@@ -166,16 +166,10 @@ class ItemController extends Controller
             $items=$items->where('Category','<>','Accessoire VIP');
 
         if(request('min_price')<>"")
-        {
-            $items=$items->where('Initial_Price','>',request('min_price'));
-                    }
+            $items=$items->where('Initial_Price','>',request('min_price'));  
         if(request('max_price')<>"")
-        {
             $items=$items->where('Initial_Price','<',request('max_price'));
-            
-        } 
-                            
-
+        
 
 
         $items_museum=$items->where('Category','Bon pour le Musée');
@@ -183,9 +177,6 @@ class ItemController extends Controller
         $items_jewel = $items->where('Category','Ferraille ou Trésor');
                         
         $items_vip = $items->where('Category','Accessoire VIP');
-
-        
-        
 
         return view('item.items_category',compact('items_museum','items_jewel','items_vip'));
     }
@@ -223,7 +214,7 @@ class ItemController extends Controller
         return view('item.sellerHome',compact('items'));
 
     }
-
+    //get
     public function updateView(Request $request, $item_id){
         $item_infos = Item::where('id',$item_id)->first();
         $user = Auth::user();
@@ -237,7 +228,7 @@ class ItemController extends Controller
         ->get();
         return view('item.changeSellerHome',compact('item_infos','items'));
     }
-
+    //post
     public function update(Request $request, $item_id ){
       
         $user_id = Auth::id();
@@ -253,9 +244,26 @@ class ItemController extends Controller
             }
 
         }
-      
-        //$items = Item::where('user_id',$user_id)->get();
-        //return view('item.sellerHome',compact('items'));
+        $files=$request->file('files');
+        if(!empty($files)){
+            $i=0;
+            foreach($files as $file){
+                $path=date('YmdHis') . $i."." . $file->getClientOriginalExtension();
+                if(strpos(".ogm .wmv .mpg .webm .ogv .asx .mpeg .mp4 .mkv .avi", $file->getClientOriginalExtension())!== false)
+                    $insert['type']="video";
+                else
+                    $insert['type']="picture";
+                $insert['reference'] = $path;
+                $insert['item_id']=$item_id;
+                $check = Media::insertGetId($insert);
+                Storage::put("public/".$path,file_get_contents($file));
+                $i++;
+            }
+            echo "$i images ajoutées";
+        }
+        else
+            echo "pas d'images";
+  
         return redirect()->action('ItemController@displayHomeSeller');
     }
 
