@@ -56,7 +56,7 @@ class UserTableSeeder extends Seeder
     $both->lastname = 'buyerseller lastName';
     $both->email_verified_at = '2020-04-37';
     $both->pseudo = 'ece_seller';
-    $both->picture = '';
+    $both->profil_picture = '';
     $both->contract = 1;
     $both->save();
   }
