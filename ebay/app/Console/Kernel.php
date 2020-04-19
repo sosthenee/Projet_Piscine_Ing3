@@ -140,9 +140,8 @@ class Kernel extends ConsoleKernel
                         $i=-1;
                                             
                     }else
-                    {
                         echo "une seule offre proposée pour cet item, le prix initial reste inchangé";
-                    }
+                    
                     $today=date("Y-m-d").'T'.(date("H")+2).':'.date('i');
                     if($test[0]->end_date<$today){ //si la date de l'enchère est terminé on atribut un gagnant
                         
