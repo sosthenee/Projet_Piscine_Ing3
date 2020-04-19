@@ -249,10 +249,18 @@ class ItemController extends Controller
         foreach($items->media()->get() as $media)
         {
             if ( null != request("d".$media->id)){
+                
+            if($items->media()->get()->count()== 1){
+                $media->reference = "unnamed.png";
+                $media->save();
+            } else {
                 $media->delete();
             }
+            }
+            
 
         }
+        
       
         //$items = Item::where('user_id',$user_id)->get();
         //return view('item.sellerHome',compact('items'));

@@ -15,7 +15,7 @@
             <input type="checkbox" name={{"d".$items[$i]->id}}> 
         </div>
             @endfor
-    
+     
 <br>
 <br>
     <input class="form-control" type="text" value={{ $item_infos->Title}} name="title" required><br>
