@@ -292,15 +292,14 @@ class OfferController extends Controller
       $offers  = DB::table('offers')
                     ->where('offers.id',$id)
                     ->get();
-          $nboffers=DB::table('offers')
-                ->where('offers.item_id', $offers->item_id)
-                ->where('offers.user_id', $offers->user_id)
+          $nboffrs=DB::table('offers')
+                ->where('offers.item_id', $offers[0]->item_id)
+                ->where('offers.user_id', $offers[0]->user_id)
                ->get();
          
-         $nombreoffers=count($nboffers);
+         $nboffers=count($nboffrs);
          
-         
-         return view('offer.bestOffer',compact('items','nombreoffers'));
+         return view('offer.bestOffer',compact('items','nboffers'));
 }
     
     public function get_my_best_offersVendeurs(Request $request)
@@ -317,11 +316,10 @@ class OfferController extends Controller
                     ->where('items.user_id',$user->id)
                     ->select('items.title','items.Description','items.Category',
                              'items.id',
-                            'media.type as media_type','media.reference as media_reference',
+                            'media.type as media_type','media.reference as media_reference','offers.id',
                             'offers.price')
                ->get();
 
-        
          return view('offer.myBestOffers',compact('items','user'));
 }
     public function propose_my_offersVendeurs(Request $request, $id)
@@ -341,7 +339,8 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                     'offers.id','offers.price','offers.item_id','offers.user_id')
                ->get();
-    
-         return view('offer.bestOffer',compact('items'));
+            $nboffers=1;
+
+         return view('offer.bestOffer',compact('items','nboffers'));
 }
 }
