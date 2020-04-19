@@ -260,10 +260,18 @@ class ItemController extends Controller
         foreach($items->media()->get() as $media)
         {
             if ( null != request("d".$media->id)){
+                
+            if($items->media()->get()->count()== 1){
+                $media->reference = "unnamed.png";
+                $media->save();
+            } else {
                 $media->delete();
             }
+            }
+            
 
         }
+
         $files=$request->file('files');
         if(!empty($files)){
             $i=0;
@@ -283,7 +291,7 @@ class ItemController extends Controller
         }
         else
             echo "pas d'images";
-  
+
         return redirect()->action('ItemController@displayHomeSeller');
     }
 
