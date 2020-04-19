@@ -2,6 +2,7 @@
 
 A signifie "à verifier"
 ! signifie "non fait/reste à faire"
+G signifie give up
 
 Création d'un item avec photos et/ou vidéo
     -> blindage des champs title, description catégory et type de vente
@@ -10,7 +11,7 @@ Création d'un item avec photos et/ou vidéo
     -> blindage à 80 % sur le type de vente (il faut selectionner au moins une fois une checkbox pour enlever le blindage)
     -> blindage dans le controller le type de vente
     => BLINDAGE COMPLET
-  A -> la création d'un item  prend  en compte l'id du user
+  A -> la création d'un item  prend en compte l'id du user
     -> state = waiting
   ! -> la page n'est pas sécurisé (accès public)  function display
 
@@ -36,43 +37,47 @@ Affichage du Panier
     -> Button delete OK
   ! -> Button Modif NO
   A -> Prend en compte l'ID Utilisateur
-  ! -> refaire tous les tests blindage au moment de la validation du récapitulatif
+  G -> refaire tous les tests blindage au moment de la validation du récapitulatif
   ! -> la page n'est pas sécurisé (accès public)  function index
 
 Achat/SellType & Category
     Recherche OK
-  ! -> pour category lorsque on regarde un prix on ne regarde plus les achats immédiats 
+  G -> pour category lorsque on regarde un prix on ne regarde plus les achats immédiats 
 
+________________________________________________________
+________________________________________________________
 
 Reste à faire:
-  * Gestions des dates avec BDD
-    -> ne pas afficher les items si la date de début n'a pas commencé 
-    (pour la date de fin auto grâce au cron except si aucune offre n'a été faite)
-
-
-FAIT -> valider l'achat d'une enchère 
-
-  -> afficher le sous total d'un panier
-  -> modification d'un item par le vendeur (ajout de photos suppression de photos)
-
-  -> envoie d'un mail
   
-  -> gestion des photos du vendeur (import)
-  -> affichages des items d'un vendeur (avec photo de profil et image d'arrière plan)
+    
+
+
+FAIT -> valider l'achat d'une enchère
+
+FAIT -> afficher le sous total d'un panier
+
+  -> ne pas afficher les items si la date de début n'a pas commencé 
+      (pour la date de fin auto grâce au cron except si aucune offre n'a été faite)
+
+ ! -> Attention une enchère qui à 0 offre n'est pas actualisé, si personne ne l'achète avant la date limite elle reste présente.
+
+FAIT -> Envoie d'un mail
+
 
 FAIT page d'accueil vendeur
 
-  page d'un vendeur avec ses items pour client
-
+FAIT -> AFFICHAGE ITEM POUR VENDEUR:
+      -> Modification d'un item par le vendeur (ajout de photos suppression de photos)
+      Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
+      
+  -> Gestion des photos du vendeur (import)
+  -> Page d'un vendeur avec ses items pour client (avec photo de profil et image d'arrière plan)
 
 
   à vérifier
-    -> le process d'achat (items -> panier -> purchase -> mesCommandes -> valider ou refuser)
-OK  -> test Cron  
+    -> Le process d'achat (items -> panier -> purchase -> mesCommandes -> valider ou refuser)
+OK  -> Test Cron  
     -> le process de best offer
 
 option:
    faire un ajout au panier plus dynamique 
-
-   côté vendeur : Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
-                  Gerer l'enchère non vendu
