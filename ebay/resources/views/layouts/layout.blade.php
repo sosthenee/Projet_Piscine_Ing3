@@ -61,6 +61,7 @@
         </script>
 
         <script src="/js/myJS_sellerInfo.js" ></script>
+        <script src="/js/myJS_BuyerInfo.js" ></script>
         <!-- Styles -->
         <style>
             html, body {

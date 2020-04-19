@@ -330,7 +330,16 @@ class ItemController extends Controller
 
     public function updateView(Request $request, $item_id){
         $item_infos = Item::where('id',$item_id)->first();
-        return view('item.changeSellerHome',compact('item_infos'));
+        $user = Auth::user();
+
+        $items  = DB::table('items')
+        ->join('media','items.id', '=','media.item_id')
+        ->where('media.type','picture')
+        ->where('items.user_id',$user->id)
+        ->where('items.id',$item_id)
+        ->orderBy('items.id', 'desc')               
+        ->get();
+        return view('item.changeSellerHome',compact('item_infos','items'));
     }
 
     public function update(Request $request, $item_id ){
@@ -340,7 +349,15 @@ class ItemController extends Controller
         $items->Title = request('title');
         $items->Description = request('description');
         $items->save();
+        
+        foreach($items->media()->get() as $media)
+        {
+            if ( null != request("d".$media->id)){
+                $media->delete();
+            }
 
+        }
+      
         //$items = Item::where('user_id',$user_id)->get();
         //return view('item.sellerHome',compact('items'));
         return redirect()->action('ItemController@displayHomeSeller');
