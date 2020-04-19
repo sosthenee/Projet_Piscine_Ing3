@@ -94,7 +94,7 @@ class OfferController extends Controller
         ]);
         $request->user()->authorizeRoles(['buyer','seller','buyerseller','admin']);
         $user = Auth::user();
-        if($user->role==='buyer')
+        if($user->role==='buyer' || $user->role==='buyerseller')
         {
             $user = Auth::user();
             $offer = new Offer();
@@ -116,9 +116,11 @@ class OfferController extends Controller
         ]);
         $request->user()->authorizeRoles(['buyer','seller','buyerseller','admin']);
         $user = Auth::user();
-        if($user->role==='buyer')
+        $u=request('utilisat');
+        if($user->role==='buyer' || $user->role==='buyerseller')
         {
-                        $i=request('iddepreoffre');
+            if($u==='1')
+            {$i=request('iddepreoffre');
             Offer::find($i)->update(['state' => 'refuse']);
             $user = Auth::user();
             $offer = new Offer();
@@ -130,8 +132,10 @@ class OfferController extends Controller
             $offer->save();
         
         return redirect('/achat')->with('success','L\'offre a été envoyée !');
-        }
-        if($user->role==='seller' || $user->role==='admin'){
+        }}
+        if($user->role==='seller' || $user->role==='admin'  || $user->role==='buyerseller'){
+            if($u==='2')
+            {
             $i=request('iddepreoffre');
             Offer::find($i)->update(['state' => 'refuse']);
             $user = Auth::user();
@@ -146,8 +150,7 @@ class OfferController extends Controller
         
         
         return redirect('/achat')->with('success','L\'offre a été envoyée !');
-        }
-
+        }}
     }
     public function saveOffer(Request $request, $id)
     {
@@ -269,14 +272,15 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                             'offers.price','offers.id')
                ->get();
-   
-           
-         return view('offer.myBestOffers',compact('items','user'));
+        
+        $utilisateur=1;
+        
+         return view('offer.myBestOffers',compact('items','user','utilisateur'));
 }
     
      public function propose_my_offersAcheteurs(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['buyer','buyerseller','']);
+        $request->user()->authorizeRoles(['buyer','buyerseller']);
         $user = Auth::user();
               $items  = DB::table('items')
                     ->join('offers','items.id', '=','offers.item_id')
@@ -300,8 +304,8 @@ class OfferController extends Controller
                ->get();
          
          $nboffers=count($nboffrs);
-         
-         return view('offer.bestOffer',compact('items','nboffers'));
+         $utilisa=request('utilisateu');
+         return view('offer.bestOffer',compact('items','nboffers','utilisa'));
 }
     
     public function get_my_best_offersVendeurs(Request $request)
@@ -321,8 +325,8 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference','offers.id',
                             'offers.price')
                ->get();
-
-         return view('offer.myBestOffers',compact('items','user'));
+            $utilisateur=2;
+         return view('offer.myBestOffers',compact('items','user','utilisateur'));
 }
     public function propose_my_offersVendeurs(Request $request, $id)
     {
@@ -342,7 +346,8 @@ class OfferController extends Controller
                     'offers.id','offers.price','offers.item_id','offers.user_id')
                ->get();
             $nboffers=1;
-
-         return view('offer.bestOffer',compact('items','nboffers'));
+            $utilisa=request('utilisateu');
+        
+         return view('offer.bestOffer',compact('items','nboffers','utilisa'));
 }
 }

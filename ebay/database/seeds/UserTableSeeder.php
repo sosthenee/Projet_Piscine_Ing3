@@ -43,7 +43,9 @@ class UserTableSeeder extends Seeder
     $seller->lastname = 'seller lastName';
     $seller->email_verified_at = '2020-04-37';
     $seller->pseudo = 'ece_seller';
-    $seller->profil_picture = '';
+    $seller->profil_picture = 'unnamed.png';
+    $seller->background_picture = 'unnamed.png';
+
     $seller->contract = 0;
     $seller->save();
       
@@ -56,7 +58,8 @@ class UserTableSeeder extends Seeder
     $both->lastname = 'buyerseller lastName';
     $both->email_verified_at = '2020-04-37';
     $both->pseudo = 'ece_seller';
-    $both->picture = '';
+    $both->profil_picture = 'unamed.png';
+       $both->background_picture = 'unamed.png';
     $both->contract = 1;
     $both->save();
   }
