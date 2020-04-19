@@ -162,7 +162,7 @@
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="/achat/SellType">
-                                Options d'achats
+                                Les types d'achats
                             </a>
                         </li>
                         
@@ -173,14 +173,15 @@
                 
                 @if (Route::has('login'))
                     <div class="collapse navbar-collapse">
-                        <div class="nav-item active">
-                            <a class="nav-link" href="/vendre">Vendre</a>
-                        </div>
                         
-                        <div class=" my-2 my-lg-0 active">
-                            <a class="nav-link" href="/panier">Panier</a>
-                        </div>
                         @auth
+                            <div class="nav-item active">
+                                <a class="nav-link" href="/vendre">Vendre</a>
+                            </div>
+                            
+                            <div class=" my-2 my-lg-0 active">
+                                <a class="nav-link" href="/panier">Panier</a>
+                            </div>
                             <div class="nav-item active dropdown">
                                 <a class="nav-link dropdown-toggle" href="/myAccount" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Votre compte
@@ -218,10 +219,10 @@
                             </div>
                             <!--a href="{{ url('/home') }}">Home</a-->
                         @else
-                            <a href="{{ route('login') }}">Login </a>
+                            <a class="nav-link"href="{{ route('login') }}">Login </a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}">Register</a>
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
                             @endif
                         @endauth
                         

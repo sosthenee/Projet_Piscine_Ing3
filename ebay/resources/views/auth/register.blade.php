@@ -108,7 +108,7 @@
                                     <label for="pseudo" class="col-md-4 col-form-label text-md-right">{{ __('Pseudo') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="pseudo" type="text" class="form-control @error('pseudo') is-invalid @enderror" name="pseudo" value="{{ old('pseudo') }}" required autocomplete="pseudo" autofocus>
+                                        <input id="pseudo" type="text" class="form-control @error('pseudo') is-invalid @enderror" name="pseudo" value="{{ old('pseudo') }}" autocomplete="pseudo" autofocus>
 
                                         @error('pseudo') 
                                             <span class="invalid-feedback" role="alert">
@@ -118,11 +118,11 @@
                                     </div>
                                 </div>
                             
-                                <tr>
+                                <!--<tr>
                                     <td><label >Ajouter une photo de profil : </label></td>
                                     <td>
                                         @csrf
-                                        <input id="file-upload_profil" type="file" name="file_profil" accept="image/*" > <!--onchange="readURL(this);"-->
+                                        <input id="file-upload_profil" type="file" name="file_profil" accept="image/*" > 
                                         <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
                                         <span id="erreurs"></span>
                                     </td>
@@ -131,11 +131,11 @@
                                     <td><label >Ajouter une photo de fond : </label></td>
                                     <td>
                                         @csrf
-                                        <input id="file-upload_background" type="file" name="file_backgroud" accept="image/*" > <!--onchange="readURL(this);"-->
+                                        <input id="file-upload_background" type="file" name="file_backgroud" accept="image/*" > 
                                         <span class="text-danger">{{ $errors->first('fileUpload') }}</span>
                                         <span id="erreurs"></span>
                                     </td>
-                                </tr>
+                                </tr>-->
                             </table>
                         </div>
                         <div id="buyercontent" style="display: none;">
@@ -146,7 +146,7 @@
                               <label for="contrat" class="col-md-4 col-form-label text-md-right">{{ __('Contrat :') }}</label>
                                    
                               <div class="col-md-6">
-                                  <input id="contrat" type="checkbox" class="form-control @error('Contrat') is-invalid @enderror" name="contrat" required  autofocus>
+                                  <input id="contrat" type="checkbox" class="form-control @error('Contrat') is-invalid @enderror" name="contrat"   autofocus>
                                 
                                   @error('contrat') 
                                       <span class="invalid-feedback" role="alert">
