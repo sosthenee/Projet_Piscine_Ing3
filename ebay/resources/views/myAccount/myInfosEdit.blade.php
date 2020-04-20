@@ -2,7 +2,7 @@
 
 @section('content')
     
-        <h1>Mes informations</h1>
+    <h1>Mes informations</h1>
 
     <form action="/myInfos/modification" method="post"class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -12,15 +12,15 @@
                 <td><input type="text"  name="user_username" value="{{$user->username}}"></td>
             </tr> 
             <tr> 
-                <td><label >Firstname :</label></td>
+                <td><label >Prénom :</label></td>
                 <td><input type="text"  name="user_firstname" value="{{$user->firstname}}"></td>
             </tr> 
             <tr> 
-                <td><label >Lastname :</label></td>
+                <td><label >NOM :</label></td>
                 <td><input type="text"  name="user_lastname" value="{{$user->lastname}}"></td>
             </tr> 
             <tr> 
-                <td><label >email :</label></td>
+                <td><label >Email :</label></td>
                 <td><input type="email" name="user_email" value="{{$user->email}}"></td>
             </tr> 
             @if($user->role!=='buyer')

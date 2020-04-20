@@ -60,7 +60,6 @@ Route::get('/vendre/update_vendre/{item_id}', 'ItemController@updateView');
 Route::get('/panier','OfferController@index'); //display basket
 Route::post('/panier/delete/{offer_id}','OfferController@destroy');
 Route::post('/panier/update/{offer_id}','OfferController@update');
-Route::post('/panier/delivery','OfferController@basketValidation'); // !!!! inutiles je crois !!! 
 
 // ======= myAccount=======
 Route::get('/myAccount','UserController@my_account');

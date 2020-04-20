@@ -3,7 +3,7 @@
  
 
 @section('content')
-    <h1>All Information About Item</h1>
+    <h1>Tous les items - par type de vente</h1>
     <hr>
     
     <form action="/achat/SellType/search" method="get">
@@ -106,7 +106,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
             @endforeach
         </div>
     @else
-        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie pour l'instant.
+        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie avec vos critères de recherche.
             <br> Nous vous invitons à revenir plus tard. </p>
     @endif
 
@@ -163,7 +163,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
             @endforeach
         </div>
     @else
-        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie pour l'instant.
+        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie avec vos critères de recherche.
             <br> Nous vous invitons à revenir plus tard. </p>
     @endif
     <hr>
@@ -219,7 +219,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
             @endforeach
         </div>
     @else
-        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie pour l'instant.
+        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie avec vos critères de recherche.
             <br> Nous vous invitons à revenir plus tard. </p>
     @endif
 @endsection

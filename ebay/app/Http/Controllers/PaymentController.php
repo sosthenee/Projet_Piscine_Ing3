@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class PaymentController extends Controller
 {
 
-
     public function AllfromUser(Request $request){
         if(Auth::guest())
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
@@ -18,10 +17,12 @@ class PaymentController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
             }else{
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-     
-        $payement_infos = Payment_info::where('user_id',$user->id)->get();
-        return view('payment_info.payment_info',compact('payement_infos'));}}
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+            
+                $payement_infos = Payment_info::where('user_id',$user->id)->get();
+                return view('payment_info.payment_info',compact('payement_infos'));
+            }
+        }
     }
 
     public function updateView(Request $request, $payment_id){
@@ -33,9 +34,11 @@ class PaymentController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
             }else{
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-        $payment_info = Payment_info::where('id',$payment_id)->first();
-        return view('payment_info.change_payment',compact('payment_info'));}}
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+                $payment_info = Payment_info::where('id',$payment_id)->first();
+                return view('payment_info.change_payment',compact('payment_info'));
+            }
+        }
     }
     
     public function Create(Request $request) {

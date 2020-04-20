@@ -16,24 +16,26 @@ class UserController extends Controller
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
         else{
             $user = Auth::user();
-            
-        return view('myAccount.myAccount',compact('user'));}
+            return view('myAccount.myAccount',compact('user'));
+        }
     }
 
     function index(Request $request){
         if(Auth::guest())
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
         else{
-        $user = Auth::user();
-        return view('myAccount.myInfos',compact('user'));}
+            $user = Auth::user();
+            return view('myAccount.myInfos',compact('user'));
+        }
     }
 
     function edit_myinfos(Request $request){
         if(Auth::guest())
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
         else{
-        $user = Auth::user();
-        return view('myAccount.myInfosEdit',compact('user'));}
+            $user = Auth::user();
+            return view('myAccount.myInfosEdit',compact('user'));
+        }
     }
 
     function modif_myinfos (Request $request){
@@ -64,7 +66,6 @@ class UserController extends Controller
         }
         else
             echo "pas d'images";
-    
         return view('myAccount.myAccount',compact('user'));
     }
 }
