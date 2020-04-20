@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
 <div class="container">
@@ -94,15 +94,50 @@
                             
                             <div style="padding-top: 8px; margin-left: 16px;" >
                                 
-                                <input id="buyer"  value="rolebuyer" name="rolebuyer" type="checkbox" > Buyer
+                                <input id="buyer"  value="rolebuyer" name="rolebuyer" type="checkbox"  > Buyer
                                 <input id="Seller"  value="roleseller" name="roleseller" type="checkbox" > Seller
                                
                             </div>
                         </div>
+                        
+                        <div id="sellercontent" style="display: none;">
+                          <hr>
+                          <h4> Veuillez completer les champs ci dessous:</h4>
+                            <table>
+                                <div class="form-group row">
+                                    <label for="pseudo" class="col-md-4 col-form-label text-md-right">{{ __('Pseudo') }}</label>
 
+                                    <div class="col-md-6">
+                                        <input id="pseudo" type="text" class="form-control @error('pseudo') is-invalid @enderror" name="pseudo" value="{{ old('pseudo') }}" autocomplete="pseudo" autofocus>
+
+                                        @error('pseudo') 
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            
+                                
+                            </table>
+                        </div>
+                        <div id="buyercontent" style="display: none;">
+                            <hr>
+                            <h3> Veuillez signer <a href="/Contrat" style="color: blue;">le contrat</a>  des règles d'achat:</h3><br>
+                            
+                            <div class="form-group row">
+                              <label for="contrat" class="col-md-4 col-form-label text-md-right">{{ __('Contrat :') }}</label>
+                                   
+                              <div class="col-md-6">
+                                  <input id="contrat" type="checkbox" class="form-control " name="contrat"    >
+                                
+                              </div>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="button_register" type="submit" class="btn btn-primary" disabled>
                                     {{ __('Register') }}
                                 </button>
                             </div>

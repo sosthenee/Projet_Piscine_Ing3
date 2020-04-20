@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -57,6 +58,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'rolebuyer' => ['required_without_all: rolebuyer,roleseller'],
             'roleseller' => ['required_without_all: roleseller,rolebuyer'],
+            
         ]);
     }
 
@@ -66,7 +68,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create( array $data)
     {
         $roletmp = "";
 
@@ -79,14 +81,29 @@ class RegisterController extends Controller
         if (isset($data['roleseller']) && isset($data['rolebuyer'])){
             $roletmp = 'askseller';
         }
-
+/*
+        $file=$request->file('file_profil');
+        echo $file;
+        $path="unnamed.png";
+        if(!empty($file)){
+            $path=date('YmdHis') ."." .$file->getClientOriginalExtension();
+            Storage::put("public/profil/".$path,file_get_contents($file));
+            echo " images ajoutées";
+        }
+        else
+            echo "pas d'images";
+           
+            */
         return User::create([
             'username' => $data['username'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role'=>$roletmp
+            'background_picture' => 'unnamed.png',
+            'profil_picture' => 'unnamed.png',
+            'role'=>$roletmp,
+            'pseudo' => $data['pseudo']
         ]);
 
         return $user;

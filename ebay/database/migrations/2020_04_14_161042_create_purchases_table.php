@@ -25,7 +25,7 @@ class CreatePurchasesTable extends Migration
             $table->date('paiement_date')->nullable();
             $table->date('delivery_date')->nullable();
             
-            $table->integer('transaction')->nullable();
+            $table->string('state')->nullable();
         }); 
     }
 

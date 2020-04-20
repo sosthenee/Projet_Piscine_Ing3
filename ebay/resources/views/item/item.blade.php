@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>All Information About Item</h1>
+    <h1>Toutes les informations de cet item</h1>
     @if(count($items)>0)
         
         @php
@@ -16,22 +16,52 @@
                 <p>{{$item->Description}}</p>
             </div>
             <div class="right" style=" margin: 20px;">
-                <div class="carrousel" >
-                    @foreach($items as $image)
-                        @if($image->type=="picture")
-                            <img  style="width: 30vw; height: 18vw; border: 1px grey solid; display: none;" src="/storage/{{$image->reference}}" alt="{{$image->Title}}" > 
-                        @endif
-                    @endforeach
+
+                <div id="carouselControls" class="carousel slide" data-ride="carousel" style="border: 1px solid;">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
+                        @for($i=1; $i < count($items); $i++)
+                            <li data-target="#carouselControls" data-slide-to=$i></li>
+                        @endfor
+                    </ol>
+                    <div class="carousel-inner ">
+                        <div class= "carousel-item active" >
+                            @if($items[0]->type=="picture")
+                                <img  class="d-inline-block " style="width: 30vw; height: 18vw; " src="/storage/{{$items[0]->reference}}" alt="{{$items[0]->Title}}" > 
+                            @endif
+                            @if($items[0]->type=="video")
+                                <video controls  style="width: 30vw; height: 18vw; " >
+                                    <source src="/storage/{{$items[0]->reference}}">
+                                    </source>
+                                    votre navigateur ne prend pas en charge ce type de vidéo
+                                </video>
+                            @endif
+                        </div>
+                        @for($i=1; $i < count($items); $i++)
+                            <div class= "carousel-item">
+                                @if($items[$i]->type=="picture")
+                                    <img  class="d-inline-block " style="width: 30vw; height: 18vw; "  src="/storage/{{$items[$i]->reference}}" alt="{{$items[$i]->Title}}" > 
+                                @endif
+                                @if($items[$i]->type=="video")
+                                    <video controls style="width: 30vw; height: 18vw; "  >
+                                        <source src="/storage/{{$items[$i]->reference}}">
+                                        </source>
+                                        votre navigateur ne prend pas en charge ce type de vidéo
+                                    </video>
+                                @endif
+                            </div>
+                        @endfor
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div> 
-                @foreach($items as $image)
-                     @if($image->type=="video")
-                        <video controls style="width: 30vw; height: 18vw; border: 1px grey solid;"  >
-                            <source src="/storage/{{$image->reference}}">
-                            </source>
-                            votre navigateur ne prend pas en charge ce type de vidéo
-                        </video>
-                    @endif
-                @endforeach
+               
             </div>
         </div>
 
@@ -42,12 +72,18 @@
                     {{ csrf_field() }}
                     <h4>Vente aux enchères</h4>
                     <p>Prix actuel : <strong>{{$item->Initial_Price}}€</strong>
-                    <br>Date Début : {{$item->start_date}}
-                    <br>Fin Début : {{$item->end_date}}
+                    <br>Date Début : {{substr($item->start_date,0,10)}}
+                    <br>Fin Début : {{substr($item->end_date,0,10)}}
+                    <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
+                    <br>
+                    <span class="countdown" style="font-weight: bold;"></span>
                     </p>
                     <h5>Enchère automatique :</h5>
-                    Saissisez le montant maximum que vous etes prêt à dépenser: <input type="number" min="{{$item->Initial_Price}}" name="price" id="" placeholder="00€00">
-                    <input type="submit" class="btn btn-primary" value="Encherire"></input>
+                    @php
+                        $minimum_price=$item->Initial_Price+1;
+                    @endphp
+                    Saississez le montant maximum que vous êtes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
+                    <input type="submit" class="btn btn-primary" value="Encherir">
                 </form>
             @endif
 
@@ -56,7 +92,8 @@
                 <form action="/achat/{{$item->item_id}}/addBestOffer" method="post">
                     {{ csrf_field() }}
                     <h4>Vente au meilleur prix</h4>
-                    <span> Proposez le prix que vous souhaitez au vendeur : </span>
+                    
+                    <span> Proposez le prix que vous souhaitez, au vendeur : </span>
                     <input type="number" name="price" id="" placeholder="00€00">
                     <input type="submit" class="btn btn-primary" value="Faire une proposition">
                 </form>

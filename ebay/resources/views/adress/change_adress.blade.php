@@ -1,28 +1,26 @@
+@extends('layouts.layout')
+@section('content')
 
-Update adress info
+    <h1>Update adress info</h1>
+    <br>
 
-<form method="POST" action="/adress/update/{{$delivery_addresses->id}}">
-    {{ csrf_field() }}
-    {{ method_field("PUT") }}
-
-    <li> {{ $delivery_addresses->firstName}} </li>
-    <li> {{ $delivery_addresses->lastName}} </li>
-    <li> {{ $delivery_addresses->phoneNumber}} </li>
-    <li> {{ $delivery_addresses->number}} </li>
-    <li> {{ $delivery_addresses->street}} </li>
-    <li> {{ $delivery_addresses->city}} </li>
-    <li> {{ $delivery_addresses->postCode}} </li>
-    <li> {{ $delivery_addresses->country}} </li>
-
-    <input type="text" value={{ $delivery_addresses->firstName}} name="firstName" required>
-    <input type="text" value={{ $delivery_addresses->lastName}} name="lastName" required>
-    <input type="number" value={{ $delivery_addresses->phoneNumber}}  name="phoneNumber" required>
-    <input type="number" value={{ $delivery_addresses->number}} name="number" required>
-    <input type="text" value={{ $delivery_addresses->street}}  name="street" required>
-    <input type="text" value={{ $delivery_addresses->city}}  name="city" required>
-    <input type="number" value={{ $delivery_addresses->postCode}} name="postCode" required>
-    <input type="text" value={{ $delivery_addresses->country}}  name="country" required>
+    <form method="POST" action="/adress/update/{{$delivery_addresses->id}}">
+        {{ csrf_field() }}
+        {{ method_field("PUT") }}
         
-    <button style="primary" type="submit" >Update</button>
-    
-</form>
+        <div class="card">
+            <div class="card-body">
+                <input class="form-control" type="text" value={{ $delivery_addresses->firstName}} name="firstName" required><br>
+                <input class="form-control" type="text" value={{ $delivery_addresses->lastName}} name="lastName" required><br>
+                <input class="form-control" type="number" value={{ $delivery_addresses->phoneNumber}}  name="phoneNumber" required><br>
+                <input class="form-control" type="number" value={{ $delivery_addresses->number}} name="number" required><br>
+                <input class="form-control" type="text" value={{ $delivery_addresses->street}}  name="street" required><br>
+                <input class="form-control" type="text" value={{ $delivery_addresses->city}}  name="city" required><br>
+                <input class="form-control" type="number" value={{ $delivery_addresses->postCode}} name="postCode" required><br>
+                <input class="form-control" type="text" value={{ $delivery_addresses->country}}  name="country" required><br>
+                    
+                <button class="btn btn-outline-primary" type="submit" >Update</button>
+            </div>
+        </div>
+    </form>
+@endsection

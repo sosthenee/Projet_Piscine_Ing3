@@ -13,4 +13,5 @@ var today = new Date();
     
     $('#start_date_payment').prop('min', today);
 
+    
 });

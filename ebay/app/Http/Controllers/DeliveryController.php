@@ -9,18 +9,36 @@ use Illuminate\Support\Facades\Auth;
 class DeliveryController extends Controller
 {
     public function AllfromUser(Request $request){
-        
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-        $user = Auth::user();
-        $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
-        return view('adress.adress',compact('delivery_addresses'));
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
+            }else{
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+                $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
+                return view('adress.adress',compact('delivery_addresses'));
+            }
+        }
     }
 
     public function updateView(Request $request, $id){
        
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-        $delivery_addresses = Delivery_address::where('id',$id)->first();
-        return view('adress.change_adress',compact('delivery_addresses'));
+        if(Auth::guest())
+        {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
+        else{
+            $user = Auth::user();
+            if($user->role!=='buyer'&&$user->role!=='buyerseller')
+            {
+                return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
+            }else{
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+                $delivery_addresses = Delivery_address::where('id',$id)->first();
+        
+            }
+        }
     }
 
     public function Create(Request $request){
@@ -40,8 +58,7 @@ class DeliveryController extends Controller
         $address->user()->associate($user);
         $address->save();
 
-        $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
-        return view('adress.adress',compact('delivery_addresses'));
+        return redirect()->action('DeliveryController@AllfromUser');
 
     }
 
