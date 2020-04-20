@@ -291,6 +291,7 @@ class OfferController extends Controller
         $utilisateur=1;
         
          return view('offer.myBestOffers',compact('items','user','utilisateur'));
+        }}
 }
     
      public function propose_my_offersAcheteurs(Request $request, $id)
@@ -340,14 +341,16 @@ class OfferController extends Controller
                      ->join('media','items.id', '=','media.item_id')
                     ->where('offers.type','bestoffer')
                     ->where('offers.state','wait seller')
+                    ->orderBy('offers.id', 'desc') 
                     ->where('items.user_id',$user->id)
                     ->select('items.title','items.Description','items.Category',
                              'items.id',
                             'media.type as media_type','media.reference as media_reference','offers.id',
                             'offers.price')
                ->get();
+           
             $utilisateur=2;
-         return view('offer.myBestOffers',compact('items','user','utilisateur'));
+         return view('offer.myBestOffers',compact('items','user','utilisateur'));}
 }
     public function propose_my_offersVendeurs(Request $request, $id)
     {

@@ -15,6 +15,11 @@
               <button class="btn btn-link" data-toggle="collapse" data-target={{"#i" . $item->id}} aria-expanded="false" >
                 <strong>{{$item->Title}}</strong>
               </button>
+                   <form action="/ListesItems/retirerItems" method="post">
+                {{ csrf_field() }}
+            <input hidden type="number" name="id" value="{{$item->id}}">
+            <input type="submit" class="btn btn-outline-danger btn-lg" value="Retirer" style="float: right;">
+        </form>
             </h5>
           </div>
       

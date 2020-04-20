@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+
 <h1>Mes informations</h1>
 
 @if($user->role!=='buyer')
@@ -35,6 +36,7 @@
         <tr>
                 <td>
                 <p>role:</p>
+
         
                 </td>
                 <td>
@@ -67,11 +69,14 @@
                 </td>
         </tr>
         @endif
+
         </table>
         
         
         <a href="/myAccount/myInfos/edit"><button class="btn btn-lg btn-primary">Modifier</button></a>
+
     
-     
+        </div>
+</div>
 @endsection
 
