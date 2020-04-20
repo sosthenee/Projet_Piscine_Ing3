@@ -10,9 +10,9 @@
             <div class="card-body">
                 <input class="form-control" type="text" value={{ $payment_info->cardType}} name="cardType" required><br>
                 <input class="form-control" type="text" value={{ $payment_info->cardName}}  name="cardName" required><br>
-                <input class="form-control" type="number" value={{ $payment_info->cardNumber}} name="cardNumber" required><br>
+                <input class="form-control" type="number" value={{ $payment_info->cardNumber}} minlength="16" maxlength="16" name="cardNumber" required><br>
                 <input class="form-control" type="date" id="start_date_payment" value={{ $payment_info->expirationDate}} name="expirationDate" required><br>
-                <input class="form-control" type="number" value={{ $payment_info->securityCode}} name="securityCode" aria-describedby="cardhelp" required><br>
+                <input class="form-control" type="password" value={{ $payment_info->securityCode}} minlength="4" maxlength="4" name="securityCode" aria-describedby="cardhelp" required><br>
                 <small id="cardhelp" class="form-text text-muted">We'll never share your private informations with anyone else.</small><br>
 
                 <button class="btn btn-outline-primary" type="submit" >Update</button>
