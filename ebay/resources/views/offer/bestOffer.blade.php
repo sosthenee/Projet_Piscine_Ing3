@@ -57,7 +57,7 @@
                          {{ csrf_field() }}
                          <input type="number" name="idduuser" id="" value="{{$item->user_id}}" hidden>
                          <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
-                        <input type="number" name="utilisat" id="" value="{{$utilisa}}" >
+                        <input type="number" name="utilisat" id="" value="{{$utilisa}}" hidden >
                         <input type="number" name="kaka" id="" value="{{$nboffers}}" hidden>
                         <span> Proposez le prix que vous souhaitez au vendeur : </span>
                         <input type="number" name="price" id="" placeholder="00€00">

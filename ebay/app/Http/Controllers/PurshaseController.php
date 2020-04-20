@@ -87,6 +87,7 @@ class PurshaseController extends Controller
                 }
             }
         }
+    
 
 
     //    return var_dump($purshases);
@@ -94,5 +95,5 @@ class PurshaseController extends Controller
 
         return view('purshase.purshase',compact('purshases', 'offers'));
 
-    }
+    }}
 }

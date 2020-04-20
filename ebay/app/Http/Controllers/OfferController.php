@@ -291,6 +291,7 @@ class OfferController extends Controller
         $utilisateur=1;
         
          return view('offer.myBestOffers',compact('items','user','utilisateur'));
+        }}
 }
     
      public function propose_my_offersAcheteurs(Request $request, $id)
@@ -349,7 +350,7 @@ class OfferController extends Controller
                ->get();
            
             $utilisateur=2;
-         return view('offer.myBestOffers',compact('items','user','utilisateur'));
+         return view('offer.myBestOffers',compact('items','user','utilisateur'));}
 }
     public function propose_my_offersVendeurs(Request $request, $id)
     {
