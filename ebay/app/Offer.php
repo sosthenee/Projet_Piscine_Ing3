@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
+    protected $inject_firstName = "";
+    protected $inject_street = "";
+    protected $inject_city = "";
+    protected $inject_date_dely = "";
+    protected $inject_date = "";
+
+    
     public $timestamps = false;
     protected $primaryKey = 'id';
 

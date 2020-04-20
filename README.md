@@ -71,8 +71,8 @@ DONE -> Modification d'un item par le vendeur (ajout de photos suppression de ph
         Il pourrait voir toutes les offres (refuser) des enchères et le NBR d'offres
 
 
-  -> Gestion des photos du vendeur (import)
-  -> Page d'un vendeur avec ses items pour client (avec photo de profil et image d'arrière plan)
+DONE  -> Gestion des photos du vendeur (import)
+DONE  -> Page d'un vendeur avec ses items pour client (avec photo de profil et image d'arrière plan)
 
 
   à vérifier

@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', 'ItemController@display_all')->name('home');
+
 
 
 //Route::get('/admin', 'HomeController@admin_only');
@@ -48,7 +50,7 @@ Route::post('/vendre/ajouter/action','ItemController@storeItem'); //creation an 
 
 
 // ====== Affichage des items d'un vendeur pour un vendeur===
-Route::get('/vendre','ItemController@displayHomeSeller');
+Route::get('/vendre','ItemController@displayHomeSeller'); 
 Route::put('/vendre/update/{item_id}','ItemController@update');
 Route::get('/vendre/update_vendre/{item_id}', 'ItemController@updateView');
 
@@ -61,31 +63,10 @@ Route::post('/panier/update/{offer_id}','OfferController@update');
 Route::post('/panier/delivery','OfferController@basketValidation'); // !!!! inutiles je crois !!! 
 
 // ======= myAccount=======
-Route::get('/myAccount',function(Request $request){
-    $user = Auth::user();
-    return view('myAccount.myAccount',compact('user'));
-});
-Route::get('/myAccount/myInfos',function(Request $request){
-    $user = Auth::user();
-    return view('myAccount.myInfos',compact('user'));
-});
-Route::get('/myAccount/myInfos/edit',function(Request $request){
-    $user = Auth::user();
-    return view('myAccount.myInfosEdit',compact('user'));
-});
-Route::post('/myInfos/modification',function(Request $request){
-    $user = Auth::user();
-    $user->update(['username' => request('user_username')]);
-    $user->update(['firstname' => request('user_firstname')]);
-    $user->update(['lastname' => request('user_lastname')]);
-    $user->update(['email' => request('user_email')]);
-    if($user->role!='buyer')
-    {
-        $user->update(['pseudo' => request('user_pseudo')]);
-    }
-
-    return view('myAccount.myAccount',compact('user'));
-});
+Route::get('/myAccount','UserController@my_account');
+Route::get('/myAccount/myInfos','UserController@index');
+Route::get('/myAccount/myInfos/edit','UserController@edit_myinfos');
+Route::post('/myInfos/modification','UserController@modif_myinfos');
 
 
 // ============ PAYMENTS ==========
