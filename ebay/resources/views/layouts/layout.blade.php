@@ -29,7 +29,8 @@
         <script src="/js/myJS_addPayment.js" ></script>
         <script src="/js/myJS_countdown.js" ></script>
         <script src="/js/myJS_createAccount.js" ></script>
-        
+        <!--    Favicon    -->
+        <link rel="SHORTCUT ICON" href="/storage/icons/logo_ebay.ico" />
         
         <!--------------------------------------------
         ------script to add elements to carrousel-----
