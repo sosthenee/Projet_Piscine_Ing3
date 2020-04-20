@@ -2,7 +2,7 @@
 
 A signifie "à verifier"
 ! signifie "non fait/reste à faire"
-G signifie give up
+
 
 Création d'un item avec photos et/ou vidéo
     -> blindage des champs title, description catégory et type de vente
@@ -13,7 +13,7 @@ Création d'un item avec photos et/ou vidéo
     => BLINDAGE COMPLET
   A -> la création d'un item  prend en compte l'id du user
     -> state = waiting
-  ! -> la page n'est pas sécurisé (accès public)  function display
+  DONE -> la page n'est pas sécurisé (accès public)  function display
 
 
 Affichage de tous les items

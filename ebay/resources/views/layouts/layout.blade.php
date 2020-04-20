@@ -190,10 +190,10 @@
                         
                     </ul>
                     
-                </div>
+                
                 
                 @if (Route::has('login'))
-                    <div class="collapse navbar-collapse">
+                    
                         
                         @auth
                             @php
