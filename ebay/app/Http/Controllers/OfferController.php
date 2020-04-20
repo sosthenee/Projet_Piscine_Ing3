@@ -234,7 +234,7 @@ class OfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect('/panier')->with('error','Aucune modification n\'a été faite. La page de modification n\'existe pas encore');
+        return redirect('/panier')->with('error','Aucune modification n\'a été fait. La page de modification n\'existe pas encore');
     }
 
     /**
@@ -259,11 +259,7 @@ class OfferController extends Controller
         }
         
     }
-    public function basketValidation()
-    {
 
-        return redirect('/panier')->with('error','La page de validation du panier n\'existe pas encore');
-    }
     public function get_my_best_offersAcheteurs(Request $request)
     {
         if(Auth::guest())
