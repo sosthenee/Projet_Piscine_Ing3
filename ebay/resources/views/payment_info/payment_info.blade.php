@@ -14,7 +14,7 @@
                             <li class="list-group-item"> {{ $payment_info->cardNumber}} </li>
                             <li class="list-group-item"> {{ $payment_info->cardName}} </li>
                             <li class="list-group-item"> {{ $payment_info->expirationDate}} </li>
-                            <li  class="list-group-item"> {{$payment_info->securityCode}} </li>
+                            <li  class="list-group-item"> {{ bcrypt($payment_info->securityCode)}} </li>
                         </ul>
                         <form method="POST" action="/payment/{{$payment_info->id}}">
                             {{ csrf_field() }}
