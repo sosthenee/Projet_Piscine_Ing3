@@ -79,22 +79,26 @@ class Kernel extends ConsoleKernel
                         DB::table('purchases')
                                 ->where('purchases.id',$data->offer_id)->update([ 'delivery_date' => $later ]);
 
-                        //Send email
+                        /***************************************************************
+                         * *********************Send email******************************
+                         * *************************************************************/
+                        
                         $to_name = User::find($data->buyer_id)->get()->first()->lastname;
-                        $to_email = 'willy.martin@edu.ece.fr';//User::find($data->buyer_id)->get()->first()->email;
+                        $to_email = User::find($data->buyer_id)->get()->first()->email;
+
                         $subject = 'Commande validée !';
-                        $message = 'Bonjour '.$to_name.', \\n Votre commande vient d\'etre validée ! ';
+                        $message = 'Bonjour '.$to_name.', \\n Votre commande ('.$data->Title.') vient d\'etre validée ! (prix: '. $data->Initial_Price.'€)';
                         $message.='Elle sera transmise à notre transporteur dés demain. Votre date de livraison estimé est le : '.$data->delivery_date;
                         
                         $headers = 'From: ECE SRW <connected.letterbox@gmail.com>';
                         if(mail($to_email,$subject,$message,$headers))
-                            echo "L'email a été envoyé.";
+                            echo "L'email a été envoyé.\n";
                         else
-                            echo "L'email n'a pas été envoyé.";
+                            echo "L'email n'a pas été envoyé.\n";
                     
                     }
                     else{
-                        echo "<strong>Probleme correspondance BDD : demande intervention d'un administrateur. </strong>";
+                        echo "<strong>Probleme correspondance BDD : demande intervention d'un administrateur. </strong>\n";
                     }
                 }
                 if($data->offer_type=='bestoffer')
@@ -114,7 +118,7 @@ class Kernel extends ConsoleKernel
                             ->orderBy('offers.price','desc')
                             ->select('items.id as item_id','items.user_id as seller_id', 'items.Title', 'items.end_date','items.sold','items.Initial_Price',
                                 'offers.id as offer_id','offers.price as offer_price','offers.state','offers.type as offer_type','offers.user_id as buyer_id',
-                                'purchases.id as purchase_id')
+                                'purchases.id as purchase_id','purchases.delivery_date')
                             ->get();
 
                     echo "count". count($test) ;
@@ -161,16 +165,20 @@ class Kernel extends ConsoleKernel
                             Item::find($test[0]->item_id)->update([ 'sold' => true ]);
                                 echo "l'objet :". $test[0]->item_id ."est vendu pour l'utilisateur". $test[0]->buyer_id. "avec l'offre".$test[0]->offer_id;
                                 //envoie du mail 
-                            //Send email
+                            /********************************************************
+                             * **************       Send email       ****************
+                             * ******************************************************/
                             $to_name = User::find($test[0]->buyer_id)->get()->first()->lastname;
-                            $to_email = 'willy.martin@edu.ece.fr';
-                            $subject = 'Votre commande vient d etre valider';
-                            $message = 'Bonjour '.$to_name.', <br><br> L\'enchere '.$test[0]->Title.' vient de vous etre attribuer ! Votre commande sera transmise à notre transporteur dés demain. Votre date de livraison estimé est le : ';
+                            $to_email = User::find($test[0]->buyer_id)->get()->first()->email;
+
+                            $subject = 'Commande validée';
+                            $message = 'Bonjour '.$to_name.', \\n <br><br> L\'enchere '.$test[0]->Title.' vient de vous etre attribuer ! Votre commande sera transmise à notre transporteur dés demain.'
+                                        .' Votre date de livraison estimé est le : '.$test[0]->delivery_date;
                             $headers = 'From: ECE SRW <connected.letterbox@gmail.com>';
                             if(mail($to_email,$subject,$message,$headers))
-                                echo "L'email de confirmation de commande a été envoyé.";
+                                echo "L'email de confirmation de commande a été envoyé.\n";
                             else
-                                echo "L'email de confirmation de commande n'a pas été envoyé.";
+                                echo "L'email de confirmation de commande n'a pas été envoyé.\n";
                         }
                     }
                         
