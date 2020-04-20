@@ -20,7 +20,6 @@
         <script  src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script  src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         
@@ -138,6 +137,23 @@
             display: block;
             }
 
+footer {
+background-color: #b5b5b5;
+    position: absolute;
+    width: 100%;
+    margin-top: 40px;
+    height: 180px;
+    padding-top: 20px; 
+}
+            i{
+               font-size:40px;
+               color: black;
+                transition: color 0.5s;
+                
+            }
+            i:hover{
+                color: blue;
+            }
             
         </style>
     </head>
@@ -245,5 +261,68 @@
                 @yield('content')     
             </div>
         </main>
+      <!-- Footer -->
+<footer class="page-footer font-small indigo">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#">About us</a>
+          </li>
+          <li>
+            <a href="#">iOS App</a>
+          </li>
+          <li>
+            <a href="#">Android App</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#"><i class='fab fa-facebook-square' ></i>
+</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+    <div style="text-align:center;">Sosthene Lamotte  -  Raphael Bouhnik  -  Willy Martin</div>
+    <div style="text-align:center;">Porjet piscine ING3</div>
+  <!-- Copyright -->
+  <div style="text-align:center;">© 2020 Copyright:
+    <a href="#"> Ebay SRW</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
     </body>
 </html>
