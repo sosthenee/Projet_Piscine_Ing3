@@ -5,8 +5,8 @@
 <h1>Mes informations</h1>
 
 @if($user->role!=='buyer')
-<img class="rounded-circle img-thumbnail" src="/storage/{{$user->profil_picture}}" style="position: absolute; top: 17vh;left: 13vw; height: 12vw; width:12vw;"alt="">
-    <img src="/storage/{{$user->background_picture}}" style="height: 20vw; width:100%;"alt="">
+        <img class="rounded-circle img-thumbnail" src="/storage/{{$user->profil_picture}}" style="position: absolute; top: 17vh;left: 13vw; height: 12vw; width:12vw;"alt="">
+        <img src="/storage/{{$user->background_picture}}" style="height: 20vw; width:100%;"alt="">
 @endif
         <table>
         <tr>
@@ -19,7 +19,7 @@
         </tr>
         <tr>
                 <td>
-                <p>firstname:</p>
+                <p>Prénom:</p>
                 </td>
                 <td>
                 <p>{{$user->firstname}}</p>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
                 <td>
-                <p>lastname:</p>
+                <p>NOM:</p>
                 </td>
                 <td>
                 <p>{{$user->lastname}}</p>
@@ -71,12 +71,8 @@
         @endif
 
         </table>
-        
-        
+
         <a href="/myAccount/myInfos/edit"><button class="btn btn-lg btn-primary">Modifier</button></a>
 
-    
-        </div>
-</div>
 @endsection
 

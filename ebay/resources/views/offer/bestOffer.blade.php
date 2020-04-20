@@ -36,48 +36,46 @@
         </div>
 
         <div style=" background: lightgrey;  margin: 20px 50px; padding: 20px;">
-           
-           
 
-            @if(strpos($item->sell_type, "bestoffer")!== false)
-          
-                    <form action="/myAccount/{{$item->id}}" method="post">
-                        {{ csrf_field() }}
-                        <h4>Vente au meilleur prix</h4>
-                         @if($item->price!==NULL)
-
-                        <p>Une personne évalue cette article à: {{$item->price}} €             
-                        <input type="submit" class="btn btn-primary" value="Accepter l'offre"></p>
-                        
-                    </form>
-                 @if($nboffers !== 10)
-                     
-                                           
-                    <form action="/mybestoff/{{$item->item_id}}" method="post">  
-                         {{ csrf_field() }}
-                         <input type="number" name="idduuser" id="" value="{{$item->user_id}}" hidden>
-                         <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
-                        <input type="number" name="utilisat" id="" value="{{$utilisa}}" hidden >
-                        <input type="number" name="kaka" id="" value="{{$nboffers}}" hidden>
-                        <span> Proposez le prix que vous souhaitez au vendeur : </span>
-                        <input type="number" name="price" id="" placeholder="00€00">
-                        <input type="submit" class="btn btn-primary" value="Faire une proposition">
-                    </form>
-
-                   @endif
-                    @if($nboffers===10)
-                     <form action="/mybestoff/{{$item->id}}/refuse" method="post">  
-                         {{ csrf_field() }}
-                         <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
-                        <input type="submit" class="btn btn-primary" value="Refuser">
-                    </form>
-                   @endif
-          
+        @if(strpos($item->sell_type, "bestoffer")!== false)
         
-                @endif
-</div>
-             @endif
+            <form action="/myAccount/{{$item->id}}" method="post">
+                {{ csrf_field() }}
+                <h4>Vente au meilleur prix</h4>
+                    @if($item->price!==NULL)
 
+                <p>Une personne évalue cette article à: {{$item->price}} €             
+                <input type="submit" class="btn btn-primary" value="Accepter l'offre"></p>
+                
+            </form>
+            @if($nboffers !== 10)
+                    
+                                        
+                <form action="/mybestoff/{{$item->item_id}}" method="post">  
+                        {{ csrf_field() }}
+                        <input type="number" name="idduuser" id="" value="{{$item->user_id}}" hidden>
+                        <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
+                    <input type="number" name="utilisat" id="" value="{{$utilisa}}" hidden >
+                    <input type="number" name="kaka" id="" value="{{$nboffers}}" hidden>
+                    <span> Proposez le prix que vous souhaitez au vendeur : </span>
+                    <input type="number" name="price" id="" placeholder="00€00">
+                    <input type="submit" class="btn btn-primary" value="Faire une proposition">
+                </form>
+
+                @endif
+                @if($nboffers===10)
+                    <form action="/mybestoff/{{$item->id}}/refuse" method="post">  
+                        {{ csrf_field() }}
+                        <input type="number" name="iddepreoffre" id="" value="{{$item->id}}" hidden>
+                    <input type="submit" class="btn btn-primary" value="Refuser">
+                </form>
+                @endif
+        
+    
+            @endif
+
+            @endif
+        </div>
     @else
         <p> Nous n'avons trouvé aucun article correspondant.
             <br> Nous vous invitons à revenir plus tard. 
