@@ -2,7 +2,7 @@
 
 @section('content')
  <!-- fichier inutile-->
-  <h1>All Information About the sellers</h1>
+  <h1>Informations vendeurs</h1>
   <br>
 
   @foreach ($users as $user)
