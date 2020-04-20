@@ -3,7 +3,7 @@
 @section('content')
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-  <h1>Historic Commands  </h1>
+  <h1>Mes commandes  </h1>
   <br> <br><br>
 
   <div class="row justify-content-center">
