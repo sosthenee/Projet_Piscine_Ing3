@@ -17,11 +17,11 @@ class DeliveryController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
             }else{
-
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-       
-        $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
-        return view('adress.adress',compact('delivery_addresses'));}}
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+                $delivery_addresses = Delivery_address::where('user_id',$user->id)->get();
+                return view('adress.adress',compact('delivery_addresses'));
+            }
+        }
     }
 
     public function updateView(Request $request, $id){
@@ -34,9 +34,11 @@ class DeliveryController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
             }else{
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-        $delivery_addresses = Delivery_address::where('id',$id)->first();
-        return view('adress.change_adress',compact('delivery_addresses'));}}
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
+                $delivery_addresses = Delivery_address::where('id',$id)->first();
+        
+            }
+        }
     }
 
     public function Create(Request $request){
