@@ -3,7 +3,7 @@
  
 
 @section('content')
-    <h1>All Information About Item</h1>
+    <h1>Tous les items</h1>
     
     @if(count($items)>0)
         @php

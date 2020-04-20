@@ -3,7 +3,7 @@
  
 
 @section('content')
-    <h1>All Information About Item</h1>
+    <h1>Tous les items - par catégories</h1>
     <hr>
     
     <form action="/achat/Category/search" method="get">
@@ -106,7 +106,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +120,8 @@
             @endforeach
         </div>
     @else
-        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie pour l'instant.
-            <br> Nous vous invitons à revenir plus tard. </p>
+        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie avec vos critères de recherche.
+            <br> Nous vous invitons à revenir plus tard, ou à changer vos critères. </p>
     @endif
 
     <hr>
@@ -165,7 +165,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +179,7 @@
             @endforeach
         </div>
     @else
-        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie pour l'instant.
+        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie avec vos critères de recherche.
             <br> Nous vous invitons à revenir plus tard. </p>
     @endif
     <hr>
@@ -223,7 +223,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                         </div>
@@ -237,8 +237,9 @@
             @endforeach
         </div>
     @else
-        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie pour l'instant.
-            <br> Nous vous invitons à revenir plus tard. </p>
+        <p> Nous n'avons trouvé aucun article disponible dans cette catégorie avec vos critères de recherche.
+            <br> Nous vous invitons à revenir plus tard. 
+        </p>
     @endif
 @endsection
 

@@ -9,7 +9,7 @@
     <form id="upload" action="/vendre/ajouter/action" method="POST"  style="width: 100%;" class="uploader"  accept-charset="utf-8" enctype="multipart/form-data">
 
       {{ csrf_field() }} <!-- I don't know what is it-->
-      <h1>Ajout d'un nouvelle Item</h1>
+      <h1>Ajout d'un nouvel Item</h1>
       <hr>
 
 
@@ -41,7 +41,7 @@
       <div class="form-group row">
         <div class="col-sm-5">
           <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Insertion de média : </label> 
+              <label class="col-sm-4 col-form-label">Insertion de médias : </label> 
               <div class="col-sm-8">
                 @csrf
                 <input id="file-upload" class="form-control-file" type="file" name="file[]" accept="image/*, video/*"  onchange="readURL(this);" multiple > 
@@ -81,7 +81,6 @@
         <div id="carouselControls" class="carousel slide" data-ride="carousel" style="border: 1px solid; width: 30vw; height: 18vw;">
           <ol id="carousel-indicators" class="carousel-indicators">
               <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
-              <!--iiiiiiiiiiiiiiiiii-->
           </ol>
           <div id="carousel-inner"class="carousel-inner ">
                   

@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 
-<h1>Modification des informations de cette item</h1>
+<h1>Modification des informations de cet item</h1>
 <br>
 <div class="card">
     <div class="card-body">
