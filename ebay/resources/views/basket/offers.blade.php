@@ -14,11 +14,8 @@
             @if($id_offer_temp<>$offer->id)
                 
                 <div class="well" style="display: flex; border: 1px grey solid; padding: 10px; margin: 20px 50px;">
-                    
-                    
+
                     <img class="img-thumbnail rounded float-left" style="width: 15vw; height: 10vw; margin: 20px;" src="/storage/{{$offer->media_reference}}" alt="{{$offer->Title}}"/> 
-                
-                    
                     <div style="margin: 20px; width: 100%;">
                         <h3>{{$offer->Title}}</h3>
                         <h6>{{$offer->Category}}</h6>
@@ -34,7 +31,6 @@
                                 <img src="/storage/icons/warning.png" alt="Warning" style="width: 30px; height: 30px;">
                                 Vous ne pouvez pas proposer 2 offres pour un même article merci de corriger votre panier
                             </div>
-
                         @endif
                     
                         @if(($offer->price<$offer->Initial_Price && strpos($offer->offer_type, "immediat")!== false  )||( $offer->price<$offer->Initial_Price&& strpos($offer->offer_type, "enchere")!== false))
@@ -75,7 +71,8 @@
                 $id_item_temp=$offer->item_id;
             @endphp
         @endforeach
-        <form action="/purshase" method="post"  style="padding: 10px; margin: 20px 50px;">
+        <h5 class="modal-title" style="float: right; margin-bottom: 20px; margin-right: 50px;"id="exampleModalLongTitle">Total du panier : {{$data->first()->count}} €</h5>
+        <form action="/purshase" method="post"  style="padding: 10px; margin: 30px 50px;">
             {{ csrf_field() }}
             <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter" {{$valid_button}}>Valider le panier
             </button>
@@ -83,7 +80,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Basket total : {{$data->first()->count}} €</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Total du panier : {{$data->first()->count}} €</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -92,7 +89,7 @@
                             <h2>Delivery choice</h2>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="choosenadress">Adress</label>
+                                    <label class="input-group-text" for="choosenadress">Adresse </label>
                                 </div>
                                 <select class="custom-select " name="choosenadress" required>
                                     <option selected value="">Choose...</option>
@@ -107,7 +104,7 @@
                             <h2>Payment choice</h2>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="choosenPayment">Payment</label>
+                                    <label class="input-group-text" for="choosenPayment">Paiement</label>
                                 </div>
                                 <select class="custom-select selectpicker"  name="choosenPayment" required>
                                     <option selected value="">Choose...</option>
@@ -121,10 +118,8 @@
                             </div>
                             @foreach($payment_infos as $payment_info)
                                 <div hidden class="input-group mb-3" id={{"coco".$payment_info->id}}>
-                                    <h3>Card informations</h3>
-                
+                                    <h3>Informations Cartes</h3>
                                     <div class="container">
-                    
                                         <ul> 
                                             <li>{{$payment_info->cardType}}</li>
                                             <li>{{$payment_info->cardNumber}}</li>
