@@ -20,7 +20,6 @@
         <script  src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script  src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         
@@ -141,9 +140,19 @@ footer {
 background-color: #b5b5b5;
     position: absolute;
     width: 100%;
-    
+    margin-top: 40px;
+    height: 180px;
+    padding-top: 20px; 
 }
-
+            i{
+               font-size:40px;
+               color: black;
+                transition: color 0.5s;
+                
+            }
+            i:hover{
+                color: blue;
+            }
             
         </style>
     </head>
@@ -264,20 +273,16 @@ background-color: #b5b5b5;
       <div class="col-md-3 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Very long link 1</a>
+            <a href="#">About us</a>
           </li>
           <li>
-            <a href="#!">Very long link 2</a>
+            <a href="#">iOS App</a>
           </li>
           <li>
-            <a href="#!">Very long link 3</a>
-          </li>
-          <li>
-            <a href="#!">Very long link 4</a>
+            <a href="#">Android App</a>
           </li>
         </ul>
 
@@ -290,87 +295,29 @@ background-color: #b5b5b5;
       <div class="col-md-3 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
+            <a href="#"><i class='fab fa-facebook-square' ></i>
+</a>
           </li>
         </ul>
 
       </div>
       <!-- Grid column -->
 
-      <hr class="clearfix w-100 d-md-none">
 
-      <!-- Grid column -->
-      <div class="col-md-3 mx-auto">
-
-        <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none">
-
-      <!-- Grid column -->
-      <div class="col-md-3 mx-auto">
-
-        <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
 
     </div>
     <!-- Grid row -->
 
   </div>
   <!-- Footer Links -->
-
+    <div style="text-align:center;">Sosthene Lamotte  -  Raphael Bouhnik  -  Willy Martin</div>
+    <div style="text-align:center;">Porjet piscine ING3</div>
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+  <div style="text-align:center;">© 2020 Copyright:
+    <a href="#"> Ebay SRW</a>
   </div>
   <!-- Copyright -->
 
