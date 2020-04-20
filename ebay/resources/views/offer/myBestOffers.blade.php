@@ -36,11 +36,16 @@
               </div>
             </div>
           </div>
+          @php
+            $id_item_temp=$item->id ;
+          @endphp
         @endif
       @endforeach
     @endif
   @endif
-
+  @php
+    $id_item_temp=-1;
+  @endphp
   @if($user->role==='seller'||$user->role==='admin' || $user->role==='buyerseller')
     @if($utilisateur===2)
       @foreach($items as $item)

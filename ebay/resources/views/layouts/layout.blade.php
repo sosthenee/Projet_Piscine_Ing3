@@ -148,16 +148,7 @@
                 height: 35px;
                  
             }
-            i{
-                
-                margin-right:4px;
-                font-size:30px;
-                color: black;
-                transition: color 0.5s;
-            }
-            i:hover{
-                color: blue;
-            }
+           
             
         </style>
     </head>
@@ -190,10 +181,10 @@
                         
                     </ul>
                     
-                </div>
+                
                 
                 @if (Route::has('login'))
-                    <div class="collapse navbar-collapse">
+                    
                         
                         @auth
                             @php
