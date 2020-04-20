@@ -8,7 +8,8 @@
 
 @foreach ($users as $user)
     
-  @if($user->role==='seller' || $user->role==='askseller' || $user->role==='buyer seller')
+  @if($user->role==='seller' || $user->role==='buyerseller')
+
   <div id="accordion">
     <div class="card">
       <div class="card-header" id="headingOne">
@@ -16,6 +17,11 @@
           <button class="btn btn-link" data-toggle="collapse" data-target={{"#i" . $user->id}} aria-expanded="true" aria-controls="collapseOne">
             <strong>{{$user->firstname}}</strong>
           </button>
+        <form action="/ListesVendeurs/retirerVendeur" method="post">
+                {{ csrf_field() }}
+            <input hidden type="number" name="id" value="{{$user->id}}">
+            <input type="submit" value="Retirer" >
+        </form>
         </h5>
       </div>
   

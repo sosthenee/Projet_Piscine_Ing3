@@ -24,6 +24,8 @@ class AdminController extends Controller
    
    
     public function suppVendeur(){
+    return view('Admin.ListesVendeurs',compact('users'));
+        
         if(Auth::guest())
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
         else{
@@ -32,8 +34,11 @@ class AdminController extends Controller
             {
                 return redirect('/login')->with('error','Vous n\'etes pas administrateur. Identifiez vous ou faites une création de compte !');
             }else{
-    $users = User::all();
-    return view('Admin.suppVendeur', compact('users'));}}
+        $k=request('id');
+    User::find($k)->update(['role' => 'buyer']);
+     $users = User::all();   
+    return view('Admin.ListesVendeurs',compact('users'));
+            }}
     }
     
     public function suppressionVendeur(){
@@ -115,9 +120,11 @@ class AdminController extends Controller
             {
                 return redirect('/login')->with('error','Vous n\'etes pas administrateur. Identifiez vous ou faites une création de compte !');
             }else{
-        $items = Item::all();
-        return view('Admin.suppItem', compact('items'));}}
-    }
+        $k=request('id');
+    Item::find($k)->update(['admin_state' => 'disapprove']);
+     $items = Item::all();   
+    return view('Admin.ListesItems',compact('items'));
+        }}}
     
     public function suppressionItem(){
         if(Auth::guest())
