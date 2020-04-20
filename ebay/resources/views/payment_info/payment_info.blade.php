@@ -14,7 +14,7 @@
                             <li class="list-group-item"> {{ $payment_info->cardNumber}} </li>
                             <li class="list-group-item"> {{ $payment_info->cardName}} </li>
                             <li class="list-group-item"> {{ $payment_info->expirationDate}} </li>
-                            <li class="list-group-item"> {{ $payment_info->securityCode}} </li>
+                            <li  class="list-group-item"> {{$payment_info->securityCode}} </li>
                         </ul>
                         <form method="POST" action="/payment/{{$payment_info->id}}">
                             {{ csrf_field() }}
@@ -57,7 +57,7 @@
                                 <input class="form-control" type="text" placeholder=" cardType" name="cardType" required><br>
                                 <input class="form-control" type="text" placeholder=" cardName"  name="cardName" required><br>
                                 <div class="input-group">
-                                    <input class="form-control" type="number" placeholder=" cardNumber" name="cardNumber" required><br>
+                                    <input class="form-control" type="number" placeholder=" cardNumber"  minlength="16" maxlength="16" name="cardNumber" required><br>
                                     <div class="input-group-append">
                                         <span class="input-group-text text-muted">
                                             <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>   
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" placeholder=" securityCode" name="securityCode"  aria-describedby="cardhelp" required><br>
+                                            <input class="form-control" type="password"   minlength="4" maxlength="4"  placeholder=" securityCode" name="securityCode"  aria-describedby="cardhelp" required><br>
                                         </div> 
                                     </div>
                                 </div>

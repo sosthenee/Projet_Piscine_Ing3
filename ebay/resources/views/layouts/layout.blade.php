@@ -163,7 +163,7 @@ background-color: #b5b5b5;
             <nav class="navbar navbar-expand-lg navbar-light bg-light links">
             
                 
-                <a class="navbar-brand" href="/">Mon site</a>
+                <a class="navbar-brand" href="/"><img width=40 src="/storage/icons/logo_ebay.png" alt="Ebay SRW"> </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
