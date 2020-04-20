@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-    <h1>page payment test </h1>
+    <h1>Mes moyens de paiement </h1>
     <div class="row">
         @foreach ($payement_infos as $payment_info)
             <div class="col-sm-4">
@@ -33,7 +33,7 @@
         @endforeach
     </div>
     <br> <br>
-    <h2>Add a new one</h2>
+    <h2>Ajouter un nouveau moyen de paiement</h2>
     <br> <br>
 
     <div class="row">
@@ -87,23 +87,6 @@
                             </form>
                         </div> <!-- tab-pane.// -->
                 
-                        <div class="tab-pane fade" id="nav-tab-bank">
-                            <p>Bank accaunt details</p>
-                            <dl class="param">
-                            <dt>BANK: </dt>
-                            <dd> THE WORLD BANK</dd>
-                            </dl>
-                            <dl class="param">
-                            <dt>Accaunt number: </dt>
-                            <dd> 12345678912345</dd>
-                            </dl>
-                            <dl class="param">
-                            <dt>IBAN: </dt>
-                            <dd> 123456789</dd>
-                            </dl>
-                            <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
-                        </div> <!-- tab-pane.// -->
                     </div> <!-- tab-content .// -->
                 
                 </div> <!-- card-body.// -->
