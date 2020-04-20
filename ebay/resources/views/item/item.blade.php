@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>All Information About Item</h1>
+    <h1>Toutes les informations de cet item</h1>
     @if(count($items)>0)
         
         @php
@@ -81,8 +81,8 @@
                     @php
                         $minimum_price=$item->Initial_Price+1;
                     @endphp
-                    Saissisez le montant maximum que vous etes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
-                    <input type="submit" class="btn btn-primary" value="Encherire">
+                    Saissisez le montant maximum que vous êtes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
+                    <input type="submit" class="btn btn-primary" value="Encherir">
                 </form>
             @endif
 
@@ -92,7 +92,7 @@
                     {{ csrf_field() }}
                     <h4>Vente au meilleur prix</h4>
                     
-                    <span> Proposez le prix que vous souhaitez au vendeur : </span>
+                    <span> Proposez le prix que vous souhaitez, au vendeur : </span>
                     <input type="number" name="price" id="" placeholder="00€00">
                     <input type="submit" class="btn btn-primary" value="Faire une proposition">
                 </form>

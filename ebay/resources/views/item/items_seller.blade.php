@@ -52,7 +52,7 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto " style="width: 150px;">
-                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cette objet</a>
+                                    <a href="/achat/{{$item->item_id}}" class="btn btn-primary">Voir cet objet</a>
                                 </div>
                             </div>
                             

@@ -127,37 +127,37 @@ class OfferController extends Controller
         if($user->role==='buyer' || $user->role==='buyerseller')
         {
             if($u==='1')
-            {$i=request('iddepreoffre');
-            Offer::find($i)->update(['state' => 'refuse']);
-            $user = Auth::user();
-            $offer = new Offer();
-            $offer->type="bestoffer";
-            $offer->item_id=$item_id;
-            $offer->price=request('price');
-            $offer->state='wait seller';
-            $offer->user_id=$user->id;
-            $offer->save();
-        
-        return redirect('/achat')->with('success','L\'offre a été envoyée !');
-        }}
+            {
+                $i=request('iddepreoffre');
+                Offer::find($i)->update(['state' => 'refuse']);
+                $user = Auth::user();
+                $offer = new Offer();
+                $offer->type="bestoffer";
+                $offer->item_id=$item_id;
+                $offer->price=request('price');
+                $offer->state='wait seller';
+                $offer->user_id=$user->id;
+                $offer->save();
+                return redirect('/achat')->with('success','L\'offre a été envoyée !');
+            }
+        }
         if($user->role==='seller' || $user->role==='admin'  || $user->role==='buyerseller'){
             if($u==='2')
             {
-            $i=request('iddepreoffre');
-            Offer::find($i)->update(['state' => 'refuse']);
-            $user = Auth::user();
-            $offer = new Offer();
-            $offer->type="bestoffer";
-            $offer->item_id=$item_id;
-            $offer->price=request('price');
-            $offer->state='wait buyer';
-            $offer->user_id=request('idduuser');
-            $offer->save();
-            
-        
-        
-        return redirect('/achat')->with('success','L\'offre a été envoyée !');
-        }}
+                $i=request('iddepreoffre');
+                Offer::find($i)->update(['state' => 'refuse']);
+                $user = Auth::user();
+                $offer = new Offer();
+                $offer->type="bestoffer";
+                $offer->item_id=$item_id;
+                $offer->price=request('price');
+                $offer->state='wait buyer';
+                $offer->user_id=request('idduuser');
+                $offer->save();
+
+                return redirect('/achat')->with('success','L\'offre a été envoyée !');
+            }
+        }
     }
     public function saveOffer(Request $request, $id)
     {
@@ -192,15 +192,12 @@ class OfferController extends Controller
             $offer->save();
 
             return redirect('/achat')->with('success','L\'élèment a été ajouté à votre panier !');
-
         }
         else
         {
             echo "problem BDD: multiple items with this id";
             return redirect('/achat')->with('error','L\'élèment n\'a pas été ajouté à votre panier !');
         }
-            
-
     }
 
     /**
@@ -234,7 +231,7 @@ class OfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect('/panier')->with('error','Aucune modification n\'a été faite. La page de modification n\'existe pas encore');
+        return redirect('/panier')->with('error','Aucune modification n\'a été fait. La page de modification n\'existe pas encore');
     }
 
     /**
@@ -257,13 +254,8 @@ class OfferController extends Controller
         else{
             return redirect('/panier')->with('error','Cet element ne peut pas être supprimer' .count($offers));
         }
-        
     }
-    public function basketValidation()
-    {
 
-        return redirect('/panier')->with('error','La page de validation du panier n\'existe pas encore');
-    }
     public function get_my_best_offersAcheteurs(Request $request)
     {
         if(Auth::guest())
@@ -274,25 +266,23 @@ class OfferController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas buyer. Identifiez vous ou faites une création de compte !');
             }else{
-        $request->user()->authorizeRoles(['buyer','buyerseller']);
-        
+                $request->user()->authorizeRoles(['buyer','buyerseller']);
 
-        $items  = DB::table('items')
-                    ->join('offers','items.id', '=','offers.item_id')
-                    ->join('users','items.user_id', '=','users.id')
-                     ->join('media','items.id', '=','media.item_id')
-                    ->where('offers.state','wait buyer')
-                    ->where('offers.user_id',$user->id)
-                    ->select('items.title','items.Description','items.Category',
-                            'media.type as media_type','media.reference as media_reference',
-                            'offers.price','offers.id')
-               ->get();
-        
-        $utilisateur=1;
-        
-         return view('offer.myBestOffers',compact('items','user','utilisateur'));
-        }}
-}
+                $items  = DB::table('items')
+                            ->join('offers','items.id', '=','offers.item_id')
+                            ->join('users','items.user_id', '=','users.id')
+                            ->join('media','items.id', '=','media.item_id')
+                            ->where('offers.state','wait buyer')
+                            ->where('offers.user_id',$user->id)
+                            ->select('items.title','items.Description','items.Category',
+                                    'media.type as media_type','media.reference as media_reference',
+                                    'offers.price','offers.id')
+                    ->get();
+                $utilisateur=1;
+                return view('offer.myBestOffers',compact('items','user','utilisateur'));
+            }
+        }
+    }
     
      public function propose_my_offersAcheteurs(Request $request, $id)
     {
@@ -311,7 +301,7 @@ class OfferController extends Controller
                             'media.type as media_type','media.reference as media_reference',
                     'offers.id','offers.price','offers.item_id','offers.user_id')
                ->get();
-      $offers  = DB::table('offers')
+        $offers  = DB::table('offers')
                     ->where('offers.id',$id)
                     ->get();
           $nboffrs=DB::table('offers')
@@ -322,7 +312,7 @@ class OfferController extends Controller
          $nboffers=count($nboffrs);
          $utilisa=request('utilisateu');
          return view('offer.bestOffer',compact('items','nboffers','utilisa'));
-}
+    }
     
     public function get_my_best_offersVendeurs(Request $request)
     {
@@ -330,28 +320,25 @@ class OfferController extends Controller
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}
         else{
             $user = Auth::user();
-            
+            $request->user()->authorizeRoles(['seller','buyerseller','admin']);
 
-        $request->user()->authorizeRoles(['seller','buyerseller','admin']);
-        
-
-        $items  = DB::table('items')
-                    ->join('offers','items.id', '=','offers.item_id')
-                    ->join('users','items.user_id', '=','users.id')
-                     ->join('media','items.id', '=','media.item_id')
-                    ->where('offers.type','bestoffer')
-                    ->where('offers.state','wait seller')
-                    ->orderBy('offers.id', 'desc') 
-                    ->where('items.user_id',$user->id)
-                    ->select('items.title','items.Description','items.Category',
-                             'items.id',
-                            'media.type as media_type','media.reference as media_reference','offers.id',
-                            'offers.price')
-               ->get();
-           
+            $items  = DB::table('items')
+                        ->join('offers','items.id', '=','offers.item_id')
+                        ->join('users','items.user_id', '=','users.id')
+                        ->join('media','items.id', '=','media.item_id')
+                        ->where('offers.type','bestoffer')
+                        ->where('offers.state','wait seller')
+                        ->orderBy('offers.id', 'desc') 
+                        ->where('items.user_id',$user->id)
+                        ->select('items.title','items.Description','items.Category',
+                                'items.id',
+                                'media.type as media_type','media.reference as media_reference','offers.id',
+                                'offers.price')
+                        ->get();
             $utilisateur=2;
-         return view('offer.myBestOffers',compact('items','user','utilisateur'));}
-}
+            return view('offer.myBestOffers',compact('items','user','utilisateur'));
+        }
+    }
     public function propose_my_offersVendeurs(Request $request, $id)
     {
         $request->user()->authorizeRoles(['seller','buyerseller','admin']);
@@ -368,10 +355,10 @@ class OfferController extends Controller
                              'users.username',
                             'media.type as media_type','media.reference as media_reference',
                     'offers.id','offers.price','offers.item_id','offers.user_id')
-               ->get();
-            $nboffers=1;
-            $utilisa=request('utilisateu');
+                    ->get();
+        $nboffers=1;
+        $utilisa=request('utilisateu');
         
          return view('offer.bestOffer',compact('items','nboffers','utilisa'));
-}
+    }
 }

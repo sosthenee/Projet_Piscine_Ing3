@@ -261,16 +261,18 @@ class ItemController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas vendeur. Identifiez vous ou faites une création de compte !');
             }else{
-        $item_infos = Item::where('id',$item_id)->first();
+                $item_infos = Item::where('id',$item_id)->first();
 
-        $items  = DB::table('items')
-        ->join('media','items.id', '=','media.item_id')
-        ->where('media.type','picture')
-        ->where('items.user_id',$user->id)
-        ->where('items.id',$item_id)
-        ->orderBy('items.id', 'desc')               
-        ->get();
-        return view('item.changeSellerHome',compact('item_infos','items'));}}
+                $items  = DB::table('items')
+                ->join('media','items.id', '=','media.item_id')
+                ->where('media.type','picture')
+                ->where('items.user_id',$user->id)
+                ->where('items.id',$item_id)
+                ->orderBy('items.id', 'desc')               
+                ->get();
+                return view('item.changeSellerHome',compact('item_infos','items'));
+            }
+        }
     }
     //post
     public function update(Request $request, $item_id ){
@@ -284,16 +286,13 @@ class ItemController extends Controller
         foreach($items->media()->get() as $media)
         {
             if ( null != request("d".$media->id)){
-                
-            if($items->media()->get()->count()== 1){
-                $media->reference = "unnamed.png";
-                $media->save();
-            } else {
-                $media->delete();
+                if($items->media()->get()->count()== 1){
+                    $media->reference = "unnamed.png";
+                    $media->save();
+                } else {
+                    $media->delete();
+                }
             }
-            }
-            
-
         }
 
         $files=$request->file('files');
@@ -328,7 +327,9 @@ class ItemController extends Controller
             {
                 return redirect('/')->with('error','Vous n\'etes pas vendeur. Identifiez vous ou faites une création de compte !');
             }else{
-        return view('item.createItem');}}
+                return view('item.createItem');
+            }
+        }
     }
     
     //function POST
@@ -341,8 +342,6 @@ class ItemController extends Controller
             'Category' => 'required',
             'Title' => 'required',
         ]);
-        
-        
 
         $item = new Item();
 
@@ -352,8 +351,6 @@ class ItemController extends Controller
         $item->Category =request('Category');
         $item->admin_state="waiting";
         $item->sold=0;
-
-        
         $item->start_date= request('start_date');
 
         $mySellType ="";
@@ -375,7 +372,6 @@ class ItemController extends Controller
         if($mySellType!=="")
         {
             $item->save();
-
             $files=$request->file('file');
             if(!empty($files)){
                 $i=0;
@@ -399,13 +395,11 @@ class ItemController extends Controller
                 $insert['item_id']=$item->id;
                 $check = Media::insertGetId($insert);
             }
-    
             return redirect('/vendre')->with('success','Votre item a été ajouté !');
         }
         else
             return redirect('/vendre')->with('error','Votre item n\'a été ajouté ! Merci de bien saisir le champ "type de vente" ');
 
         //$item->media()->saveMany([$media]);
- 
     }
 }

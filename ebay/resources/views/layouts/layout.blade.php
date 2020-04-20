@@ -182,20 +182,26 @@ background-color: #b5b5b5;
                     <div class="collapse navbar-collapse">
                         
                         @auth
+                            @php
+                                $myuserconnect= Auth::user();
+                            @endphp
+                            @if($myuserconnect->role =='seller'||$myuserconnect->role =='buyerseller'||$myuserconnect->role =='admin')
                             <div class="nav-item active">
                                 <a class="nav-link" href="/vendre">Vendre</a>
                             </div>
-                            
+                            @endif
+                            @if($myuserconnect->role =='buyer'||$myuserconnect->role =='buyerseller')
                             <div class=" my-2 my-lg-0 active">
-                                <a class="nav-link" href="/panier">Panier</a>
+                                <a class="nav-link" href="/panier">
+                                     <img width=40 src="/storage/icons/basket.jpg" alt="Panier"> 
+                                </a>
                             </div>
+                            @endif
                             <div class="nav-item active dropdown">
                                 <a class="nav-link dropdown-toggle" href="/myAccount" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Votre compte
                                 </a>
-                                @php
-                                    $myuserconnect= Auth::user();
-                                @endphp
+                                
 
                                 <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="/myAccount/myInfos">Mes informations</a>
