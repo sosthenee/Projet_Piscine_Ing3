@@ -72,16 +72,17 @@
                     {{ csrf_field() }}
                     <h4>Vente aux enchères</h4>
                     <p>Prix actuel : <strong>{{$item->Initial_Price}}€</strong>
-                    <br>Date Début : {{$item->start_date}}
-                    <br>Fin Début : {{$item->end_date}}
+                    <br>Date Début : {{substr($item->start_date,0,10)}}
+                    <br>Fin Début : {{substr($item->end_date,0,10)}}
                     <span class="countdown_end_date" hidden>{{$item->end_date}}</span>
-                    <span class="countdown"></span>
+                    <br>
+                    <span class="countdown" style="font-weight: bold;"></span>
                     </p>
                     <h5>Enchère automatique :</h5>
                     @php
                         $minimum_price=$item->Initial_Price+1;
                     @endphp
-                    Saissisez le montant maximum que vous êtes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
+                    Saississez le montant maximum que vous êtes prêt à dépenser: <input type="number" min="{{$minimum_price}}" name="price" id="" placeholder="00€00">
                     <input type="submit" class="btn btn-primary" value="Encherir">
                 </form>
             @endif
