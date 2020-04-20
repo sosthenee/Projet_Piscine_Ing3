@@ -123,7 +123,7 @@
                         </div>
                         <div id="buyercontent" style="display: none;">
                             <hr>
-                            <h3> Veuillez signer le contrat des règles d'achat:</h3><br>
+                            <h3> Veuillez signer <a href="/Contrat" style="color: blue;">le contrat</a>  des règles d'achat:</h3><br>
                             
                             <div class="form-group row">
                               <label for="contrat" class="col-md-4 col-form-label text-md-right">{{ __('Contrat :') }}</label>

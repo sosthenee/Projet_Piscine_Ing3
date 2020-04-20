@@ -117,6 +117,9 @@ Route::get('/ItemsAttente','AdminController@ItemsenAttente');
 Route::post('/ItemsAttente/approuver/{item_id}','AdminController@ItemschoixAjouter');
 Route::post('/ItemsAttente/refuser/{item_id}','AdminController@ItemschoixRefuser');
 
+Route::get('/Contrat', function(){
+    return view('contrat');
+});
 
 //  ======= Logout =======
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

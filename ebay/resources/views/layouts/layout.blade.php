@@ -66,8 +66,9 @@
                 font-family: 'Nunito', sans-serif;
                 
                 font-weight: 200;
-                height: 100vh;
+                
                 margin: 0;
+                margin-bottom: 30px;
             }
 
             .full-height {
@@ -137,19 +138,22 @@
             display: block;
             }
 
-footer {
-background-color: #b5b5b5;
-    position: absolute;
-    width: 100%;
-    margin-top: 40px;
-    height: 180px;
-    padding-top: 20px; 
-}
+            footer {
+                background-color: #b5b5b5;
+                color: white;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                margin-top: 40px;
+                height: 35px;
+                 
+            }
             i{
-               font-size:40px;
-               color: black;
-                transition: color 0.5s;
                 
+                margin-right:4px;
+                font-size:30px;
+                color: black;
+                transition: color 0.5s;
             }
             i:hover{
                 color: blue;
@@ -261,68 +265,19 @@ background-color: #b5b5b5;
                 @yield('content')     
             </div>
         </main>
-      <!-- Footer -->
-<footer class="page-footer font-small indigo">
 
-  <!-- Footer Links -->
-  <div class="container text-center text-md-left">
-
-    <!-- Grid row -->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-md-3 mx-auto">
-
-        <!-- Links -->
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="#">About us</a>
-          </li>
-          <li>
-            <a href="#">iOS App</a>
-          </li>
-          <li>
-            <a href="#">Android App</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none">
-
-      <!-- Grid column -->
-      <div class="col-md-3 mx-auto">
-
-        <!-- Links -->
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="#"><i class='fab fa-facebook-square' ></i>
-</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-
-
-    </div>
-    <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-    <div style="text-align:center;">Sosthene Lamotte  -  Raphael Bouhnik  -  Willy Martin</div>
-    <div style="text-align:center;">Porjet piscine ING3</div>
-  <!-- Copyright -->
-  <div style="text-align:center;">© 2020 Copyright:
-    <a href="#"> Ebay SRW</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
+        <!-- Footer -->
+        <footer class="page-footer font-small indigo align-middle" style="z-index:5;">
+            <!-- Copyright -->
+            <div  style="text-align:center;margin:3px;">
+                 ING3 Web Dynamique <strong > © 2020 :
+                <a href="#" style="color: white;" > Ebay SRW</a></strong> 
+                Sosthene Lamotte  -  Raphael Bouhnik  -  Willy Martin
+                <a style="float: right;" href="#"> 
+                    <img style="height:25px; margin-right:4px;"src="/storage/icons/logo_ece_détouré.png" alt="">
+                </a>
+            </div>
+            
+        </footer>
     </body>
 </html>
