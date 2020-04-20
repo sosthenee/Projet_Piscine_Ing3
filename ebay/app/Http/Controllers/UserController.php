@@ -52,7 +52,7 @@ class UserController extends Controller
             $path=date('YmdHis') ."0." .$file->getClientOriginalExtension();
             Storage::put("public/profil/".$path,file_get_contents($file));
             echo " image ajoutée";
-            $user->update(['email' => "profil/".$path]);
+            $user->update(['profil_picture' => "profil/".$path]);
         }
         else
         echo "pas d'images";
@@ -60,7 +60,7 @@ class UserController extends Controller
             $path=date('YmdHis') ."1." .$file->getClientOriginalExtension();
             Storage::put("public/profil/".$path,file_get_contents($file));
             echo " back image ajoutée";
-            $user->update(['email' => "profil/".$path]);
+            $user->update(['background_picture' => "profil/".$path]);
         }
         else
             echo "pas d'images";

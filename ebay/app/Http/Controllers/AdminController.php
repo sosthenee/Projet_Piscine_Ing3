@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\SUpport\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Item;
@@ -24,7 +24,6 @@ class AdminController extends Controller
    
    
     public function suppVendeur(){
-    return view('Admin.ListesVendeurs',compact('users'));
         
         if(Auth::guest())
         {return redirect('/login')->with('error','Vous n\'etes pas connecté. Identifiez vous ou faites une création de compte !');}

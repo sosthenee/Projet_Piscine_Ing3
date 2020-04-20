@@ -20,7 +20,7 @@
         <form action="/ListesVendeurs/retirerVendeur" method="post">
                 {{ csrf_field() }}
             <input hidden type="number" name="id" value="{{$user->id}}">
-            <input type="submit" value="Retirer" >
+            <input type="submit" class="btn btn-outline-danger btn-lg" value="Retirer" style="float: right;">
         </form>
         </h5>
       </div>
