@@ -30,7 +30,7 @@
                                 <h5 class="card-title">{{$item->Category}}</h5>
                                 
                                 <p class="card-text text-truncate" >{{$item->Description}}</p>
-                                <p class="card-text">Admin state: {{$item->admin_state}}</p>
+                                <p class="card-text">Etat actuelle de l'item :<strong> {{$item->admin_state}}</strong></p>
                             </div>
 
 
