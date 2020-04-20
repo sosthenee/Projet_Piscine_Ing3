@@ -66,7 +66,6 @@ class UserController extends Controller
         }
         else
             echo "pas d'images";
-    
         return view('myAccount.myAccount',compact('user'));
     }
 }
