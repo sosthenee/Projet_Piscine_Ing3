@@ -16,6 +16,7 @@
 @endforeach
 @endif
 @endif
+
 @if($user->role==='seller'||$user->role==='admin' || $user->role==='buyerseller')
 @if($utilisateur===2)
 @foreach($items as $item)

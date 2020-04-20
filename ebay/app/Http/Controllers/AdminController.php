@@ -17,8 +17,10 @@ class AdminController extends Controller
    
    
     public function suppVendeur(){
-    $users = User::all();
-    return view('Admin.suppVendeur', compact('users'));
+        $k=request('id');
+    User::find($k)->update(['role' => 'buyer']);
+     $users = User::all();   
+    return view('Admin.ListesVendeurs',compact('users'));
     }
     
     public function suppressionVendeur(){
@@ -53,9 +55,11 @@ class AdminController extends Controller
     }
     
     public function suppItem(){
-        $items = Item::all();
-        return view('Admin.suppItem', compact('items'));
-    }
+        $k=request('id');
+    Item::find($k)->update(['admin_state' => 'disapprove']);
+     $items = Item::all();   
+    return view('Admin.ListesItems',compact('items'));
+        }
     
     public function suppressionItem(){
     $i=request('num');
