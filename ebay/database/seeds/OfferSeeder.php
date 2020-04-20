@@ -26,7 +26,7 @@ class OfferSeeder extends Seeder
 
 
         $offer2 = new Offer();
-        $offer2->price = 223;
+        $offer2->price = 154;
         $offer2->state = 'wait buyer';
         $offer2->type='bestoffer';
         

@@ -16,7 +16,7 @@ class PurchaseSeeder extends Seeder
        
     
         $Purchase = new Purchase();
-        $Purchase->delivery_date = '2020-04-08';
+        $Purchase->delivery_date = '2020-05-18';
         $Purchase->paiement_date = '2020-04-08';
         
         $Purchase->offer()->associate($offer);
@@ -25,8 +25,8 @@ class PurchaseSeeder extends Seeder
         $Purchase->save();
 
         $Purchase2 = new Purchase();
-        $Purchase2->delivery_date = '2020-04-08';
-        $Purchase2->paiement_date = '2020-04-08';
+        $Purchase2->delivery_date = '2020-02-24';
+        $Purchase2->paiement_date = '2020-03-08';
         
         $Purchase2->offer()->associate($offer);
         $Purchase2->delivery_adress()->associate($address);
